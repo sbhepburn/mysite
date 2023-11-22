@@ -68,6 +68,9 @@ body {
 		transform: translate(-50%, -50%);
 		text-align: center;
 		letter-spacing: 1px;
+		display: flex;
+		flex-direction: column;
+		gap: 50px;
 		.wave {
 			font-size: 80px;
 		}
