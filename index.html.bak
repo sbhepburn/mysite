@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	Wow!
+-->
+<html>
+	<head>
+		<title>Stirling Hepburn</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<span class="logo"><img src="images/logo.svg" alt="" /></span>
+						<h1>Stirling Hepburn</h1>
+						<h3>Technologist</h3>
+                        <ul class="icons">
+                            <li><a href="https://www.instagram.com/stirlingbrucehepburn/" class="icon brands fa-instagram alt"><span class="label">Instagram</span></a></li>
+                            <li><a href="https://www.linkedin.com/in/stirling-hepburn-301208b1/" class="icon brands fa-linkedin alt"><span class="label">LinkedIn</span></a></li>
+                        </ul>
+
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul>
+							<li><a href="#intro" class="active">Who I Am</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Introduction -->
+							<section id="intro" class="main">
+								<div class="spotlight">
+									<div class="content">
+										<header class="major">
+											<h2>“People think of education as something they can finish.” -Isaac Asimov</h2>
+										</header>
+										<p>Born in British Columbia, Canada 1988. Since I was an infant, I've been drawn to the mechanical and the digital. I got my first job when I was 13 years old at an airport and was paid in flight time with an instructor. Nothing could hold me back from learning all about technology and the technical. I am a strong believer in the idea that anyone can teach themselves anything. I'm self taught in many things like 3d modeling, cooking, pixel art, web design, programming, drawing, baking and flying drones. I love cats and dogs, playing couch co-op indie games and making pizza from scratch.
+											</p>
+									</div>
+									<span class="image"><img src="images/Me.png" alt="" /></span>
+								</div>
+							</section>
+
+						<!-- First Section -->
+							<section id="first" class="main special">
+								<header class="major">
+									<h2>Technology</h2>
+								</header>
+								<ul class="features">
+									<li>
+										<span class="icon solid major style1 fa-terminal"></span>
+										<h3>Linux Lover</h3>
+										<p>Somehow I managed to use Ubuntu as my daily driver in a Windows Active Directory environment job for five years. 2021 is the year of Linux on the desktop! No computer is too old to be put in the trash. Just install Linux on it!</p>
+									</li>
+									<li>
+										<span class="icon solid major style3 fa-laptop-code"></span>
+										<h3>HTML, CSS, Javascript, Ruby, Blender</h3>
+										<p>I may not be the most seasoned veteran, but I learn quickly, love to experiment, tinker, come up with new ideas and I learn how to do things fast. I'm a fan of the old Material Design with sharp corners, but have a deep appreciation for <b>all</b> good design work. </p>
+									</li>
+									<li>
+										<span class="icon solid major style5 fa-user-astronaut"></span>
+										<h3>The Sky is the Limit</h3>
+										<p>My eyes have been opened to the kaleidescope of wonderful technologies after working in the educational sector for seven years. From hand building computers to 3d printing rocket parts, I'm ready to learn anything, and I'm hungry for more.</p>
+									</li>
+								</ul>
+							</section>
+
+						<!-- Second Section -->
+							<!-- <section id="second" class="main special">
+								<header class="major">
+									<h2>Drone Pilot</h2>
+                                    <span class="logo"><img src="images/drone.png" alt="" /></span>
+
+									<p>With three years of experience flying drones, it's only a matter of time before I take out an LLC.</p>
+								</header>
+								<p class="content">Ever since my first job working at the airport I've wanted to fly. Until I get my real pilot's license, flying a drone let's me live that fantasy.</p>
+							</section> -->
+
+						<!-- Get Started -->
+							<!-- <section id="cta" class="main special">
+								<header class="major">
+									<h2>Congue imperdiet</h2>
+									<p>Donec imperdiet consequat consequat. Suspendisse feugiat congue<br />
+									posuere. Nulla massa urna, fermentum eget quam aliquet.</p>
+								</header>
+								<footer class="major">
+									<ul class="actions special">
+										<li><a href="generic.html" class="button primary">Get Started</a></li>
+										<li><a href="generic.html" class="button">Learn More</a></li>
+									</ul>
+								</footer>
+							</section> -->
+
+					</div>
+
+				<!-- Footer -->
+                <div>
+                    <p></p>
+                </div>
+					<footer class="align-center">
+						<section>
+							<h2>Hire me!</h2>
+							<p>Stirling is currently looking for opportunities to flex his web development muscle. <a href="https://www.linkedin.com/in/stirling-hepburn-301208b1/" target="_blank">Send him a DM on LinkedIn!</a></p>
+						</section>
+						<section>
+							<!-- <h2>Etiam feugiat</h2>
+							<dl class="alt">
+								<dt>Address</dt>
+								<dd>1234 Somewhere Road &bull; Nashville, TN 00000 &bull; USA</dd>
+								<dt>Phone</dt>
+								<dd>(000) 000-0000 x 0000</dd>
+								<dt>Email</dt>
+								<dd><a href="#">information@untitled.tld</a></dd>
+							</dl> -->
+						</section>
+						<p class="copyright">&copy; Edited by Stirling Hepburn. Template from: <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
+<!-- Wow! -->
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
