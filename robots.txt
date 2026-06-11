@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /elements.html
+Disallow: /generic.html
+Disallow: /index-demo.html
+
+Sitemap: https://stirlinghepburn.com/sitemap.xml
