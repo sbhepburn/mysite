@@ -540,6 +540,27 @@ body.cursor-hovering .cursor-ring {
   box-shadow: var(--shadow);
 }
 
+.work-thumb {
+  margin: 0 0 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) - 6px);
+  overflow: hidden;
+}
+
+.work-thumb img {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.4s var(--ease);
+}
+
+.work-card:hover .work-thumb img,
+.work-card:focus-visible .work-thumb img {
+  transform: scale(1.03);
+}
+
 .work-card h3 {
   font-size: 1.25rem;
 }
