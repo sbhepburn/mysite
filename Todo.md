@@ -4,7 +4,7 @@
 *  Ron Siegel's website -  https://www.trueeducationsolutions.com/. Built using Squarespace.
 * Modabl - B2B schematic showcase https://eclectic-sfogliatella-dfb879.netlify.app/ Designed and built by hand from scratch.
 * Belimo - built from scratch an interactive map to showcase their components: https://main--belimo-interactive-image.netlify.app/
-* ATLAS - Designed 
+* ATLAS - special project coming soon https://github.com/sbhepburn/ATLAS-design/blob/main/brand-assets.html
 ### Designed by Studio 3, Built by Me
 * Waring Vision - https://www.waringvision.com/ Designed by Studio 3, built by me, DatoCMS
 * https://www.beachcitieslaservision.com/
