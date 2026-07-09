@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Git, Finally — the map you never got</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Jost:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A101F; --panel:#101A30; --panel2:#0C1425; --edge:rgba(233,240,255,.09);
+  --ink:#EDF1F9; --muted:#9AA7C1; --cream:#F3EBD8;
+  --amber:#FFB020; --teal:#2AD4B0; --pink:#FF5D8F; --violet:#9D8CFF;
+  --red:#FF6A55; --green:#6FE39B;
+  --disp:"Bricolage Grotesque",sans-serif; --body:"Jost",sans-serif; --mono:"IBM Plex Mono",monospace;
+  --r:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--body); font-size:17.5px; line-height:1.62; font-weight:400;
+  background-image:radial-gradient(rgba(214,226,255,.05) 1px, transparent 1.4px);
+  background-size:26px 26px;
+}
+::selection{background:var(--amber); color:#20180a}
+p{margin:.55em 0}
+a{color:var(--teal)}
+strong{font-weight:600; color:var(--cream)}
+em{color:var(--ink)}
+h1,h2,h3{font-family:var(--disp); line-height:1.08; margin:0}
+code,.cmd{font-family:var(--mono)}
+button{font-family:var(--body)}
+:focus-visible{outline:2.5px solid var(--amber); outline-offset:3px; border-radius:6px}
+
+/* ---------- hero ---------- */
+.hero{position:relative; padding:64px 24px 30px; max-width:1060px; margin:0 auto; overflow:hidden}
+.hero .eyebrow{font-family:var(--mono); font-size:12.5px; letter-spacing:.22em; color:var(--amber);
+  border:1px solid rgba(255,176,32,.4); border-radius:999px; padding:6px 14px; display:inline-block}
+.hero h1{font-size:clamp(52px,9vw,108px); font-weight:800; margin:.25em 0 .08em; letter-spacing:-.02em}
+.hero h1 .dot{color:var(--amber)}
+.hero .sub{font-size:clamp(19px,2.6vw,24px); color:var(--muted); max-width:640px; font-weight:400}
+.hero .sub b{color:var(--cream); font-weight:600}
+.heroline{margin:34px -8px 4px; width:calc(100% + 16px)}
+.thesis{max-width:1060px; margin:6px auto 0; padding:0 24px 8px}
+.thesis p{font-size:clamp(18px,2.2vw,21px); color:var(--ink); max-width:820px}
+.thesis .kicker{color:var(--amber); font-family:var(--mono); font-size:13px; letter-spacing:.2em}
+
+/* ---------- nav ---------- */
+nav{position:sticky; top:0; z-index:60; background:rgba(9,14,26,.86); backdrop-filter:blur(10px);
+  border-block:1px solid var(--edge)}
+.navline{display:flex; gap:0; overflow-x:auto; max-width:1160px; margin:0 auto; padding:12px 18px;
+  scrollbar-width:none; align-items:center}
+.navline::-webkit-scrollbar{display:none}
+.stop{display:flex; align-items:center; flex:none; text-decoration:none; color:var(--muted); font-size:13.5px; font-weight:500}
+.stop .tick{width:11px; height:11px; border-radius:50%; border:2.5px solid var(--muted); background:var(--bg); flex:none; transition:all .25s}
+.stop .lbl{padding:0 10px 0 8px; white-space:nowrap; letter-spacing:.02em}
+.stop .rail{width:26px; height:3px; background:var(--edge); flex:none}
+.stop:last-child .rail{display:none}
+.stop:hover{color:var(--cream)}
+.stop.on{color:var(--amber)}
+.stop.on .tick{border-color:var(--amber); background:var(--amber); box-shadow:0 0 0 4px rgba(255,176,32,.18)}
+
+/* ---------- sections ---------- */
+main{max-width:1060px; margin:0 auto; padding:12px 24px 60px}
+section{padding:66px 0 30px; border-bottom:1px dashed var(--edge); scroll-margin-top:76px}
+section:last-of-type{border-bottom:none}
+.stophead{display:flex; align-items:center; gap:14px; margin-bottom:10px}
+.roundel{flex:none; width:52px; height:52px; border-radius:50%; border:4px solid var(--amber);
+  display:grid; place-items:center; font-family:var(--disp); font-weight:800; font-size:17px; color:var(--cream);
+  background:var(--panel2); position:relative}
+.roundel::after{content:""; position:absolute; inset:auto; width:64px; height:9px; background:var(--amber);
+  border-radius:4px; z-index:-1}
+h2{font-size:clamp(30px,4.6vw,44px); font-weight:800; letter-spacing:-.015em}
+.tagline{color:var(--muted); font-size:18px; margin:2px 0 18px; max-width:760px}
+.cols{display:grid; grid-template-columns:1fr 1fr; gap:22px}
+@media(max-width:820px){.cols{grid-template-columns:1fr}}
+
+/* metaphor / why / gotcha cards */
+.card{background:var(--panel); border:1px solid var(--edge); border-radius:var(--r); padding:18px 20px; margin:14px 0}
+.card .cap{font-family:var(--mono); font-size:11.5px; letter-spacing:.2em; display:block; margin-bottom:6px}
+.meta .cap{color:var(--teal)} .meta{border-left:4px solid var(--teal)}
+.why .cap{color:var(--amber)} .why{border-left:4px solid var(--amber)}
+.gotcha .cap{color:var(--pink)} .gotcha{border-left:4px solid var(--pink)}
+.card p{margin:.3em 0}
+.card p:first-of-type{margin-top:0}
+
+/* command chips */
+.cmds{display:flex; flex-wrap:wrap; gap:10px; margin:16px 0 4px}
+.cmd{background:#0A1322; border:1px solid rgba(122,180,255,.22); color:#BFD6FF; border-radius:9px;
+  padding:9px 13px; font-size:14px; cursor:pointer; transition:all .18s; text-align:left; position:relative}
+.cmd small{display:block; font-family:var(--body); color:var(--muted); font-size:12.5px; margin-top:2px}
+.cmd:hover{border-color:var(--teal); transform:translateY(-1px)}
+.cmd.copied{border-color:var(--green); color:var(--green)}
+.cmd.copied::after{content:"copied ✓"; position:absolute; top:-11px; right:8px; font-size:11px;
+  font-family:var(--body); color:var(--green); background:var(--bg); padding:0 6px; border-radius:6px}
+
+/* ---------- playground ---------- */
+.board{background:linear-gradient(180deg,#0E1830,#0B1326); border:1px solid var(--edge); border-radius:18px;
+  padding:16px; box-shadow:0 24px 60px -30px rgba(0,0,0,.8)}
+.mapwrap{overflow-x:auto; overflow-y:hidden; border-radius:12px; background:
+  radial-gradient(rgba(214,226,255,.06) 1px, transparent 1.4px) 0 0/22px 22px, #0A1222;
+  border:1px solid var(--edge)}
+.mapwrap svg{display:block; min-width:640px}
+.pg-node{transition:transform .55s cubic-bezier(.22,1,.36,1), opacity .45s}
+.pg-node.ghost{opacity:.24; filter:saturate(.2)}
+.pg-node.pop circle.st{animation:pop .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes pop{from{transform:scale(.2)}to{transform:scale(1)}}
+.pg-edge{fill:none; stroke-width:6; stroke-linecap:round; opacity:.95}
+.pg-edge.ghost{opacity:.16}
+.plate{font-family:var(--mono); font-size:11.5px; font-weight:600}
+.headring{animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{stroke-opacity:.95}50%{stroke-opacity:.35}}
+.ctrls{display:flex; flex-wrap:wrap; gap:9px; margin-top:14px}
+.pbtn{background:var(--panel); color:var(--cream); border:1px solid var(--edge); border-radius:11px;
+  padding:10px 14px; font-size:14.5px; font-weight:600; cursor:pointer; transition:all .16s}
+.pbtn:hover:not(:disabled){border-color:var(--amber); color:var(--amber); transform:translateY(-1px)}
+.pbtn:disabled{opacity:.35; cursor:not-allowed}
+.pbtn.danger:hover:not(:disabled){border-color:var(--red); color:var(--red)}
+.pbtn.quiet{opacity:.75; font-weight:500}
+.dispatch{margin-top:14px; background:#0A1322; border:1px solid var(--edge); border-radius:12px; padding:13px 16px;
+  min-height:64px}
+.dispatch .dcap{font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--violet)}
+.dispatch .dmsg{margin:4px 0 6px; font-size:16px}
+.dispatch code{color:#BFD6FF; background:rgba(122,180,255,.1); padding:2px 8px; border-radius:6px; font-size:13.5px}
+.legend{display:flex; gap:16px; flex-wrap:wrap; font-size:13px; color:var(--muted); margin-top:10px}
+.legend span{display:flex; align-items:center; gap:6px}
+.swatch{width:18px; height:5px; border-radius:3px; display:inline-block}
+
+/* ---------- three areas toy ---------- */
+.areas{display:grid; grid-template-columns:1fr 1fr 1.2fr; gap:12px; margin-top:16px}
+@media(max-width:760px){.areas{grid-template-columns:1fr}}
+.zone{background:var(--panel2); border:1.5px dashed var(--edge); border-radius:var(--r); padding:14px; min-height:190px}
+.zone h4{margin:0 0 2px; font-family:var(--disp); font-size:17px; color:var(--cream)}
+.zone .zl{font-family:var(--mono); font-size:11px; letter-spacing:.15em; color:var(--muted); display:block; margin-bottom:10px}
+.zone.z-street{border-color:rgba(255,106,85,.4)} .zone.z-street h4{color:var(--red)}
+.zone.z-plat{border-color:rgba(255,176,32,.4)} .zone.z-plat h4{color:var(--amber)}
+.zone.z-hist{border-color:rgba(42,212,176,.4)} .zone.z-hist h4{color:var(--teal)}
+.chip{display:inline-flex; align-items:center; gap:7px; background:#16233E; border:1px solid var(--edge);
+  border-radius:999px; padding:7px 13px; margin:4px 4px 4px 0; font-family:var(--mono); font-size:13px;
+  cursor:pointer; transition:all .2s; color:var(--ink)}
+.chip:hover{border-color:var(--amber); transform:translateY(-1px)}
+.chip::before{content:"±"; color:var(--red); font-weight:700}
+.z-plat .chip::before{content:"◍"; color:var(--amber)}
+.train{background:#0E2A24; border:1px solid rgba(42,212,176,.35); border-radius:11px; padding:9px 12px; margin:0 0 8px;
+  font-size:13.5px; animation:slidein .45s ease}
+.train b{font-family:var(--mono); color:var(--teal)}
+@keyframes slidein{from{transform:translateX(26px); opacity:0}to{transform:none; opacity:1}}
+.zrow{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap}
+.hint{font-size:13.5px; color:var(--muted); font-style:italic}
+
+/* ---------- toggles (merge/rebase, PR) ---------- */
+.seg{display:inline-flex; background:var(--panel2); border:1px solid var(--edge); border-radius:12px; padding:4px; gap:4px; flex-wrap:wrap}
+.seg button{background:none; border:none; color:var(--muted); padding:9px 16px; border-radius:9px; font-size:14.5px;
+  font-weight:600; cursor:pointer; transition:all .18s}
+.seg button.on{background:var(--amber); color:#221703}
+.seg.tealseg button.on{background:var(--teal); color:#04231c}
+.panelbox{background:var(--panel2); border:1px solid var(--edge); border-radius:var(--r); padding:16px; margin-top:12px}
+.panelbox svg{width:100%; height:auto; display:block}
+.vu{display:none}.vu.show{display:block; animation:fadein .35s ease}
+@keyframes fadein{from{opacity:0; transform:translateY(6px)}to{opacity:1; transform:none}}
+.verdict{font-size:15.5px; margin-top:10px; color:var(--muted)}
+.verdict b{color:var(--cream)}
+
+/* ---------- reset dial ---------- */
+.dialrow{display:grid; grid-template-columns:220px 1fr; gap:18px; align-items:start; margin-top:14px}
+@media(max-width:720px){.dialrow{grid-template-columns:1fr}}
+.dial{display:flex; flex-direction:column; gap:6px}
+.dial button{text-align:left; background:var(--panel2); border:1.5px solid var(--edge); border-radius:11px;
+  color:var(--muted); padding:12px 14px; font-family:var(--mono); font-size:14px; cursor:pointer; transition:all .18s}
+.dial button.on{border-color:var(--amber); color:var(--amber); background:#1C1809}
+.gauge{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
+@media(max-width:560px){.gauge{grid-template-columns:1fr}}
+.gz{border:1.5px solid var(--edge); border-radius:11px; padding:12px 13px; transition:all .3s; background:var(--panel2)}
+.gz h5{margin:0 0 3px; font-family:var(--disp); font-size:15px; color:var(--cream)}
+.gz p{font-size:13.5px; color:var(--muted); margin:0}
+.gz.hit{border-color:var(--red); background:#2A1410}
+.gz.hit p{color:#FFB3A5}
+.gz.keep{border-color:rgba(111,227,155,.45); background:#0F241A}
+.gz.keep p{color:#A9EDC4}
+.dialout{margin-top:12px; font-size:16px}
+
+/* ---------- bisect ---------- */
+.btrack{display:flex; gap:6px; flex-wrap:wrap; margin:16px 0 10px}
+.bst{width:34px; height:34px; border-radius:50%; border:3px solid var(--muted); background:var(--panel2);
+  display:grid; place-items:center; font-family:var(--mono); font-size:11px; color:var(--muted); transition:all .3s}
+.bst.good{border-color:var(--green); color:var(--green)}
+.bst.bad{border-color:var(--red); color:var(--red); background:#2A1410}
+.bst.test{border-color:var(--amber); color:var(--amber); box-shadow:0 0 0 5px rgba(255,176,32,.16); transform:scale(1.12)}
+.bst.culprit{background:var(--red); color:#fff; border-color:var(--red); transform:scale(1.15)}
+.brow{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+.bmsg{font-size:15.5px; color:var(--muted); margin-top:10px; min-height:24px}
+.bmsg b{color:var(--cream)}
+
+/* ---------- quiz ---------- */
+.quiz{background:#141024; border:1px solid rgba(157,140,255,.3); border-radius:var(--r); padding:16px 18px; margin:16px 0}
+.quiz .qcap{font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--violet)}
+.quiz p{margin:.4em 0 .7em}
+.quiz .qbtns{display:flex; gap:9px; flex-wrap:wrap}
+.quiz .qbtns button{background:var(--panel2); border:1px solid var(--edge); color:var(--ink); border-radius:9px;
+  padding:8px 14px; font-size:14.5px; cursor:pointer}
+.quiz .qbtns button:hover{border-color:var(--violet)}
+.quiz .qfb{margin-top:10px; font-size:15px; display:none}
+.quiz .qfb.show{display:block; animation:fadein .3s}
+.quiz .qfb.yay{color:var(--green)} .quiz .qfb.nah{color:#FFB3A5}
+
+/* ---------- remotes diagram ---------- */
+.cities{display:grid; grid-template-columns:1fr 84px 1fr; gap:8px; align-items:stretch; margin-top:14px}
+@media(max-width:720px){.cities{grid-template-columns:1fr}; .wire{transform:rotate(90deg); margin:-8px auto}}
+.city{background:var(--panel2); border:1px solid var(--edge); border-radius:var(--r); padding:15px}
+.city h4{margin:0; font-family:var(--disp); font-size:17px}
+.city .zl{font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--muted)}
+.rline{display:flex; align-items:center; gap:8px; margin:9px 0; font-family:var(--mono); font-size:13px}
+.rdot{width:12px; height:12px; border-radius:50%; flex:none}
+.wire{display:grid; place-items:center; color:var(--muted); font-size:12px; text-align:center; font-family:var(--mono)}
+
+/* ---------- panic accordions ---------- */
+details.oh{background:var(--panel); border:1px solid var(--edge); border-left:4px solid var(--red);
+  border-radius:12px; margin:10px 0; overflow:hidden}
+details.oh summary{cursor:pointer; padding:15px 18px; font-family:var(--disp); font-weight:600; font-size:17.5px;
+  list-style:none; display:flex; gap:10px; align-items:center; color:var(--cream)}
+details.oh summary::before{content:"⚠"; color:var(--red)}
+details.oh summary::marker{display:none}
+details.oh[open] summary{border-bottom:1px dashed var(--edge)}
+details.oh .body{padding:6px 18px 16px}
+details.oh .body p{font-size:15.5px}
+
+/* ---------- recap & footer ---------- */
+.recap{background:linear-gradient(160deg,#14213C,#0E1830); border:1px solid rgba(255,176,32,.3);
+  border-radius:20px; padding:30px 30px; margin-top:16px}
+.recap p{font-size:clamp(18px,2.3vw,21.5px); line-height:1.66}
+footer{max-width:1060px; margin:0 auto; padding:30px 24px 70px; color:var(--muted); font-size:14px;
+  border-top:1px solid var(--edge); display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap}
+.mini{font-family:var(--mono); font-size:12px; letter-spacing:.12em}
+
+/* svg station shared classes */
+.sN{fill:#0C1425; stroke-width:4}
+.sMain{stroke:var(--amber)} .sFeat{stroke:var(--teal)} .sGhostS{stroke:#54617e}
+.sLbl{fill:var(--ink); font-family:var(--mono); font-size:11px; text-anchor:middle; dominant-baseline:central}
+.sEdge{fill:none; stroke-width:5; stroke-linecap:round}
+.eMain{stroke:var(--amber)} .eFeat{stroke:var(--teal)} .eGhost{stroke:#3a445c}
+.sNote{fill:var(--muted); font-family:"Jost"; font-size:12.5px}
+.gh{opacity:.3}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important; transition-duration:.01ms !important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <span class="eyebrow">NIGHT SERVICE · ALL LINES RUNNING</span>
+  <h1>Git, Finally<span class="dot">.</span></h1>
+  <p class="sub">You know the commands. You've typed <b>rebase</b> a hundred times with your eyes half-closed. This is the part nobody handed you: <b>the map</b>.</p>
+  <svg class="heroline" viewBox="0 0 900 80" aria-hidden="true">
+    <path id="heropath" d="M10 55 L260 55 Q290 55 310 38 L370 38 Q 395 38 420 38 L640 38 Q670 38 690 55 L890 55" fill="none" stroke="var(--amber)" stroke-width="7" stroke-linecap="round"/>
+    <path d="M310 38 Q290 38 270 22 L120 22" fill="none" stroke="var(--teal)" stroke-width="7" stroke-linecap="round" opacity=".9"/>
+    <g>
+      <circle cx="120" cy="22" r="9" class="sN sFeat"/><circle cx="230" cy="22" r="0"/>
+      <circle cx="80" cy="55" r="9" class="sN sMain"/><circle cx="260" cy="55" r="9" class="sN sMain"/>
+      <circle cx="500" cy="38" r="9" class="sN sMain"/><circle cx="740" cy="55" r="9" class="sN sMain"/>
+      <circle cx="860" cy="55" r="11" fill="var(--amber)" stroke="#fff" stroke-width="3"/>
+    </g>
+    <circle r="6" fill="#fff">
+      <animateMotion dur="7s" repeatCount="indefinite" rotate="0" path="M10 55 L260 55 Q290 55 310 38 L370 38 Q 395 38 420 38 L640 38 Q670 38 690 55 L890 55"/>
+    </circle>
+  </svg>
+</header>
+<div class="thesis">
+  <span class="kicker">THE ONLY IDEA YOU NEED</span>
+  <p><strong>Git is a rail network.</strong> Every commit is a <strong>station</strong> — a complete, frozen photograph of your whole project, welded permanently into the map. A branch is a <strong>nameplate</strong> pinned to exactly one station. <code>HEAD</code> is the <strong>you-are-here marker</strong>. Every git command, however scary its name, is one of two moves: <em>weld a new station</em>, or <em>slide a nameplate</em>. Ride the line below and watch.</p>
+</div>
+
+<nav aria-label="Stops"><div class="navline" id="navline">
+  <a class="stop" href="#playground"><span class="tick"></span><span class="lbl">Drive it</span><span class="rail"></span></a>
+  <a class="stop" href="#commits"><span class="tick"></span><span class="lbl">Commits</span><span class="rail"></span></a>
+  <a class="stop" href="#areas"><span class="tick"></span><span class="lbl">Staging</span><span class="rail"></span></a>
+  <a class="stop" href="#branches"><span class="tick"></span><span class="lbl">Branches &amp; HEAD</span><span class="rail"></span></a>
+  <a class="stop" href="#mergerebase"><span class="tick"></span><span class="lbl">Merge vs Rebase</span><span class="rail"></span></a>
+  <a class="stop" href="#stash"><span class="tick"></span><span class="lbl">Stash</span><span class="rail"></span></a>
+  <a class="stop" href="#cherry"><span class="tick"></span><span class="lbl">Cherry-pick</span><span class="rail"></span></a>
+  <a class="stop" href="#reset"><span class="tick"></span><span class="lbl">Reset</span><span class="rail"></span></a>
+  <a class="stop" href="#revert"><span class="tick"></span><span class="lbl">Revert</span><span class="rail"></span></a>
+  <a class="stop" href="#reflog"><span class="tick"></span><span class="lbl">Reflog</span><span class="rail"></span></a>
+  <a class="stop" href="#remotes"><span class="tick"></span><span class="lbl">Remotes</span><span class="rail"></span></a>
+  <a class="stop" href="#pr"><span class="tick"></span><span class="lbl">Pull requests</span><span class="rail"></span></a>
+  <a class="stop" href="#tags"><span class="tick"></span><span class="lbl">Tags</span><span class="rail"></span></a>
+  <a class="stop" href="#bisect"><span class="tick"></span><span class="lbl">Bisect</span><span class="rail"></span></a>
+  <a class="stop" href="#panic"><span class="tick"></span><span class="lbl">Panic desk</span><span class="rail"></span></a>
+  <a class="stop" href="#recap"><span class="tick"></span><span class="lbl">The whole model</span><span class="rail"></span></a>
+</div></nav>
+
+<main>
+
+<!-- ================= PLAYGROUND ================= -->
+<section id="playground">
+  <div class="stophead"><div class="roundel">01</div><h2>Drive the network</h2></div>
+  <p class="tagline">Every button is a real git command. Watch what it does to the map — new stations pop in, nameplates slide, abandoned track fades but <em>never disappears</em>. Break things on purpose. That's the point.</p>
+  <div class="board">
+    <div class="mapwrap" id="mapwrap"><svg id="pgsvg" height="280" role="img" aria-label="Interactive git commit graph drawn as a metro map">
+      <g id="pgEdges"></g><g id="pgNodes"></g><g id="pgOver"></g>
+    </svg></div>
+    <div class="legend">
+      <span><i class="swatch" style="background:var(--amber)"></i> main line</span>
+      <span><i class="swatch" style="background:var(--teal)"></i> feature line</span>
+      <span><i class="swatch" style="background:var(--pink)"></i> hotfix line</span>
+      <span><i class="swatch" style="background:#54617e"></i> abandoned track (reflog remembers)</span>
+    </div>
+    <div class="ctrls">
+      <button class="pbtn" id="bCommit">＋ Commit</button>
+      <button class="pbtn" id="bBranch">⑂ New branch</button>
+      <button class="pbtn" id="bSwitch">⇄ Switch line</button>
+      <button class="pbtn" id="bMerge">⨝ Merge</button>
+      <button class="pbtn" id="bRebase">↷ Rebase</button>
+      <button class="pbtn" id="bCherry">⧉ Cherry-pick</button>
+      <button class="pbtn" id="bRevert">⊖ Revert last</button>
+      <button class="pbtn danger" id="bReset">⤺ Reset --hard</button>
+      <button class="pbtn quiet" id="bStartOver">Start over</button>
+    </div>
+    <div class="dispatch"><span class="dcap">DISPATCH LOG</span>
+      <p class="dmsg" id="dmsg">Welcome aboard. You're on <b style="color:var(--amber)">main</b>, standing at station C. Try laying some track.</p>
+      <code id="dcmd">git status</code>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMMITS ================= -->
+<section id="commits">
+  <div class="stophead"><div class="roundel">02</div><h2>Commits — the stations</h2></div>
+  <p class="tagline">The single biggest misconception in git, corrected in one sentence:</p>
+  <div class="card meta"><span class="cap">THE METAPHOR</span>
+    <p>A commit is <strong>not a diff</strong>. It's a <strong>complete photograph of your entire project</strong> — a whole station, welded into the map with a serial number (the hash) stamped from its contents <em>plus its parent's serial number</em>. That chaining is why history is tamper-evident: change anything in any old station and every serial number after it stops matching. Diffs are something git <em>computes on demand</em> by comparing two photographs.</p></div>
+  <div class="cols">
+    <div class="card why"><span class="cap">WHY YOU'D WANT THIS</span>
+      <p>Because stations never change, time travel is <em>safe</em>. Commit early and often — dense stations mean you can step back to exactly the moment before things went sideways. A commit costs almost nothing; a missing one costs an afternoon.</p></div>
+    <div class="card gotcha"><span class="cap">THE CLASSIC GOTCHA, DEFUSED</span>
+      <p><code>--amend</code> doesn't edit a station. It welds a <strong>replacement station with a new serial number</strong> and quietly abandons the old one. Harmless on your own track — but it's why amending a <em>pushed</em> commit makes teammates' maps disagree with yours.</p></div>
+  </div>
+  <div class="cmds">
+    <button class="cmd">git commit -m "msg"<small>weld a new station</small></button>
+    <button class="cmd">git log --oneline --graph --all<small>print the whole rail map</small></button>
+    <button class="cmd">git show &lt;hash&gt;<small>inspect one station's photograph</small></button>
+    <button class="cmd">git commit --amend<small>replace the last station (new serial!)</small></button>
+  </div>
+</section>
+
+<!-- ================= THREE AREAS ================= -->
+<section id="areas">
+  <div class="stophead"><div class="roundel">03</div><h2>Street → Platform → Train</h2></div>
+  <p class="tagline">Why does staging even exist? Because it's the platform — the one place where you compose <em>exactly</em> what boards the next train.</p>
+  <div class="card meta"><span class="cap">THE METAPHOR</span>
+    <p>Your <strong>working directory</strong> is the street: live, messy, everything happening at once. <code>git add</code> walks a change down to the <strong>platform</strong> (the staging area / index). <code>git commit</code> is the train departing — only what's on the platform boards, and a new station gets welded behind you. Staging exists so a chaotic hour of street work can become three clean, single-purpose commits instead of one commit called <em>"stuff"</em>.</p></div>
+
+  <div class="areas" id="areasToy">
+    <div class="zone z-street"><h4>The street</h4><span class="zl">WORKING DIRECTORY</span>
+      <div id="streetChips"></div>
+      <p class="hint" id="streetHint">Tap a change to walk it to the platform (<code>git add</code>).</p></div>
+    <div class="zone z-plat"><h4>The platform</h4><span class="zl">STAGING AREA</span>
+      <div id="platChips"></div>
+      <p class="hint" id="platHint">Nothing staged yet.</p></div>
+    <div class="zone z-hist"><h4>Departed trains</h4><span class="zl">REPOSITORY · HISTORY</span>
+      <div id="trainList"><p class="hint">No departures yet.</p></div></div>
+  </div>
+  <div class="zrow">
+    <button class="pbtn" id="bDepart">🚆 Depart (git commit)</button>
+    <button class="pbtn quiet" id="bMess">Make more changes on the street</button>
+  </div>
+
+  <div class="card gotcha" style="margin-top:20px"><span class="cap">THE CLASSIC GOTCHA, DEFUSED</span>
+    <p>"I added the file, then committed, and it <em>still shows as modified</em>?!" — You edited it again after it boarded. The platform holds the version <strong>as it was at <code>add</code> time</strong>. That's also the difference between <code>git diff</code> (street vs platform) and <code>git diff --staged</code> (platform vs last station).</p></div>
+  <div class="cmds">
+    <button class="cmd">git add -p<small>board changes hunk-by-hunk — the power move</small></button>
+    <button class="cmd">git restore --staged &lt;file&gt;<small>walk a change back off the platform</small></button>
+    <button class="cmd">git diff --staged<small>what exactly boards the next train?</small></button>
+  </div>
+</section>
+
+<!-- ================= BRANCHES & HEAD ================= -->
+<section id="branches">
+  <div class="stophead"><div class="roundel">04</div><h2>Branches &amp; HEAD — nameplates, not copies</h2></div>
+  <p class="tagline">If you unlearn one thing today: a branch is not a folder, not a copy, not a parallel codebase.</p>
+  <div class="card meta"><span class="cap">THE METAPHOR</span>
+    <p>A branch is a <strong>magnetic nameplate pinned to exactly one station</strong> — 41 bytes on disk, literally a file containing one hash. The colored "line" you see on maps is just drawn by following parents backwards from wherever the plate sits. Commit, and the plate <em>slides forward</em> onto the new station. <code>HEAD</code> is one level up: it's the <strong>you-are-here marker</strong>, and it usually points at a <em>nameplate</em>, not a station.</p></div>
+  <div class="cols">
+    <div class="card why"><span class="cap">WHY YOU'D WANT THIS</span>
+      <p>Because nameplates are free, make one for <em>everything</em> — every experiment, every "let me just try". Nothing is copied, nothing is slow. Deleting a merged branch deletes a sticker, not work.</p></div>
+    <div class="card gotcha"><span class="cap">"DETACHED HEAD" IS NOT AN ERROR</span>
+      <p>Checking out an old hash makes HEAD point at a <strong>station directly</strong>, with no nameplate. You got off the train to sightsee — totally fine. The only rule: if you start laying new track from here and want to keep it, pin a plate on it with <code>git switch -c rescue</code>. Otherwise the track goes unnamed (and even then, the reflog remembers it for weeks).</p></div>
+  </div>
+  <div class="quiz"><span class="qcap">PREDICT THE MAP</span>
+    <p>You have branches <code>main</code> and <code>login</code> pointing at the <em>same</em> station. How much disk space does the second one use?</p>
+    <div class="qbtns">
+      <button data-r="0">A duplicate of the repo</button>
+      <button data-r="0">One diff's worth</button>
+      <button data-r="1">~41 bytes</button>
+    </div>
+    <div class="qfb"></div>
+  </div>
+  <div class="cmds">
+    <button class="cmd">git switch -c idea<small>pin a new plate here &amp; ride it</small></button>
+    <button class="cmd">git switch -<small>hop back to the previous line</small></button>
+    <button class="cmd">git branch -d idea<small>remove a plate (work stays if merged)</small></button>
+  </div>
+</section>
+
+<!-- ================= MERGE VS REBASE ================= -->
+<section id="mergerebase">
+  <div class="stophead"><div class="roundel">05</div><h2>Merge vs Rebase — junction or re-laid track</h2></div>
+  <p class="tagline">Same starting map, two ways to bring lines together. Toggle and compare.</p>
+  <div class="seg" id="mrSeg">
+    <button class="on" data-v="mrA">Before</button>
+    <button data-v="mrB">git merge</button>
+    <button data-v="mrC">git rebase</button>
+  </div>
+  <div class="panelbox">
+    <div class="vu show" id="mrA">
+      <svg viewBox="0 0 640 150">
+        <path class="sEdge eMain" d="M50 100 H310"/><path class="sEdge eFeat" d="M180 100 L200 100 Q216 100 216 84 L216 56 Q216 40 232 40 H430"/>
+        <circle cx="60" cy="100" r="12" class="sN sMain"/><text x="60" y="100" class="sLbl">A</text>
+        <circle cx="180" cy="100" r="12" class="sN sMain"/><text x="180" y="100" class="sLbl">B</text>
+        <circle cx="300" cy="100" r="12" class="sN sMain"/><text x="300" y="100" class="sLbl">C</text>
+        <circle cx="310" cy="40" r="12" class="sN sFeat"/><text x="310" y="40" class="sLbl">D</text>
+        <circle cx="430" cy="40" r="12" class="sN sFeat"/><text x="430" y="40" class="sLbl">E</text>
+        <text x="300" y="132" class="sNote" text-anchor="middle">main</text><text x="430" y="20" class="sNote" text-anchor="middle">feature (you are here)</text>
+      </svg>
+      <p class="verdict">Two lines diverged at <b>B</b>: main built <b>C</b> while you built <b>D–E</b>. Now what?</p>
+    </div>
+    <div class="vu" id="mrB">
+      <svg viewBox="0 0 640 150">
+        <path class="sEdge eMain" d="M50 100 H310"/><path class="sEdge eFeat" d="M180 100 L200 100 Q216 100 216 84 L216 56 Q216 40 232 40 H430"/>
+        <path class="sEdge eFeat" d="M430 40 L470 40 Q486 40 486 56 L486 84 Q486 100 502 100 L520 100"/>
+        <path class="sEdge eMain" d="M300 100 H530"/>
+        <circle cx="60" cy="100" r="12" class="sN sMain"/><text x="60" y="100" class="sLbl">A</text>
+        <circle cx="180" cy="100" r="12" class="sN sMain"/><text x="180" y="100" class="sLbl">B</text>
+        <circle cx="300" cy="100" r="12" class="sN sMain"/><text x="300" y="100" class="sLbl">C</text>
+        <circle cx="310" cy="40" r="12" class="sN sFeat"/><text x="310" y="40" class="sLbl">D</text>
+        <circle cx="430" cy="40" r="12" class="sN sFeat"/><text x="430" y="40" class="sLbl">E</text>
+        <circle cx="530" cy="100" r="15" fill="#fff" stroke="var(--amber)" stroke-width="4"/><text x="530" y="100" class="sLbl" fill="#0A101F" style="fill:#0A101F">M</text>
+        <text x="530" y="136" class="sNote" text-anchor="middle">merge commit — two inbound tracks</text>
+      </svg>
+      <p class="verdict"><b>Merge builds a junction station</b> with two parents. Nothing existing moves or changes — history stays exactly as it happened, at the cost of one extra station and a wigglier map. <b>Always safe, everywhere.</b></p>
+    </div>
+    <div class="vu" id="mrC">
+      <svg viewBox="0 0 640 150">
+        <path class="sEdge eGhost" d="M180 100 L200 100 Q216 100 216 84 L216 56 Q216 40 232 40 H430" stroke-dasharray="3 7"/>
+        <circle cx="310" cy="40" r="12" class="sN sGhostS gh"/><text x="310" y="40" class="sLbl gh">D</text>
+        <circle cx="430" cy="40" r="12" class="sN sGhostS gh"/><text x="430" y="40" class="sLbl gh">E</text>
+        <path class="sEdge eMain" d="M50 100 H310"/><path class="sEdge eFeat" d="M300 100 H540"/>
+        <circle cx="60" cy="100" r="12" class="sN sMain"/><text x="60" y="100" class="sLbl">A</text>
+        <circle cx="180" cy="100" r="12" class="sN sMain"/><text x="180" y="100" class="sLbl">B</text>
+        <circle cx="300" cy="100" r="12" class="sN sMain"/><text x="300" y="100" class="sLbl">C</text>
+        <circle cx="420" cy="100" r="12" class="sN sFeat"/><text x="420" y="100" class="sLbl">D′</text>
+        <circle cx="540" cy="100" r="12" class="sN sFeat"/><text x="540" y="100" class="sLbl">E′</text>
+        <text x="480" y="136" class="sNote" text-anchor="middle">re-laid copies · new serial numbers</text>
+      </svg>
+      <p class="verdict"><b>Rebase picks up your track and re-lays it</b> starting from main's tip. Clean, linear map — but D and E were <b>rebuilt as D′ and E′ with new hashes</b>; the originals are abandoned. That's the whole danger in one image.</p>
+    </div>
+  </div>
+  <div class="card why"><span class="cap">THE ONE RULE</span>
+    <p><strong>Re-lay your own unshared track as much as you like.</strong> Never rebase track other people are already riding — after you push, their maps point at stations that no longer exist on yours. Private branch: rebase for a tidy story. Shared branch: merge.</p></div>
+  <div class="cmds">
+    <button class="cmd">git merge feature<small>build the junction</small></button>
+    <button class="cmd">git rebase main<small>re-lay my track from main's tip</small></button>
+    <button class="cmd">git rebase -i HEAD~3<small>re-lay AND reorder/squash/reword my last 3 stations</small></button>
+    <button class="cmd">git pull --rebase<small>fetch, then re-lay my local commits on top</small></button>
+  </div>
+</section>
+
+<!-- ================= STASH ================= -->
+<section id="stash">
+  <div class="stophead"><div class="roundel">06</div><h2>Stash — the luggage locker</h2></div>
+  <div class="card meta"><span class="cap">THE METAPHOR</span>
+    <p>You're mid-change on the street, and suddenly you need to switch lines <em>now</em> — an urgent bug, a review, a demo. <code>git stash</code> sweeps your uncommitted street mess into a <strong>locker at the station</strong>, leaving the street spotless. Ride wherever you need; come back and <code>pop</code> the locker — even onto a <em>different</em> line.</p></div>
+  <div class="cols">
+    <div class="card why"><span class="cap">WHY YOU'D WANT THIS</span>
+      <p>It's the answer to git refusing to switch branches because "your local changes would be overwritten." Stash, switch, do the thing, switch back, pop. Ten seconds, zero fear.</p></div>
+    <div class="card gotcha"><span class="cap">TWO GOTCHAS, DEFUSED</span>
+      <p><strong>1.</strong> Brand-new files don't get swept up by default — they're not tracked yet. Use <code>-u</code>. <strong>2.</strong> The lockers are a stack (<code>stash@{0}</code>, <code>stash@{1}</code>…). Don't hoard; a week-old anonymous locker is a mystery box. If it matters, commit it to a branch instead — commits are named, stashes aren't.</p></div>
+  </div>
+  <div class="cmds">
+    <button class="cmd">git stash -u<small>lock up everything, incl. new files</small></button>
+    <button class="cmd">git stash pop<small>unpack the newest locker (and empty it)</small></button>
+    <button class="cmd">git stash list<small>which lockers are in use?</small></button>
+    <button class="cmd">git stash branch rescue<small>turn a locker into a proper branch</small></button>
+  </div>
+</section>
+
+<!-- ================= CHERRY-PICK ================= -->
+<section id="cherry">
+  <div class="stophead"><div class="roundel">07</div><h2>Cherry-pick — photocopy one station</h2></div>
+  <div class="card meta"><span class="cap">THE METAPHOR</span>
+    <p><code>cherry-pick</code> photocopies the <em>change</em> one station introduced on another line and <strong>welds the copy onto yours</strong>. It's not the same station — the copy gets its own serial number. The classic use: a critical fix landed on <code>main</code>, and the <code>release-2.4</code> line needs exactly that fix and nothing else around it.</p></div>
+  <div class="card gotcha"><span class="cap">THE GOTCHA, DEFUSED</span>
+    <p>A copy is not shared history. Git doesn't know D′ "is" D, so if the two lines fully merge later you can hit déjà-vu conflicts. Cherry-pick when you want <em>one surgical change</em>; merge when you want the <em>whole line</em>. If you're cherry-picking five commits, you probably want a merge.</p></div>
+  <div class="cmds">
+    <button class="cmd">git cherry-pick &lt;hash&gt;<small>copy that station's change here</small></button>
+    <button class="cmd">git cherry-pick -x &lt;hash&gt;<small>…and stamp the copy with its origin</small></button>
+  </div>
+</section>
+
+<!-- ================= RESET ================= -->
+<section id="reset">
+  <div class="stophead"><div class="roundel">08</div><h2>Reset — slide the nameplate backward</h2></div>
+  <p class="tagline"><code>reset</code> is one move (slide your plate to an older station) with a three-position dial for what happens to the luggage. Turn it:</p>
+  <div class="dialrow">
+    <div class="dial" id="resetDial">
+      <button class="on" data-m="soft">--soft</button>
+      <button data-m="mixed">--mixed <span style="opacity:.6">(default)</span></button>
+      <button data-m="hard">--hard</button>
+    </div>
+    <div>
+      <div class="gauge">
+        <div class="gz" id="gzHist"><h5>Timeline</h5><p id="gzHistP"></p></div>
+        <div class="gz" id="gzPlat"><h5>Platform (staged)</h5><p id="gzPlatP"></p></div>
+        <div class="gz" id="gzStreet"><h5>Street (working dir)</h5><p id="gzStreetP"></p></div>
+      </div>
+      <p class="dialout" id="dialOut"></p>
+    </div>
+  </div>
+  <div class="quiz"><span class="qcap">PREDICT THE MAP</span>
+    <p>You ran <code>git reset --hard HEAD~1</code> and instantly regretted it. Is the commit gone?</p>
+    <div class="qbtns">
+      <button data-r="0">Gone forever</button>
+      <button data-r="1">Recoverable via reflog</button>
+      <button data-r="0">Only if I force-push</button>
+    </div>
+    <div class="qfb" data-yay="Right. The station was abandoned, not demolished — the reflog (Stop 10) has its address for ~90 days. The one thing --hard truly destroys is UNCOMMITTED street changes. Commit early." data-nah="Breathe. The station was abandoned, not demolished — the reflog (Stop 10) keeps its address for ~90 days. What --hard truly destroys is only your UNCOMMITTED street changes."></div>
+  </div>
+  <div class="cmds">
+    <button class="cmd">git reset --soft HEAD~1<small>un-depart the last train; changes stay staged</small></button>
+    <button class="cmd">git reset --hard origin/main<small>make my line exactly match the remote bookmark</small></button>
+  </div>
+</section>
+
+<!-- ================= REVERT ================= -->
+<section id="revert">
+  <div class="stophead"><div class="roundel">09</div><h2>Revert — build the anti-station</h2></div>
+  <div class="card meta"><span class="cap">THE METAPHOR</span>
+    <p><code>revert</code> doesn't touch the past at all. It welds a <strong>brand-new station whose change exactly cancels an old one</strong> — history moves only forward, and the map everyone shares stays intact. Reset rewrites the line; revert extends it with an undo.</p></div>
+  <div class="card why"><span class="cap">THE DECISION RULE</span>
+    <p><strong>Private track → reset.</strong> Nobody's riding it; sculpt freely. <strong>Shared track → revert.</strong> The bad commit is already in a hundred clones; erasing it from yours fixes nothing and breaks everyone. This one rule replaces most "reset vs revert" googling forever.</p></div>
+  <div class="cmds">
+    <button class="cmd">git revert &lt;hash&gt;<small>weld the anti-station for that commit</small></button>
+    <button class="cmd">git revert --no-commit A..B<small>stage the undo of a whole range, one train</small></button>
+    <button class="cmd">git revert -m 1 &lt;merge-hash&gt;<small>undo an entire merged branch</small></button>
+  </div>
+</section>
+
+<!-- ================= REFLOG ================= -->
+<section id="reflog">
+  <div class="stophead"><div class="roundel">10</div><h2>Reflog — the stationmaster's ledger</h2></div>
+  <div class="card meta"><span class="cap">THE METAPHOR</span>
+    <p>Every single time your you-are-here marker moves — commit, switch, reset, rebase, merge, everything — the stationmaster writes it in a <strong>local ledger</strong>. Abandoned stations, "deleted" branches, pre-rebase originals: their addresses are all in there, kept for roughly 90 days. <code>git reflog</code> is why the true answer to "I destroyed everything" is almost always "no you didn't."</p></div>
+  <div class="card why"><span class="cap">THE RESCUE, IN TWO LINES</span>
+    <p>Find the moment before disaster in the ledger, then either jump your line back (<code>git reset --hard HEAD@{2}</code>) or pin a plate on the lost station (<code>git branch rescue &lt;hash&gt;</code>). Once you can do this cold, destructive commands stop being scary — and git gets <em>fun</em>.</p></div>
+  <div class="card gotcha"><span class="cap">ONE HONEST LIMIT</span>
+    <p>The ledger only records where <em>your</em> marker has been, on <em>your</em> machine. It can't recover street changes that were never committed, and it doesn't exist on the remote. It's a safety net, not a time machine for things git never saw.</p></div>
+  <div class="cmds">
+    <button class="cmd">git reflog<small>open the ledger</small></button>
+    <button class="cmd">git reset --hard HEAD@{2}<small>return to where you stood two moves ago</small></button>
+    <button class="cmd">git branch rescue &lt;hash&gt;<small>name a lost station before it fades</small></button>
+  </div>
+</section>
+
+<!-- ================= REMOTES ================= -->
+<section id="remotes">
+  <div class="stophead"><div class="roundel">11</div><h2>Remotes — another city's copy of the map</h2></div>
+  <p class="tagline"><code>origin</code> isn't "the real repo." It's just another city holding its own full copy of the network.</p>
+  <div class="cities">
+    <div class="city"><span class="zl">THEIR CITY</span><h4>origin (GitHub)</h4>
+      <div class="rline"><span class="rdot" style="background:var(--amber)"></span> main → station <b>&nbsp;F</b></div>
+      <p class="hint">Lives on a server. Moves whenever anyone pushes.</p></div>
+    <div class="wire">⇅<br>fetch<br>push</div>
+    <div class="city"><span class="zl">YOUR CITY</span><h4>your clone</h4>
+      <div class="rline"><span class="rdot" style="background:var(--amber)"></span> main → station <b>&nbsp;E</b> <span class="hint">(your line)</span></div>
+      <div class="rline"><span class="rdot" style="background:var(--violet)"></span> origin/main → <b>&nbsp;D</b> <span class="hint">(a photo, possibly stale)</span></div>
+      <p class="hint"><code>origin/main</code> is a bookmark: <em>"their main, last time I looked."</em> It is not live.</p></div>
+  </div>
+  <div class="card meta" style="margin-top:18px"><span class="cap">THE THREE VERBS, UNTANGLED</span>
+    <p><strong>fetch</strong> = take a fresh photo of their city. Updates your <code>origin/*</code> bookmarks and touches <em>nothing</em> of yours — always safe, run it constantly. <strong>pull</strong> = fetch <em>and then</em> merge (or rebase) their new track into your line — two moves wearing one trenchcoat. <strong>push</strong> = mail your new track to their city; rejected if their line moved since your last photo, which just means: fetch first and reconcile.</p></div>
+  <div class="quiz"><span class="qcap">PREDICT THE MAP</span>
+    <p>You run <code>git fetch</code>. What changes in your working files?</p>
+    <div class="qbtns">
+      <button data-r="1">Nothing at all</button>
+      <button data-r="0">They update to match origin</button>
+      <button data-r="0">Only conflicted files change</button>
+    </div>
+    <div class="qfb" data-yay="Exactly — fetch only refreshes the photo (origin/* bookmarks). Your street, platform, and line are untouched. This is why 'fetch, look, then decide' beats blind pulling." data-nah="Nothing changes! fetch only refreshes the photo (origin/* bookmarks). Your street, platform, and line are untouched — which is why 'fetch, look, then decide' beats blind pulling."></div>
+  </div>
+  <div class="card gotcha"><span class="cap">FORCE PUSH = DEMOLISHING STATIONS IN A SHARED CITY</span>
+    <p>After rewriting local history, plain push gets rejected — that's git protecting your teammates. If the branch is truly yours alone, use <code>--force-with-lease</code>: it aborts if someone else pushed since your last fetch. Bare <code>--force</code> has no such seatbelt.</p></div>
+  <div class="cmds">
+    <button class="cmd">git fetch<small>fresh photo; changes nothing of yours</small></button>
+    <button class="cmd">git pull --rebase<small>fetch + re-lay my commits on top of theirs</small></button>
+    <button class="cmd">git push --force-with-lease<small>the force push with a seatbelt</small></button>
+  </div>
+</section>
+
+<!-- ================= PULL REQUESTS ================= -->
+<section id="pr">
+  <div class="stophead"><div class="roundel">12</div><h2>Pull requests — the city notice board</h2></div>
+  <p class="tagline">Surprise: <code>git pull-request</code> isn't a command. PRs aren't git at all.</p>
+  <div class="card meta"><span class="cap">THE METAPHOR</span>
+    <p>A pull request is a <strong>proposal pinned to the notice board</strong> of the hosting city (GitHub, GitLab): <em>"I'd like to connect my line to Main — here's the track, please inspect it."</em> The review threads, approvals, and CI checks are a <strong>conversation layer</strong> the host adds on top of plain branches. What actually happens to the commits is decided by which green button gets pressed:</p></div>
+  <div class="seg tealseg" id="prSeg">
+    <button class="on" data-v="prA">Merge commit</button>
+    <button data-v="prB">Squash &amp; merge</button>
+    <button data-v="prC">Rebase &amp; merge</button>
+  </div>
+  <div class="panelbox">
+    <div class="vu show" id="prA">
+      <svg viewBox="0 0 640 150">
+        <path class="sEdge eMain" d="M50 100 H190"/><path class="sEdge eFeat" d="M180 100 L200 100 Q216 100 216 84 L216 56 Q216 40 232 40 H400"/>
+        <path class="sEdge eFeat" d="M400 40 L440 40 Q456 40 456 56 L456 84 Q456 100 472 100 L490 100"/>
+        <path class="sEdge eMain" d="M180 100 H500"/>
+        <circle cx="60" cy="100" r="12" class="sN sMain"/><text x="60" y="100" class="sLbl">A</text>
+        <circle cx="180" cy="100" r="12" class="sN sMain"/><text x="180" y="100" class="sLbl">B</text>
+        <circle cx="290" cy="40" r="12" class="sN sFeat"/><text x="290" y="40" class="sLbl">C</text>
+        <circle cx="400" cy="40" r="12" class="sN sFeat"/><text x="400" y="40" class="sLbl">D</text>
+        <circle cx="500" cy="100" r="15" fill="#fff" stroke="var(--amber)" stroke-width="4"/><text x="500" y="100" style="fill:#0A101F" class="sLbl">M</text>
+      </svg>
+      <p class="verdict"><b>Junction on Main.</b> Your stations C and D join Main's map exactly as you built them, plus a merge commit. Full history, wiggly map. Best when the branch's internal story matters.</p>
+    </div>
+    <div class="vu" id="prB">
+      <svg viewBox="0 0 640 150">
+        <path class="sEdge eGhost" d="M180 100 L200 100 Q216 100 216 84 L216 56 Q216 40 232 40 H400" stroke-dasharray="3 7"/>
+        <circle cx="290" cy="40" r="12" class="sN sGhostS gh"/><text x="290" y="40" class="sLbl gh">C</text>
+        <circle cx="400" cy="40" r="12" class="sN sGhostS gh"/><text x="400" y="40" class="sLbl gh">D</text>
+        <path class="sEdge eMain" d="M50 100 H320"/>
+        <circle cx="60" cy="100" r="12" class="sN sMain"/><text x="60" y="100" class="sLbl">A</text>
+        <circle cx="180" cy="100" r="12" class="sN sMain"/><text x="180" y="100" class="sLbl">B</text>
+        <circle cx="320" cy="100" r="12" class="sN sMain"/><text x="320" y="100" class="sLbl">S</text>
+        <text x="320" y="134" class="sNote" text-anchor="middle">C + D compressed into one new station</text>
+      </svg>
+      <p class="verdict"><b>Your whole branch becomes one brand-new station S on Main.</b> Beautifully linear — and it's why your commits seem to "disappear" after squash-merging: C and D were never placed on Main. Delete the branch guilt-free; don't keep building on it, or the next PR re-proposes old track.</p>
+    </div>
+    <div class="vu" id="prC">
+      <svg viewBox="0 0 640 150">
+        <path class="sEdge eGhost" d="M180 100 L200 100 Q216 100 216 84 L216 56 Q216 40 232 40 H400" stroke-dasharray="3 7"/>
+        <circle cx="290" cy="40" r="12" class="sN sGhostS gh"/><text x="290" y="40" class="sLbl gh">C</text>
+        <circle cx="400" cy="40" r="12" class="sN sGhostS gh"/><text x="400" y="40" class="sLbl gh">D</text>
+        <path class="sEdge eMain" d="M50 100 H190"/><path class="sEdge eFeat" d="M180 100 H540"/>
+        <circle cx="60" cy="100" r="12" class="sN sMain"/><text x="60" y="100" class="sLbl">A</text>
+        <circle cx="180" cy="100" r="12" class="sN sMain"/><text x="180" y="100" class="sLbl">B</text>
+        <circle cx="420" cy="100" r="12" class="sN sFeat"/><text x="420" y="100" class="sLbl">C′</text>
+        <circle cx="540" cy="100" r="12" class="sN sFeat"/><text x="540" y="100" class="sLbl">D′</text>
+      </svg>
+      <p class="verdict"><b>Copies of your stations re-laid onto Main's tip.</b> Linear like squash but keeps individual commits — as C′ and D′, with new serial numbers. Middle ground for teams that want clean history <em>and</em> commit granularity.</p>
+    </div>
+  </div>
+  <div class="card why"><span class="cap">WHY THIS MATTERS DAY-TO-DAY</span>
+    <p>Half of all "git is haunted" moments after a PR merges — dangling branches, "already up to date" lies, phantom re-conflicts — come from not knowing <em>which button</em> your team presses. Find out once; the haunting stops.</p></div>
+</section>
+
+<!-- ================= TAGS ================= -->
+<section id="tags">
+  <div class="stophead"><div class="roundel">13</div><h2>Tags — the commemorative plaque</h2></div>
+  <div class="card meta"><span class="cap">THE METAPHOR</span>
+    <p>A tag is a <strong>bronze plaque bolted to one station, forever</strong>: <code>v2.1.0</code> was <em>this exact snapshot</em>. Nameplates (branches) slide forward with every commit; plaques never move. That's the entire difference, and it's why releases are tagged, not branched.</p></div>
+  <div class="card gotcha"><span class="cap">THE GOTCHA, DEFUSED</span>
+    <p>Tags don't travel with a normal <code>push</code> — your teammates won't see <code>v2.1.0</code> until you push it explicitly. Also: prefer annotated tags (<code>-a</code>); they store who, when, and why. Lightweight tags are just a bare pointer.</p></div>
+  <div class="cmds">
+    <button class="cmd">git tag -a v2.1.0 -m "notes"<small>bolt an annotated plaque here</small></button>
+    <button class="cmd">git push origin v2.1.0<small>plaques must be shipped explicitly</small></button>
+    <button class="cmd">git checkout v2.1.0<small>visit the plaque (detached HEAD — sightseeing!)</small></button>
+  </div>
+</section>
+
+<!-- ================= BISECT ================= -->
+<section id="bisect">
+  <div class="stophead"><div class="roundel">14</div><h2>Bisect — the track inspector</h2></div>
+  <p class="tagline">"It worked two weeks ago, it's broken now, there are 300 commits in between." Don't read 300 commits. Binary-search them.</p>
+  <div class="card meta"><span class="cap">THE METAPHOR</span>
+    <p>Tell the inspector one <strong>good station</strong> and one <strong>bad station</strong>. She rides to the midpoint, you test, you say <em>good</em> or <em>bad</em>, and half the suspects are eliminated. Repeat. A thousand stations take <strong>ten rides</strong>. Try it — one of these 16 stations secretly broke the build:</p></div>
+  <div class="btrack" id="btrack"></div>
+  <div class="brow">
+    <button class="pbtn" id="bStart">🔦 Start inspection</button>
+    <button class="pbtn" id="bGood" disabled>✅ Runs fine</button>
+    <button class="pbtn danger" id="bBad" disabled>💥 Broken</button>
+  </div>
+  <p class="bmsg" id="bmsg">The inspector is waiting. (You'd run <code>git bisect start</code>, then mark one bad and one good commit.)</p>
+  <div class="card why" style="margin-top:16px"><span class="cap">THE POWER MOVE</span>
+    <p><code>git bisect run ./test.sh</code> automates the whole hunt: git checks out midpoints and runs your script until it names the exact guilty commit while you get coffee. If you've never used it, this is the single highest-leverage git feature you're not using.</p></div>
+  <div class="cmds">
+    <button class="cmd">git bisect start<small>summon the inspector</small></button>
+    <button class="cmd">git bisect bad<small>this station is broken</small></button>
+    <button class="cmd">git bisect good v2.1.0<small>this one was fine</small></button>
+    <button class="cmd">git bisect run ./test.sh<small>automate the entire hunt</small></button>
+    <button class="cmd">git bisect reset<small>ride home when done</small></button>
+  </div>
+</section>
+
+<!-- ================= PANIC ================= -->
+<section id="panic">
+  <div class="stophead"><div class="roundel">15</div><h2>The panic desk</h2></div>
+  <p class="tagline">The five most common "oh no" moments, each with the calm fix. Bookmark this stop.</p>
+  <details class="oh"><summary>I committed to the wrong branch</summary><div class="body">
+    <p>The station exists; it just needs a different nameplate. If the right branch doesn't exist yet: <code>git switch -c right-branch</code> — done, the commit rides with you. If it does exist: note the hash, then <code>git switch right-branch && git cherry-pick &lt;hash&gt;</code>, then go back and <code>git reset --hard HEAD~1</code> on the wrong line to slide its plate back.</p></div></details>
+  <details class="oh"><summary>I reset --hard and lost work</summary><div class="body">
+    <p>If it was ever committed: <code>git reflog</code>, find the address from before the reset, <code>git reset --hard HEAD@{1}</code> (or <code>git branch rescue &lt;hash&gt;</code>). The station was abandoned, never demolished. If it was never committed, the ledger never saw it — this is the one wound git can't heal, and the argument for committing early.</p></div></details>
+  <details class="oh"><summary>A bad commit is already pushed</summary><div class="body">
+    <p>Don't rewrite shared track. Weld the anti-station: <code>git revert &lt;hash&gt;</code>, push. History stays intact, the bug is gone, nobody's clone breaks. Reset-and-force-push on a shared branch turns one person's mistake into everyone's morning.</p></div></details>
+  <details class="oh"><summary>Merge conflict, everything is angry</summary><div class="body">
+    <p>First: you can always bail — <code>git merge --abort</code> (or <code>rebase --abort</code>) returns you exactly to before. The <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> markers just mean two stations photographed the same lines differently and git won't guess. Edit each file to the version you want, <code>git add</code> it (that's how you tell git "resolved"), then <code>git merge --continue</code>. It's tedious, not dangerous.</p></div></details>
+  <details class="oh"><summary>I committed a secret (or a 2GB file)</summary><div class="body">
+    <p>Not pushed yet? <code>git commit --amend</code> (or reset, fix, recommit) — the old station is abandoned before anyone saw it. Already pushed? <strong>Rotate the secret first</strong> — assume it's compromised; scrubbing history doesn't un-leak it. Then rewrite with <code>git filter-repo</code> and coordinate the force-push with your team, because every clone must re-fetch the rebuilt map.</p></div></details>
+</section>
+
+<!-- ================= RECAP ================= -->
+<section id="recap">
+  <div class="stophead"><div class="roundel">16</div><h2>The whole model in one paragraph</h2></div>
+  <div class="recap">
+    <p>Git is a rail network of <strong>stations</strong> — immutable snapshots chained by parent hashes. A <strong>branch</strong> is a nameplate pinned to one station that slides forward as you commit; <strong>HEAD</strong> is the you-are-here marker, and pointing it at a bare station is just sightseeing. Changes walk from the <strong>street</strong> to the <strong>platform</strong> and depart as a new station. <strong>Merge</strong> builds a junction; <strong>rebase</strong> re-lays your track as fresh copies — fine on private lines, rude on shared ones. <strong>Reset</strong> slides your plate backward (the dial only decides what happens to your luggage); <strong>revert</strong> welds a forward-moving anti-station instead. <strong>Remotes</strong> are other cities, and <code>origin/main</code> is only your last photo of theirs — fetch refreshes the photo, pull also merges, push mails your track. A <strong>tag</strong> is a plaque that never moves, a <strong>PR</strong> is a proposal on the host's notice board, <strong>bisect</strong> binary-searches the line, and the <strong>reflog</strong> remembers everywhere you've ever stood — which is why, in git, almost nothing committed is ever truly lost.</p>
+  </div>
+  <p style="color:var(--muted); margin-top:18px">That's the map. You can throw away the cheat sheet now — or better: scroll back up and break the playground a few more times until sliding nameplates feels boring. Boring is mastery. 🚇</p>
+</section>
+
+</main>
+<footer>
+  <span class="mini">GIT, FINALLY · NIGHT SERVICE</span>
+  <span>All track laid locally. Mind the gap between <code>fetch</code> and <code>pull</code>.</span>
+</footer>
+<script>
+(function(){
+"use strict";
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------- nav highlight ---------- */
+const stops=$$(".stop");
+const navline=$("#navline");
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){
+    stops.forEach(s=>s.classList.toggle("on", s.getAttribute("href")==="#"+e.target.id));
+    const on=$(".stop.on");
+    if(on) navline.scrollTo({left:on.offsetLeft-navline.clientWidth/2+on.clientWidth/2, behavior:reduced?"auto":"smooth"});
+  }});
+},{rootMargin:"-38% 0px -55% 0px"});
+$$("main section").forEach(s=>io.observe(s));
+
+/* ---------- copy chips ---------- */
+$$(".cmd").forEach(b=>b.addEventListener("click",()=>{
+  const txt=b.childNodes[0].textContent.trim();
+  navigator.clipboard && navigator.clipboard.writeText(txt).catch(()=>{});
+  b.classList.add("copied"); setTimeout(()=>b.classList.remove("copied"),1300);
+}));
+
+/* ---------- quizzes ---------- */
+$$(".quiz").forEach(q=>{
+  const fb=$(".qfb",q);
+  $$(".qbtns button",q).forEach(b=>b.addEventListener("click",()=>{
+    const ok=b.dataset.r==="1";
+    fb.className="qfb show "+(ok?"yay":"nah");
+    fb.textContent=(ok?"✓ ":"✗ ")+(fb.dataset[ok?"yay":"nah"]||(ok?"Exactly right — a branch is one 41-byte file holding one hash. Make them for everything.":"Nope — a branch is one 41-byte file holding a single hash. Nothing is copied. Make branches for everything."));
+  }));
+});
+
+/* ---------- segmented toggles ---------- */
+function seg(id){ const el=$("#"+id); if(!el) return;
+  $$("button",el).forEach(b=>b.addEventListener("click",()=>{
+    $$("button",el).forEach(x=>x.classList.toggle("on",x===b));
+    $$(".vu",el.parentElement).forEach(v=>v.classList.toggle("show", v.id===b.dataset.v));
+  }));
+}
+seg("mrSeg"); seg("prSeg");
+
+/* ---------- reset dial ---------- */
+const dialData={
+  soft:{h:["hit","Nameplate slides back one station."],p:["keep","Un-departed changes land HERE, staged and ready."],s:["keep","Untouched. Your street stays exactly as it is."],
+    out:"“Un-commit, keep everything staged.” Perfect for re-splitting a commit or fixing its message the long way."},
+  mixed:{h:["hit","Nameplate slides back one station."],p:["hit","Cleared — nothing staged anymore."],s:["keep","Changes land HERE as ordinary street edits."],
+    out:"“Un-commit and un-stage, keep the work.” The default, and the gentlest way to rethink what should board."},
+  hard:{h:["hit","Nameplate slides back one station."],p:["hit","Bulldozed."],s:["hit","Bulldozed to match the old station. Uncommitted work here is the one thing git cannot get back."],
+    out:"“Make everything match that older station, no survivors.” Powerful, honest, and the only dial position that deserves a deep breath first."}
+};
+function setDial(m){
+  $$("#resetDial button").forEach(b=>b.classList.toggle("on",b.dataset.m===m));
+  const d=dialData[m];
+  const map={h:["gzHist","gzHistP"],p:["gzPlat","gzPlatP"],s:["gzStreet","gzStreetP"]};
+  for(const k in map){ const [z,pp]=map[k]; $("#"+z).className="gz "+d[k][0]; $("#"+pp).textContent=d[k][1]; }
+  $("#dialOut").textContent=d.out;
+}
+$$("#resetDial button").forEach(b=>b.addEventListener("click",()=>setDial(b.dataset.m)));
+setDial("soft");
+
+/* ---------- three areas toy ---------- */
+const FILES=["auth.js","styles.css","README.md","api.test.js"];
+let street=[...FILES], plat=[], trainNo=0;
+function renderAreas(){
+  const sc=$("#streetChips"), pc=$("#platChips");
+  sc.innerHTML=street.map(f=>`<button class="chip" data-f="${f}">${f}</button>`).join("");
+  pc.innerHTML=plat.map(f=>`<button class="chip" data-f="${f}">${f}</button>`).join("");
+  $("#streetHint").style.display=street.length?"":"none";
+  $("#streetHint").innerHTML=street.length?`Tap a change to walk it to the platform (<code>git add</code>).`:"";
+  if(!street.length&&!plat.length)$("#streetHint").style.display="", $("#streetHint").textContent="Street is clean. git status is calm. Life is good.";
+  $("#platHint").textContent=plat.length?`git commit will board exactly ${plat.length} change${plat.length>1?"s":""}.`:"Nothing staged yet.";
+  $$("#streetChips .chip").forEach(c=>c.onclick=()=>{street=street.filter(f=>f!==c.dataset.f);plat.push(c.dataset.f);renderAreas();});
+  $$("#platChips .chip").forEach(c=>c.onclick=()=>{plat=plat.filter(f=>f!==c.dataset.f);street.push(c.dataset.f);renderAreas();});
+}
+$("#bDepart").addEventListener("click",()=>{
+  if(!plat.length){$("#platHint").textContent="Platform's empty — the train won't leave with nobody aboard. git add something first.";return;}
+  trainNo++;
+  const tl=$("#trainList"); if(trainNo===1) tl.innerHTML="";
+  tl.insertAdjacentHTML("afterbegin",`<div class="train"><b>🚆 ${String(trainNo).padStart(2,"0")} · commit</b> — ${plat.join(", ")}</div>`);
+  plat=[]; renderAreas();
+});
+$("#bMess").addEventListener("click",()=>{
+  const pool=["nav.jsx","db.sql","utils.js","logo.svg","hooks.ts","cache.rs"];
+  street.push(pool[Math.floor(Math.random()*pool.length)]); renderAreas();
+});
+renderAreas();
+
+/* ---------- bisect toy ---------- */
+const N=16; let blo,bhi,bmid=-1,bculprit,bsteps,bactive=false;
+const track=$("#btrack");
+track.innerHTML=Array.from({length:N},(_,i)=>`<div class="bst" id="bs${i}">${i+1}</div>`).join("");
+function bPaint(){
+  for(let i=0;i<N;i++){const el=$("#bs"+i); el.className="bst"+(i<=blo?" good":"")+(i>=bhi?" bad":"")+(i===bmid?" test":"");}
+}
+function bPropose(){
+  if(bhi-blo<=1){
+    bmid=-1; bPaint(); const c=$("#bs"+bhi); c.className="bst culprit"; c.textContent="✕";
+    $("#bmsg").innerHTML=`<b>Found it: station ${bhi+1}</b> introduced the bug — in <b>${bsteps} test${bsteps===1?"":"s"}</b>, not ${N-2}. That's log₂ doing the work. <em>(git prints the guilty hash; git bisect reset rides you home.)</em>`;
+    $("#bGood").disabled=$("#bBad").disabled=true; bactive=false; $("#bStart").textContent="🔦 Inspect again"; return;
+  }
+  bmid=Math.floor((blo+bhi)/2); bPaint();
+  $("#bmsg").innerHTML=`The inspector checked out <b>station ${bmid+1}</b>. Suspects left: <b>${bhi-blo-1}</b>. Run your test — does it pass here?`;
+}
+/* answers are checked against the hidden truth: bisect only works with honest tests */
+function bAnswer(saidGood){
+  if(!bactive) return; bsteps++;
+  const trulyGood = bmid < bculprit;
+  if(saidGood !== trulyGood){
+    $("#bmsg").innerHTML = trulyGood
+      ? "Your test suite says this one actually <b>passes</b>. Marked <b>good</b> — bisect only works if answers are honest (that's why <code>bisect run</code> exists)."
+      : "Hmm — the test suite disagrees: it's <b>broken</b> here. The inspector trusts tests, not vibes. Marked <b>bad</b>.";
+  }
+  if(trulyGood) blo=bmid; else bhi=bmid;
+  const note = saidGood!==trulyGood ? $("#bmsg").innerHTML+" " : "";
+  bPropose();
+  if(note && bactive) $("#bmsg").innerHTML = note + $("#bmsg").innerHTML;
+}
+$("#bStart").addEventListener("click",()=>{
+  blo=0; bhi=N-1; bsteps=0; bactive=true; bculprit=2+Math.floor(Math.random()*(N-3));
+  for(let i=0;i<N;i++){$("#bs"+i).textContent=i+1;}
+  $("#bGood").disabled=$("#bBad").disabled=false; bPropose();
+});
+$("#bGood").addEventListener("click",()=>bAnswer(true));
+$("#bBad").addEventListener("click",()=>bAnswer(false));
+
+/* =====================================================
+   PLAYGROUND ENGINE — the git metro
+===================================================== */
+const XGAP=82, X0=64, LANEY=[70,145,220];
+const LANECOL=["var(--teal)","var(--amber)","var(--pink)"];
+const LANES={feature:0, main:1, hotfix:2};
+const svg=$("#pgsvg"), gE=$("#pgEdges"), gN=$("#pgNodes"), gO=$("#pgOver");
+let S, nodeEls;
+
+function freshState(){
+  S={nodes:{}, order:[], branches:{main:"C"}, branchOrder:["main"], head:"main", nextCode:68 /*D*/, primes:{}};
+  ["A","B","C"].forEach((id,i)=>{S.nodes[id]={id,label:id,parents:i?[["A","B"][i-1]?["A","B","C"][i-1]:null].filter(Boolean):[],lane:1,x:i,kind:"n"};});
+  S.nodes.B.parents=["A"]; S.nodes.C.parents=["B"]; S.order=["A","B","C"];
+  nodeEls={}; gN.innerHTML=""; gE.innerHTML=""; gO.innerHTML="";
+}
+const tip=()=>S.branches[S.head];
+const NS="http://www.w3.org/2000/svg";
+const mk=(t,at)=>{const e=document.createElementNS(NS,t); for(const k in at)e.setAttribute(k,at[k]); return e;};
+function newId(){ let id; if(S.nextCode<=90){id=String.fromCharCode(S.nextCode++);} else {id="Z"+(S.nextCode++ -90);} return id; }
+function reachable(){ const seen=new Set(); const stack=Object.values(S.branches);
+  while(stack.length){const id=stack.pop(); if(seen.has(id))continue; seen.add(id); (S.nodes[id].parents||[]).forEach(p=>stack.push(p));}
+  return seen; }
+function isAncestor(a,b){ // a ancestor of b?
+  const stack=[b], seen=new Set();
+  while(stack.length){const id=stack.pop(); if(id===a)return true; if(seen.has(id))continue; seen.add(id); (S.nodes[id].parents||[]).forEach(p=>stack.push(p));}
+  return false; }
+function addNode(label,parents,lane,kind){
+  const id=label; let x=Math.max(...parents.map(p=>S.nodes[p].x))+1;
+  while(S.order.some(o=>S.nodes[o].x===x && S.nodes[o].lane===lane)) x++;
+  S.nodes[id]={id,label,parents,lane,x,kind:kind||"n"}; S.order.push(id); return id;
+}
+function pos(n){return [X0+n.x*XGAP, LANEY[n.lane]];}
+function edgePath(p,c){
+  const [px,py]=pos(p),[cx,cy]=pos(c);
+  if(py===cy) return `M ${px} ${py} L ${cx} ${cy}`;
+  const s=Math.sign(cy-py), k=18;
+  return `M ${px} ${py} L ${px+16} ${py} Q ${px+34} ${py} ${px+34} ${py+s*k} L ${px+34} ${cy-s*k} Q ${px+34} ${cy} ${px+52} ${cy} L ${cx} ${cy}`;
+}
+function render(newIds){
+  const live=reachable();
+  // size
+  const maxX=Math.max(...S.order.map(id=>S.nodes[id].x));
+  const W=X0*2+ (maxX)*XGAP + 60;
+  svg.setAttribute("width",Math.max(W,640)); svg.setAttribute("viewBox",`0 0 ${Math.max(W,640)} 280`);
+  // edges (redraw)
+  gE.innerHTML="";
+  S.order.forEach(id=>{const n=S.nodes[id];
+    (n.parents||[]).forEach((pid,i)=>{
+      const p=S.nodes[pid];
+      const cross=p.lane!==n.lane;
+      let col;
+      if(!cross) col=LANECOL[n.lane];
+      else col = (n.parents.length>1 && i>0) ? LANECOL[p.lane] : LANECOL[n.lane];
+      const ghost=!(live.has(id));
+      const path=mk("path",{d:edgePath(p,n),class:"pg-edge"+(ghost?" ghost":""),stroke:col});
+      gE.appendChild(path);
+    });
+  });
+  // nodes (reconcile)
+  S.order.forEach(id=>{
+    const n=S.nodes[id]; const [x,y]=pos(n); const ghost=!live.has(id);
+    let g=nodeEls[id];
+    if(!g){
+      g=mk("g",{class:"pg-node pop"});
+      const r=n.parents&&n.parents.length>1?15:13;
+      const c=mk("circle",{class:"st",r, fill:n.parents&&n.parents.length>1?"#fff":"#0C1425", stroke:LANECOL[n.lane],"stroke-width":4});
+      const t=mk("text",{class:"sLbl",y:0}); t.textContent=n.label;
+      if(n.parents&&n.parents.length>1) t.setAttribute("style","fill:#0A101F");
+      g.appendChild(c); g.appendChild(t); gN.appendChild(g); nodeEls[id]=g;
+      // start at parent pos for slide-in
+      if(n.parents&&n.parents.length&&!reduced){
+        const [px,py]=pos(S.nodes[n.parents[0]]);
+        g.style.transform=`translate(${px}px,${py}px)`;
+        requestAnimationFrame(()=>requestAnimationFrame(()=>{g.style.transform=`translate(${x}px,${y}px)`;}));
+      } else g.style.transform=`translate(${x}px,${y}px)`;
+      setTimeout(()=>g.classList.remove("pop"),600);
+    } else {
+      g.style.transform=`translate(${x}px,${y}px)`;
+    }
+    g.classList.toggle("ghost",ghost);
+  });
+  // overlay: plates + head
+  gO.innerHTML="";
+  const plateSlots={};
+  S.branchOrder.forEach(b=>{
+    const n=S.nodes[S.branches[b]]; const [x,y]=pos(n); const lane=LANES[b];
+    const above = lane!==2;
+    const slotKey=n.id+(above?"a":"b");
+    const slot=plateSlots[slotKey]||0; plateSlots[slotKey]=slot+1;
+    const w=b.length*7.6+18, py=(above? y-42-slot*24 : y+26+slot*24);
+    const rect=mk("rect",{x:x-w/2,y:py,rx:8,width:w,height:19,fill:"#0A1222",stroke:LANECOL[lane],"stroke-width":1.6});
+    const t=mk("text",{x:x,y:py+10,class:"plate sLbl",style:`fill:${LANECOL[lane]}`}); t.textContent=b;
+    const stem=mk("line",{x1:x,y1:above?py+19:y+13,x2:x,y2:above?y-15:py, stroke:LANECOL[lane],"stroke-width":1.6,"stroke-dasharray":"2 3"});
+    gO.appendChild(stem); gO.appendChild(rect); gO.appendChild(t);
+  });
+  { // HEAD marker, drawn last so its label dodges any stacked plates
+    const n=S.nodes[S.branches[S.head]]; const [x,y]=pos(n);
+    const ring=mk("circle",{cx:x,cy:y,r:21,fill:"none",stroke:"#fff","stroke-width":2,"stroke-dasharray":"4 5",class:"headring"});
+    gO.appendChild(ring);
+    const below=(plateSlots[n.id+"b"]||0);
+    const ht=mk("text",{x:x,y:y+34+below*24,class:"plate sLbl",style:"fill:#fff"}); ht.textContent="HEAD · you are here";
+    gO.appendChild(ht);
+  }
+  // scroll to the action
+  const wrap=$("#mapwrap");
+  requestAnimationFrame(()=>{ wrap.scrollTo({left:wrap.scrollWidth, behavior:reduced?"auto":"smooth"}); });
+  updateButtons();
+}
+function say(msg,cmd){ $("#dmsg").innerHTML=msg; $("#dcmd").textContent=cmd; }
+function otherBranch(){ const bs=S.branchOrder.filter(b=>b!==S.head); return bs[bs.length-1]; }
+function branchColor(b){return LANECOL[LANES[b]];}
+function bTag(b){return `<b style="color:${branchColor(b)}">${b}</b>`;}
+function updateButtons(){
+  const multi=S.branchOrder.length>1;
+  $("#bBranch").disabled=S.branchOrder.length>=3;
+  $("#bSwitch").disabled=!multi; $("#bMerge").disabled=!multi; $("#bRebase").disabled=!multi; $("#bCherry").disabled=!multi;
+  $("#bReset").disabled=!S.nodes[tip()].parents.length;
+}
+
+$("#bCommit").addEventListener("click",()=>{
+  const id=newId(); addNode(id,[tip()],LANES[S.head],"n"); S.branches[S.head]=id;
+  say(`New station <b>${id}</b> welded onto ${bTag(S.head)} — and watch the nameplate slide with it. That's all a commit is.`,`git commit -m "build station ${id}"`);
+  render();
+});
+$("#bBranch").addEventListener("click",()=>{
+  const name=S.branchOrder.includes("feature")?"hotfix":"feature";
+  S.branches[name]=tip(); S.branchOrder.push(name); S.head=name;
+  say(`Pinned a brand-new nameplate ${bTag(name)} to station <b>${tip()}</b> and hopped on. Nothing was copied — it's a 41-byte sticker.`,`git switch -c ${name}`);
+  render();
+});
+$("#bSwitch").addEventListener("click",()=>{
+  const i=S.branchOrder.indexOf(S.head); S.head=S.branchOrder[(i+1)%S.branchOrder.length];
+  say(`You hopped lines to ${bTag(S.head)}. In real life your street rewrites itself to match station <b>${tip()}</b>'s photograph.`,`git switch ${S.head}`);
+  render();
+});
+$("#bMerge").addEventListener("click",()=>{
+  const o=otherBranch(), ot=S.branches[o], ct=tip();
+  if(isAncestor(ot,ct)){ say(`${bTag(o)} has nothing you don't — <b>already up to date</b>. No junction needed.`,`git merge ${o}`); return; }
+  if(isAncestor(ct,ot)){ S.branches[S.head]=ot;
+    say(`Your line was strictly behind, so git just slid your nameplate forward: a <b>fast-forward</b>. No junction station built.`,`git merge ${o}  # fast-forward`); render(); return; }
+  const id=newId(); addNode(id,[ct,ot],LANES[S.head],"m"); S.branches[S.head]=id;
+  say(`Junction station <b>${id}</b> built with <b>two inbound tracks</b> — from ${bTag(S.head)} and ${bTag(o)}. History untouched, everything preserved.`,`git merge ${o}`);
+  render();
+});
+$("#bRebase").addEventListener("click",()=>{
+  const o=otherBranch(), ot=S.branches[o]; let ct=tip();
+  if(isAncestor(ct,ot)){ S.branches[S.head]=ot; say(`Nothing of yours to re-lay — nameplate fast-forwards to ${bTag(o)}'s tip.`,`git rebase ${o}`); render(); return; }
+  // collect current branch's unique commits (first-parent walk until common ancestor)
+  const uniq=[]; let cur=ct;
+  while(cur && !isAncestor(cur,ot)){ uniq.unshift(cur); cur=S.nodes[cur].parents[0]; }
+  if(!uniq.length){ say(`Already based on ${bTag(o)} — nothing to re-lay.`,`git rebase ${o}`); return; }
+  let base=ot, names=[];
+  uniq.forEach(u=>{ const lbl=S.nodes[u].label.replace(/′+$/,"")+"′";
+    const id=newId(); const n=addNode(id,[base],LANES[S.head],"c"); S.nodes[id].label=lbl; base=id; names.push(lbl); });
+  S.branches[S.head]=base;
+  say(`Track re-laid: ${uniq.map(u=>"<b>"+S.nodes[u].label+"</b>").join(", ")} rebuilt as <b>${names.join(", ")}</b> on top of ${bTag(o)}. New serial numbers — the originals fade to abandoned track. <em>This</em> is why you don't rebase shared branches.`,`git rebase ${o}`);
+  render();
+});
+$("#bCherry").addEventListener("click",()=>{
+  const o=otherBranch(), ot=S.branches[o];
+  if(isAncestor(ot,tip())){ say(`${bTag(o)}'s tip is already on your line — nothing to copy.`,`git cherry-pick ${ot}`); return; }
+  const src=S.nodes[ot], lbl=src.label.replace(/′+$/,"")+"′";
+  const id=newId(); addNode(id,[tip()],LANES[S.head],"c"); S.nodes[id].label=lbl; S.branches[S.head]=id;
+  say(`Photocopied station <b>${src.label}</b> from ${bTag(o)} and welded the copy <b>${lbl}</b> onto ${bTag(S.head)}. Same change, different serial — git doesn't know they're related.`,`git cherry-pick ${ot}`);
+  render();
+});
+$("#bRevert").addEventListener("click",()=>{
+  const t=S.nodes[tip()], id=newId();
+  addNode(id,[tip()],LANES[S.head],"n"); S.nodes[id].label="⊖"+t.label.replace(/′+$/,""); S.branches[S.head]=id;
+  say(`Built the <b>anti-station ⊖${t.label}</b>: a new commit that cancels <b>${t.label}</b>'s change. History only moved forward — perfectly safe on shared lines.`,`git revert ${t.label}`);
+  render();
+});
+$("#bReset").addEventListener("click",()=>{
+  const t=S.nodes[tip()];
+  if(!t.parents.length) return;
+  S.branches[S.head]=t.parents[0];
+  say(`Nameplate slid back — station <b>${t.label}</b> is now <b>abandoned track</b> (faded, not demolished). The reflog kept its address; <code>git branch rescue ${t.label}</code> would bring it back.`,`git reset --hard HEAD~1`);
+  render();
+});
+$("#bStartOver").addEventListener("click",()=>{
+  freshState(); render();
+  say(`Fresh map. You're on <b style="color:var(--amber)">main</b> at station C.`,`git init  # well, sort of`);
+});
+freshState(); render();
+})();
+</script>
+</body>
+</html>
