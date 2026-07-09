@@ -478,28 +478,49 @@ body.cursor-hovering .cursor-ring {
   letter-spacing: 0.08em;
 }
 
-/* ---------- Capabilities ---------- */
+/* ---------- Capabilities: a hand of cards ---------- */
 .cap-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-  gap: 1.4rem;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .cap-card {
+  position: relative;
   padding: 1.7rem 1.6rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  transition: transform 0.3s var(--ease), border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.45s var(--ease), border-color 0.3s ease, box-shadow 0.45s ease;
 }
 
 .cap-card:hover {
-  transform: translateY(-4px);
   border-color: var(--accent-blue);
   box-shadow: var(--shadow);
+}
+
+/* Playing-card corner pips (mirrored, like a real card) */
+.cap-card::before,
+.cap-card::after {
+  content: attr(data-pip);
+  position: absolute;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: var(--accent-orange);
+  opacity: 0.6;
+}
+
+.cap-card::before {
+  top: 0.85rem;
+  right: 1.1rem;
+}
+
+.cap-card::after {
+  bottom: 0.85rem;
+  left: 1.1rem;
+  transform: rotate(180deg);
 }
 
 .cap-card h3 {
@@ -511,6 +532,73 @@ body.cursor-hovering .cursor-ring {
   margin: 0;
   font-size: 0.97rem;
   color: var(--text-soft);
+}
+
+.cap-hint {
+  margin: 1.4rem 0 0;
+  text-align: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.98rem;
+  color: var(--text-soft);
+}
+
+/* Narrow screens: swipeable card carousel */
+@media (max-width: 879.98px) {
+  .cap-grid {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding: 0.5rem 0.25rem 1.25rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  .cap-card {
+    flex: 0 0 min(78vw, 340px);
+    scroll-snap-align: center;
+  }
+
+  .cap-card:nth-child(odd) { transform: rotate(-0.6deg); }
+  .cap-card:nth-child(even) { transform: rotate(0.6deg); }
+}
+
+/* Wide screens: fanned hand (offsets tuned for 4 cards) */
+@media (min-width: 880px) {
+  .cap-grid {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    padding: 2.5rem 0 2rem;
+  }
+
+  .cap-card {
+    flex: 0 1 290px;
+    margin: 0 -16px;
+    box-shadow: var(--shadow);
+    transform: translate(var(--shift, 0px), var(--fan-y, 0px)) rotate(var(--fan-r, 0deg));
+  }
+
+  .cap-card:nth-child(1) { --fan-r: -6deg; --fan-y: 30px; --stack-x: 387px;  --stack-r: -2deg;   z-index: 1; }
+  .cap-card:nth-child(2) { --fan-r: -2deg; --fan-y: 4px;  --stack-x: 129px;  --stack-r: 1deg;    z-index: 2; }
+  .cap-card:nth-child(3) { --fan-r: 2deg;  --fan-y: 4px;  --stack-x: -129px; --stack-r: -1.2deg; z-index: 3; }
+  .cap-card:nth-child(4) { --fan-r: 6deg;  --fan-y: 30px; --stack-x: -387px; --stack-r: 2.4deg;  z-index: 4; }
+
+  .cap-card:hover,
+  .cap-card:focus-within {
+    transform: translate(var(--shift, 0px), calc(var(--fan-y, 0px) - 26px)) rotate(0deg) scale(1.04);
+    z-index: 6;
+  }
+
+  /* Neighbors make room for the hovered card */
+  .cap-grid:not(.fan-stacked) .cap-card:has(~ .cap-card:hover) { --shift: -18px; }
+  .cap-grid:not(.fan-stacked) .cap-card:hover ~ .cap-card { --shift: 18px; }
+
+  /* Squared-up deck before reveal; main.js fans it open on scroll */
+  .cap-grid.fan-stacked .cap-card {
+    transform: translate(var(--stack-x, 0px), 0) rotate(var(--stack-r, 0deg));
+  }
 }
 
 /* ---------- Work ---------- */

@@ -156,7 +156,7 @@ if (!prefersReducedMotion && window.gsap && window.ScrollTrigger) {
     });
   });
 
-  document.querySelectorAll('.cap-grid, .work-grid').forEach((grid) => {
+  document.querySelectorAll('.work-grid').forEach((grid) => {
     gsap.from(grid.children, {
       y: 36,
       opacity: 0,
@@ -166,6 +166,26 @@ if (!prefersReducedMotion && window.gsap && window.ScrollTrigger) {
       scrollTrigger: { trigger: grid, start: 'top 85%', once: true },
     });
   });
+
+  // Capability cards: fade in as a squared-up deck, then fan open.
+  // GSAP must not touch the cards' own transforms — CSS owns the fan.
+  const capGrid = document.querySelector('.cap-grid');
+  if (capGrid) {
+    capGrid.classList.add('fan-stacked');
+    gsap.from(capGrid, {
+      y: 30,
+      opacity: 0,
+      duration: 0.7,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: capGrid, start: 'top 88%', once: true },
+    });
+    ScrollTrigger.create({
+      trigger: capGrid,
+      start: 'top 70%',
+      once: true,
+      onEnter: () => capGrid.classList.remove('fan-stacked'),
+    });
+  }
 }
 
 /* ==================== Three.js hero ==================== */
