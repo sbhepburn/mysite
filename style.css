@@ -590,6 +590,201 @@ body.cursor-hovering .cursor-ring {
   border: 1px solid color-mix(in srgb, var(--accent-blue) 45%, transparent);
 }
 
+/* ---------- Work card title links ---------- */
+.work-card h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.work-card h3 a:hover,
+.work-card h3 a:focus-visible {
+  color: var(--accent-orange);
+}
+
+/* ---------- Studio 3 ---------- */
+.studio3 {
+  background: var(--bg-deep);
+}
+
+.site-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1.2rem;
+}
+
+.site-card {
+  display: block;
+  padding: 0.85rem 0.85rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s var(--ease), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.site-card:hover,
+.site-card:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--accent-blue);
+  box-shadow: var(--shadow);
+}
+
+.site-thumb {
+  margin: 0 0 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) - 6px);
+  overflow: hidden;
+}
+
+.site-thumb img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1200 / 630;
+  object-fit: cover;
+  transition: transform 0.4s var(--ease);
+}
+
+.site-card:hover .site-thumb img,
+.site-card:focus-visible .site-thumb img {
+  transform: scale(1.04);
+}
+
+.site-card h3 {
+  font-size: 1rem;
+  margin-bottom: 0.15rem;
+}
+
+.site-domain {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  letter-spacing: 0.02em;
+}
+
+/* ---------- Command line applications ---------- */
+.term-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 1.4rem;
+}
+
+.term-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #191009;
+  color: #ede3d4;
+  transition: transform 0.3s var(--ease), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.term-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-orange);
+  box-shadow: var(--shadow);
+}
+
+.term-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 0.9rem;
+  background: #241811;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.term-bar span {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.term-bar span:nth-child(1) { background: #ff5f57; }
+.term-bar span:nth-child(2) { background: #febc2e; }
+.term-bar span:nth-child(3) { background: #28c840; }
+
+.term-bar em {
+  margin-left: auto;
+  font-style: normal;
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 0.8rem;
+  color: rgba(237, 227, 212, 0.55);
+}
+
+.term-body {
+  padding: 1.1rem 1.2rem 1.3rem;
+}
+
+.term-line {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 0.88rem;
+  margin-bottom: 0.8rem;
+  color: #f7efe2;
+}
+
+.term-prompt {
+  color: var(--accent-orange);
+  font-weight: 600;
+}
+
+.term-body p:not(.term-line) {
+  font-size: 0.95rem;
+  color: rgba(237, 227, 212, 0.78);
+  margin-bottom: 0.9rem;
+}
+
+.term-link {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 0.83rem;
+  color: #8cc9f0;
+  text-decoration: none;
+}
+
+.term-link:hover,
+.term-link:focus-visible {
+  text-decoration: underline;
+}
+
+/* ---------- Story Time ---------- */
+.storytime {
+  background: var(--bg-deep);
+}
+
+.storytime-cols {
+  display: grid;
+  grid-template-columns: minmax(220px, 360px) 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.storytime-art {
+  margin: 0;
+}
+
+.storytime-art img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.storytime-copy p {
+  color: var(--text-soft);
+  max-width: 560px;
+  margin-bottom: 1.6rem;
+}
+
+@media (max-width: 720px) {
+  .storytime-cols {
+    grid-template-columns: 1fr;
+  }
+
+  .storytime-art {
+    max-width: 320px;
+  }
+}
+
 /* ---------- Local (lead gen) ---------- */
 .local {
   background:
