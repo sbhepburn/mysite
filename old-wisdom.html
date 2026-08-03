@@ -1,0 +1,1985 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Old Wisdom</title>
+<meta name="description" content="Thirty-eight named observations about how work, people, and organizations behave, with the original wording, an example, and a diagram for each.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>document.documentElement.className = "js";</script>
+<style>
+:root{
+  --ink-900:#061A20;
+  --ink-850:#08222A;
+  --ink-800:#0C2B34;
+  --ink-700:#133B45;
+  --ink-600:#1C4E59;
+  --chalk:#EDE7D9;
+  --chalk-2:#C3CEC9;
+  --chalk-3:#8FA5A4;
+  --tan:#DAC59F;
+  --tan-dim:#B9A47E;
+  --brass:#DDA640;
+  --brass-2:#B9832C;
+  --brass-glow:rgba(221,166,64,.16);
+  --coral:#E4826A;
+  --display:"Instrument Serif","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --body:"Archivo","Helvetica Neue",Helvetica,sans-serif;
+  --mono:"IBM Plex Mono","SFMono-Regular",Menlo,Consolas,monospace;
+  --gutter:clamp(20px,5vw,72px);
+  --measure:62ch;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--ink-900);
+  color:var(--chalk);
+  font-family:var(--body);
+  font-size:clamp(15px,.42vw + 14px,17px);
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(to right,rgba(143,165,164,.055) 1px,transparent 1px),
+    linear-gradient(to bottom,rgba(143,165,164,.055) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(120% 60% at 50% 0%,#000 0%,rgba(0,0,0,.3) 55%,transparent 100%);
+  -webkit-mask-image:radial-gradient(120% 60% at 50% 0%,#000 0%,rgba(0,0,0,.3) 55%,transparent 100%);
+}
+body::after{
+  content:"";position:fixed;inset:-50%;z-index:0;pointer-events:none;opacity:.045;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.shell{position:relative;z-index:1}
+::selection{background:var(--brass);color:var(--ink-900)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--brass);outline-offset:4px;border-radius:2px}
+.wrap{width:min(1180px,100% - var(--gutter) * 2);margin-inline:auto}
+
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);margin:0}
+.lede{font-size:clamp(16px,.55vw + 14px,19px);color:var(--chalk-2);max-width:var(--measure)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow-x:clip;padding:clamp(52px,10vh,110px) 0 clamp(20px,4vh,44px)}
+.hero-glow{position:absolute;top:-42vh;left:50%;transform:translateX(-50%);width:min(1500px,190vw);height:110vh;pointer-events:none;background:radial-gradient(closest-side,var(--brass-glow),transparent 72%)}
+.hero-inner{position:relative}
+.title{font-family:var(--display);font-weight:400;line-height:.92;letter-spacing:-.015em;font-size:clamp(46px,9.4vw,132px);margin:.22em 0 0;color:var(--chalk)}
+.title span{display:block}
+.title .u{color:var(--tan);font-style:italic;padding-left:.06em}
+.standfirst{font-family:var(--display);font-style:italic;font-size:clamp(20px,2.2vw,30px);color:var(--chalk-3);margin:.5em 0 0;line-height:1.3;max-width:34ch}
+.hero-body{margin-top:clamp(26px,3.6vw,40px);display:grid;gap:clamp(20px,3.4vw,52px);grid-template-columns:minmax(0,1fr);align-items:start}
+@media(min-width:900px){.hero-body{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.hero-body p{margin:0 0 1em}
+.hero-body p:last-child{margin-bottom:0}
+
+/* ---------- catalog ---------- */
+.catalog{margin-top:clamp(28px,4vw,52px);display:grid;gap:clamp(14px,1.6vw,20px);grid-template-columns:minmax(0,1fr)}
+@media(min-width:640px){.catalog{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:1020px){.catalog{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.index{border:1px solid var(--ink-700);background:linear-gradient(180deg,rgba(12,43,52,.85),rgba(6,26,32,.55));padding:clamp(12px,1.6vw,18px)}
+.index-head{margin-bottom:8px}
+.index-head .eyebrow{color:var(--brass)}
+.index ol{list-style:none;margin:0;padding:0}
+.index a{
+  display:grid;grid-template-columns:2.4em 1fr;gap:8px;align-items:baseline;
+  padding:5px 7px;text-decoration:none;font-family:var(--mono);font-size:12px;
+  color:var(--chalk-2);transition:background .2s ease,color .2s ease,padding-left .2s ease;
+}
+.index a .n{color:var(--brass-2);font-variant-numeric:tabular-nums}
+.index a .g{color:var(--chalk-3);font-size:11px;display:block}
+.index a:hover,.index a:focus-visible{background:rgba(221,166,64,.1);color:var(--chalk);padding-left:12px}
+.index a:hover .n,.index a:focus-visible .n{color:var(--brass)}
+
+/* ---------- chapter headers ---------- */
+.chapter{padding:clamp(74px,13vh,164px) 0 clamp(10px,2vw,26px)}
+.chapter .numeral{
+  font-family:var(--display);font-style:italic;font-weight:400;
+  font-size:clamp(48px,7vw,104px);line-height:.86;letter-spacing:.01em;
+  color:var(--brass-2);margin:0 0 .04em;
+}
+.chapter h2{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(46px,8.2vw,112px);line-height:.92;letter-spacing:-.022em;
+  margin:0;color:var(--tan);
+}
+.chapter .eyebrow{margin:clamp(20px,2.6vw,32px) 0 0;color:var(--chalk-3);letter-spacing:.24em}
+
+/* ---------- law entries ---------- */
+.law{padding:clamp(38px,5.4vw,68px) 0;scroll-margin-top:clamp(16px,4vh,48px)}
+.law:target .law-num{color:var(--brass)}
+.law:target .ico-box{border-color:var(--brass-2)}
+.law-grid{display:grid;gap:clamp(24px,3.6vw,50px);grid-template-columns:minmax(0,1fr);align-items:start}
+@media(min-width:940px){
+  .law-grid{grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr)}
+  .law:nth-of-type(even) .law-copy{order:2}
+  .law:nth-of-type(even) .law-panel{order:1}
+}
+.law-mark{display:flex;align-items:center;gap:13px;margin-bottom:14px}
+.ico-box{
+  width:54px;height:54px;flex:none;border:1px solid var(--ink-700);
+  background:radial-gradient(90% 110% at 50% 0%,rgba(28,78,89,.4),transparent 72%),rgba(8,34,42,.75);
+  display:grid;place-items:center;transition:border-color .35s ease;
+}
+.ico{width:36px;height:36px;display:block;overflow:visible}
+.ico path,.ico circle,.ico rect,.ico line,.ico polyline,.ico ellipse{
+  fill:none;stroke:var(--brass);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;
+  vector-effect:non-scaling-stroke;
+}
+.ico .f{fill:var(--brass);stroke:none}
+.ico .d{stroke:var(--chalk-3);opacity:.6}
+.ico .f.d{fill:var(--chalk-3);stroke:none;opacity:.5}
+.law-num{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--brass-2)}
+.law-name{font-family:var(--display);font-weight:400;font-size:clamp(28px,3.2vw,44px);line-height:1.02;letter-spacing:-.01em;margin:0;color:var(--tan)}
+.law-origin{font-family:var(--mono);font-size:11.5px;line-height:1.7;letter-spacing:.02em;color:var(--chalk-3);margin:12px 0 0;max-width:48ch}
+.statement{
+  font-family:var(--display);font-style:italic;font-size:clamp(20px,2.2vw,29px);line-height:1.26;
+  color:var(--tan);margin:clamp(18px,2.4vw,28px) 0 0;padding-left:clamp(14px,1.6vw,20px);
+  border-left:2px solid var(--brass-2);max-width:36ch;
+}
+.qnote{font-family:var(--mono);font-size:10.5px;line-height:1.7;letter-spacing:.04em;color:var(--chalk-3);margin:11px 0 0;padding-left:calc(clamp(14px,1.6vw,20px) + 2px);max-width:52ch}
+.law-copy p{max-width:var(--measure)}
+.law-copy .body{margin:clamp(16px,2.2vw,24px) 0 0;color:var(--chalk-2)}
+.note{margin-top:20px;padding:14px 16px;background:rgba(12,43,52,.7);border:1px solid var(--ink-700)}
+.note .tag{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--coral);margin-bottom:6px}
+.note p{margin:0;font-size:.92em;color:var(--chalk-2)}
+.use{margin-top:20px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 14px;align-items:start}
+.use .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);padding-top:.42em;white-space:nowrap}
+.use p{margin:0;color:var(--chalk)}
+@media(max-width:520px){.use{grid-template-columns:minmax(0,1fr);gap:6px}}
+
+/* ---------- instrument panels ---------- */
+.law-panel{position:relative}
+.instrument{
+  border:1px solid var(--ink-700);
+  background:radial-gradient(90% 130% at 50% 0%,rgba(28,78,89,.34),transparent 70%),var(--ink-850);
+  padding:16px 16px 12px;transition:border-color .4s ease;
+}
+.instrument:hover{border-color:var(--ink-600)}
+.instrument svg{display:block;width:100%;height:auto}
+.instrument figcaption{font-family:var(--mono);font-size:10.5px;line-height:1.6;letter-spacing:.06em;text-transform:uppercase;color:var(--chalk-3);margin-top:12px}
+.dia-label{font-family:"IBM Plex Mono",monospace;font-size:8.4px;letter-spacing:.11em;text-transform:uppercase;fill:var(--chalk-3)}
+.dia-label.hot{fill:var(--brass)}
+.dia-label.warm{fill:var(--coral)}
+.dia-label.big{font-size:10.5px;fill:var(--chalk-2)}
+.axis{stroke:var(--ink-600);stroke-width:1;fill:none}
+.stroke{stroke:var(--brass);stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.stroke.faint{stroke:var(--ink-600)}
+.stroke.cool{stroke:var(--chalk-3);stroke-width:1.3}
+.stroke.warm{stroke:var(--coral)}
+.stroke.web{stroke-width:.75;opacity:.85}
+.dot{fill:var(--brass)}
+.dot.cool{fill:var(--chalk-3)}
+.dot.warm-dot{fill:var(--coral)}
+.fillbar{fill:rgba(221,166,64,.22);stroke:var(--brass);stroke-width:1.2}
+.coolbar{fill:rgba(143,165,164,.13);stroke:var(--chalk-3);stroke-width:1.1}
+.ghost{fill:none;stroke:var(--ink-600);stroke-width:1.2;stroke-dasharray:3 4}
+
+/* draw-on for instruments */
+.draw{stroke-dasharray:1;stroke-dashoffset:1}
+.in .draw{transition:stroke-dashoffset 1.15s cubic-bezier(.65,.02,.32,1);transition-delay:calc(var(--d,0) * 90ms + 180ms);stroke-dashoffset:0}
+.grow{transform:scaleX(0);transform-origin:left center;transform-box:fill-box}
+.in .grow{transition:transform 1s cubic-bezier(.22,.9,.24,1);transition-delay:calc(var(--d,0) * 120ms + 220ms);transform:scaleX(1)}
+.rise{transform:scaleY(0);transform-origin:center bottom;transform-box:fill-box}
+.in .rise{transition:transform .8s cubic-bezier(.22,.9,.24,1);transition-delay:calc(var(--d,0) * 70ms + 200ms);transform:scaleY(1)}
+.pop{opacity:0;transform:scale(.6);transform-box:fill-box;transform-origin:center}
+.in .pop{transition:opacity .5s ease,transform .5s cubic-bezier(.3,1.5,.5,1);transition-delay:calc(var(--d,0) * 60ms + 520ms);opacity:1;transform:scale(1)}
+.tilt{transform:rotate(0deg);transform-origin:160px 96px}
+.in .tilt{transition:transform 1.1s cubic-bezier(.5,1.4,.4,1) .5s;transform:rotate(11deg)}
+
+/* ---------- icon animation vocabulary ---------- */
+.ico [class*="a-"]{transform-box:fill-box;transform-origin:center}
+.law:not(.visible) .ico *{animation-play-state:paused}
+@keyframes k-flow{to{stroke-dashoffset:-20}}
+@keyframes k-pulse{0%,100%{opacity:.3;transform:scale(.75)}50%{opacity:1;transform:scale(1.2)}}
+@keyframes k-blink{0%,42%{opacity:1}50%,92%{opacity:.12}100%{opacity:1}}
+@keyframes k-slide{0%,100%{transform:translateX(-7px)}50%{transform:translateX(7px)}}
+@keyframes k-rise{0%,100%{transform:translateY(3px);opacity:.35}50%{transform:translateY(-4px);opacity:1}}
+@keyframes k-swing{0%,100%{transform:rotate(-20deg)}50%{transform:rotate(18deg)}}
+@keyframes k-spin{to{transform:rotate(360deg)}}
+@keyframes k-drip{0%{transform:translateY(0);opacity:0}18%{opacity:1}78%{transform:translateY(9px);opacity:1}100%{transform:translateY(12px);opacity:0}}
+@keyframes k-fade{0%,15%{opacity:1}55%,85%{opacity:.08}100%{opacity:1}}
+@keyframes k-grow{0%,100%{transform:scale(1)}50%{transform:scale(.7)}}
+@keyframes k-tip{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(14deg)}}
+@keyframes k-flip{0%,42%{transform:rotate(0)}58%,100%{transform:rotate(180deg)}}
+@keyframes k-sweep{0%,100%{transform:rotate(-40deg)}50%{transform:rotate(40deg)}}
+@keyframes k-draw{0%{stroke-dashoffset:100}45%,100%{stroke-dashoffset:0}}
+@keyframes k-shrink{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.08)}}
+@keyframes k-stretch{0%,100%{transform:scaleX(.35)}55%,80%{transform:scaleX(1)}}
+@keyframes k-settle{0%,10%{transform:translateY(-11px)}60%,100%{transform:translateY(0)}}
+@keyframes k-tap{0%,100%{transform:rotate(-24deg)}44%,54%{transform:rotate(6deg)}}
+@keyframes k-sink{0%,20%{transform:translateY(0);opacity:.55}70%,100%{transform:translateY(11px);opacity:0}}
+@keyframes k-wob{0%,100%{transform:translateY(0)}25%{transform:translateY(-2.5px)}75%{transform:translateY(2.5px)}}
+@keyframes k-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.a-flow{stroke-dasharray:4 5;animation:k-flow 1.7s linear infinite}
+.a-pulse{animation:k-pulse 2.4s ease-in-out infinite}
+.a-blink{animation:k-blink 2.6s ease-in-out infinite}
+.a-slide{animation:k-slide 3s ease-in-out infinite}
+.a-rise{animation:k-rise 2.4s ease-in-out infinite}
+.a-swing{animation:k-swing 2.8s ease-in-out infinite}
+.a-spin{animation:k-spin 5.5s linear infinite}
+.a-drip{animation:k-drip 2.4s ease-in infinite}
+.a-fade{animation:k-fade 3.4s ease-in-out infinite}
+.a-grow{animation:k-grow 2.8s ease-in-out infinite}
+.a-tip{animation:k-tip 3.4s ease-in-out infinite}
+.a-flip{animation:k-flip 3.6s cubic-bezier(.6,0,.3,1) infinite}
+.a-sweep{animation:k-sweep 3.2s ease-in-out infinite}
+.a-draw{stroke-dasharray:100;animation:k-draw 3.4s ease-in-out infinite}
+.a-shrink{animation:k-shrink 3s ease-in-out infinite}
+.a-stretch{animation:k-stretch 3.4s cubic-bezier(.3,.9,.3,1) infinite}
+.a-settle{animation:k-settle 3.4s cubic-bezier(.2,1,.3,1) infinite}
+.a-tap{animation:k-tap 1.9s cubic-bezier(.4,0,.4,1) infinite}
+.a-sink{animation:k-sink 3s ease-in-out infinite}
+.a-wob{animation:k-wob 3s ease-in-out infinite}
+.a-bob{animation:k-bob 2.6s ease-in-out infinite}
+
+/* ---------- reveal ---------- */
+.js .reveal{opacity:0;transform:translateY(20px)}
+.js .reveal.in{opacity:1;transform:none;transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.3,1);transition-delay:calc(var(--d,0) * 80ms)}
+
+/* ---------- closing ---------- */
+.closing{padding:clamp(56px,10vh,120px) 0 clamp(70px,12vh,140px)}
+.twelfth{border:1px solid var(--brass-2);background:radial-gradient(120% 160% at 0% 0%,rgba(221,166,64,.12),transparent 62%),var(--ink-850);padding:clamp(26px,4.5vw,52px)}
+.twelfth .eyebrow{margin-bottom:14px}
+.twelfth q{display:block;quotes:none;font-family:var(--display);font-style:italic;font-size:clamp(25px,3.7vw,48px);line-height:1.14;color:var(--tan);max-width:23ch}
+.twelfth .attrib{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:var(--chalk-3);margin:20px 0 0}
+.outro{margin-top:clamp(34px,5vw,56px);display:grid;gap:clamp(18px,3vw,44px);grid-template-columns:minmax(0,1fr)}
+@media(min-width:820px){.outro{grid-template-columns:minmax(0,.7fr) minmax(0,1fr)}}
+.outro h2{font-family:var(--display);font-weight:400;font-size:clamp(26px,3vw,38px);line-height:1.1;margin:0;color:var(--tan)}
+.outro p{margin:0 0 1em;color:var(--chalk-2)}
+.outro p:last-child{margin-bottom:0}
+.colophon{margin-top:clamp(40px,6vw,72px);font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--chalk-3);line-height:1.9}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .js .reveal{opacity:1;transform:none}
+  .draw{stroke-dashoffset:0}
+  .grow,.rise,.pop{transform:none;opacity:1}
+  .tilt{transform:rotate(11deg)}
+  .a-draw{stroke-dashoffset:0}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<header class="hero">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <h1 class="title reveal" style="--d:0">
+      <span>Old</span>
+      <span class="u">Wisdom</span>
+    </h1>
+    <p class="standfirst reveal" style="--d:1">Thirty-eight named observations about how work, people, and organizations behave.</p>
+
+    <div class="hero-body">
+      <div class="reveal" style="--d:2">
+        <p class="lede">Each is named for whoever first recorded it: a naval historian, a friar, a pediatrician, a cyberneticist, a physicist who published his findings as a novel. Where the original wording survives, it is quoted directly, with a note on what has been trimmed and what is a later restatement.</p>
+      </div>
+      <div class="reveal" style="--d:3">
+        <p class="lede">None of them is enforceable, and several contradict one another. Each entry gives the claim, an example, a diagram of its shape, and a short note on applying it. No specialist knowledge is assumed anywhere in the collection.</p>
+      </div>
+    </div>
+
+    <div class="catalog">
+      <nav class="index reveal" style="--d:5" aria-label="Leverage">
+        <div class="index-head"><p class="eyebrow">I. Leverage</p></div>
+        <ol>
+          <li><a href="#law-1"><span class="n">01</span><span>Conway's Law<span class="g">design mirrors the communication structure</span></span></a></li>
+          <li><a href="#law-2"><span class="n">02</span><span>Ashby's Law<span class="g">range must match variation</span></span></a></li>
+          <li><a href="#law-3"><span class="n">03</span><span>Managerial Output<span class="g">output measured through others</span></span></a></li>
+          <li><a href="#law-4"><span class="n">04</span><span>Task-Relevant Maturity<span class="g">supervision set per task</span></span></a></li>
+        </ol>
+      </nav>
+      <nav class="index reveal" style="--d:5" aria-label="Triage">
+        <div class="index-head"><p class="eyebrow">II. Triage</p></div>
+        <ol>
+          <li><a href="#law-5"><span class="n">05</span><span>Theory of Constraints<span class="g">one step limits throughput</span></span></a></li>
+          <li><a href="#law-6"><span class="n">06</span><span>Little's Law<span class="g">work in progress sets the wait</span></span></a></li>
+          <li><a href="#law-7"><span class="n">07</span><span>Amdahl's Law<span class="g">gains capped by the share improved</span></span></a></li>
+          <li><a href="#law-8"><span class="n">08</span><span>One-Way Doors<span class="g">reversibility sets the pace</span></span></a></li>
+          <li><a href="#law-9"><span class="n">09</span><span>The Pareto Principle<span class="g">effects concentrate in few causes</span></span></a></li>
+          <li><a href="#law-10"><span class="n">10</span><span>Brooks's Law<span class="g">added people, added coordination</span></span></a></li>
+          <li><a href="#law-11"><span class="n">11</span><span>Parkinson's Law<span class="g">work fills the time allotted</span></span></a></li>
+          <li><a href="#law-12"><span class="n">12</span><span>Hofstadter's Law<span class="g">estimates run long regardless</span></span></a></li>
+        </ol>
+      </nav>
+      <nav class="index reveal" style="--d:5" aria-label="Preservation">
+        <div class="index-head"><p class="eyebrow">III. Preservation</p></div>
+        <ol>
+          <li><a href="#law-13"><span class="n">13</span><span>Chesterton's Fence<span class="g">establish the reason before removing</span></span></a></li>
+          <li><a href="#law-14"><span class="n">14</span><span>Gall's Law<span class="g">complexity grows, it is not specified</span></span></a></li>
+          <li><a href="#law-15"><span class="n">15</span><span>Hyrum's Law<span class="g">incidental behavior becomes dependency</span></span></a></li>
+          <li><a href="#law-16"><span class="n">16</span><span>Second-System Effect<span class="g">replacements accumulate omissions</span></span></a></li>
+          <li><a href="#law-17"><span class="n">17</span><span>Kernighan's Law<span class="g">built beyond the range to repair</span></span></a></li>
+          <li><a href="#law-18"><span class="n">18</span><span>Leaky Abstractions<span class="g">simplifications expose complexity</span></span></a></li>
+          <li><a href="#law-19"><span class="n">19</span><span>The Lindy Effect<span class="g">age as evidence of durability</span></span></a></li>
+        </ol>
+      </nav>
+      <nav class="index reveal" style="--d:5" aria-label="Reading the organization">
+        <div class="index-head"><p class="eyebrow">IV. Reading the organization</p></div>
+        <ol>
+          <li><a href="#law-20"><span class="n">20</span><span>Theory Building<span class="g">the understanding is the asset</span></span></a></li>
+          <li><a href="#law-21"><span class="n">21</span><span>Bus Factor<span class="g">concentration of knowledge</span></span></a></li>
+          <li><a href="#law-22"><span class="n">22</span><span>The Shirky Principle<span class="g">institutions and their problems</span></span></a></li>
+          <li><a href="#law-23"><span class="n">23</span><span>Goodhart's Law<span class="g">targets degrade measures</span></span></a></li>
+          <li><a href="#law-24"><span class="n">24</span><span>Bikeshedding<span class="g">time runs inverse to the sum</span></span></a></li>
+          <li><a href="#law-25"><span class="n">25</span><span>Segal's Law<span class="g">two sources, no resolution</span></span></a></li>
+          <li><a href="#law-26"><span class="n">26</span><span>Sturgeon's Law<span class="g">most output is unremarkable</span></span></a></li>
+          <li><a href="#law-27"><span class="n">27</span><span>Dunning-Kruger<span class="g">confidence and accuracy diverge</span></span></a></li>
+        </ol>
+      </nav>
+      <nav class="index reveal" style="--d:5" aria-label="Judgment">
+        <div class="index-head"><p class="eyebrow">V. Judgment</p></div>
+        <ol>
+          <li><a href="#law-28"><span class="n">28</span><span>Occam's Razor<span class="g">count the assumptions</span></span></a></li>
+          <li><a href="#law-29"><span class="n">29</span><span>Hanlon's Razor<span class="g">pressure before intent</span></span></a></li>
+          <li><a href="#law-30"><span class="n">30</span><span>Inversion<span class="g">specify failure instead</span></span></a></li>
+          <li><a href="#law-31"><span class="n">31</span><span>Cynefin<span class="g">expertise or experiment</span></span></a></li>
+          <li><a href="#law-32"><span class="n">32</span><span>Map and Territory<span class="g">representation and reality</span></span></a></li>
+          <li><a href="#law-33"><span class="n">33</span><span>Law of the Instrument<span class="g">tools shape the problems seen</span></span></a></li>
+          <li><a href="#law-34"><span class="n">34</span><span>Survivorship Bias<span class="g">the sample excludes failures</span></span></a></li>
+          <li><a href="#law-35"><span class="n">35</span><span>Regression to the Mean<span class="g">extremes move toward the average</span></span></a></li>
+          <li><a href="#law-36"><span class="n">36</span><span>The Peter Principle<span class="g">promotion ends at the unsuited role</span></span></a></li>
+          <li><a href="#law-37"><span class="n">37</span><span>Hick's Law<span class="g">options and decision time</span></span></a></li>
+          <li><a href="#law-38"><span class="n">38</span><span>Illich's Law<span class="g">input past the threshold</span></span></a></li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="wrap laws">
+<section id="ch-1">
+<header class="chapter">
+  <p class="numeral reveal">I</p>
+  <h2 class="reveal" style="--d:1">Leverage</h2>
+  <p class="eyebrow reveal" style="--d:2">Entries 01 to 04</p>
+</header>
+
+<article class="law" id="law-1">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <circle cx="11" cy="10" r="4"/><circle cx="29" cy="10" r="4"/><path class="a-flow" d="M15 10 H25"/>
+          <rect x="5" y="24" width="12" height="11"/><rect x="23" y="24" width="12" height="11"/>
+          <path class="a-flow" style="animation-delay:.5s" d="M17 29.5 H23"/>
+        </svg></span>
+        <span class="law-num">No. 01</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Conway's Law</h2>
+      <p class="law-origin reveal" style="--d:2">Melvin Conway, 1968, in a paper titled How Do Committees Invent? The observation has since been reproduced in studies of software architecture and product design.</p>
+      <p class="statement reveal" style="--d:3">&hellip;a design whose structure is a copy of the organization's communication structure.</p>
+      <p class="qnote reveal" style="--d:3">Conway's own words, 1968, second half of the sentence.</p>
+      <p class="body reveal" style="--d:4">A design tends to mirror the communication structure of the group that produced it. Where two teams coordinate closely, the parts they build fit together. Where they rarely speak, the parts meet at a seam. A bank with separate mortgage and savings departments generally produces separate applications, separate logins, and a customer who has to explain themselves twice.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Changing team boundaries changes the design. Where a seam in the product keeps causing problems, examine whether the two groups on either side of it have any reason to talk.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="Three teams above, two of them connected. Below, the product they built, with a matching gap between its parts.">
+          <text class="dia-label" x="10" y="20">Who talks to whom</text>
+          <circle class="dot pop" style="--d:0" cx="70" cy="46" r="9"/>
+          <circle class="dot pop" style="--d:1" cx="160" cy="46" r="9"/>
+          <circle class="dot pop" style="--d:2" cx="250" cy="46" r="9"/>
+          <path class="stroke draw" style="--d:0" pathLength="1" d="M81 46 H149"/>
+          <path class="ghost" d="M171 46 H239"/>
+          <text class="dia-label" x="115" y="66" text-anchor="middle">weekly</text>
+          <text class="dia-label warm" x="205" y="66" text-anchor="middle">never</text>
+          <text class="dia-label" x="10" y="102">What they shipped</text>
+          <rect class="fillbar rise" style="--d:0" x="32" y="112" width="80" height="34"/>
+          <rect class="fillbar rise" style="--d:1" x="114" y="112" width="80" height="34"/>
+          <rect class="fillbar rise" style="--d:2" x="222" y="112" width="80" height="34"/>
+          <path class="stroke warm draw" style="--d:3" pathLength="1" d="M198 108 V150 M218 108 V150"/>
+          <text class="dia-label warm" x="208" y="164" text-anchor="middle">the seam</text>
+        </svg>
+        <figcaption>Fig. 1 The seam in the product corresponds to the missing conversation.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-2">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <rect x="3" y="13" width="12" height="15"/><circle class="f" cx="9" cy="18" r="1.7"/><circle class="f" cx="9" cy="24" r="1.7"/>
+          <circle class="f a-blink" cx="23" cy="10" r="1.8"/><circle class="f a-blink" style="animation-delay:.3s" cx="30" cy="10" r="1.8"/><circle class="f a-blink" style="animation-delay:.7s" cx="37" cy="10" r="1.8"/>
+          <circle class="f a-blink" style="animation-delay:1.1s" cx="23" cy="20" r="1.8"/><circle class="f a-blink" style="animation-delay:.5s" cx="30" cy="20" r="1.8"/><circle class="f a-blink" style="animation-delay:1.5s" cx="37" cy="20" r="1.8"/>
+          <circle class="f a-blink" style="animation-delay:.9s" cx="23" cy="30" r="1.8"/><circle class="f a-blink" style="animation-delay:1.9s" cx="30" cy="30" r="1.8"/><circle class="f a-blink" style="animation-delay:.1s" cx="37" cy="30" r="1.8"/>
+        </svg></span>
+        <span class="law-num">No. 02</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Ashby's Law of Requisite Variety</h2>
+      <p class="law-origin reveal" style="--d:2">W. Ross Ashby, An Introduction to Cybernetics, 1956. Ashby was describing regulators, biological and mechanical. Stafford Beer later applied the law to organizations.</p>
+      <p class="statement reveal" style="--d:3">Only variety can destroy variety.</p>
+      <p class="qnote reveal" style="--d:3">Ashby's own words, 1956, in full. Variety means number of possible states.</p>
+      <p class="body reveal" style="--d:4">A controller can absorb only as much variation as it can itself produce. If a situation presents forty distinct states and the controller has six distinct responses, thirty-four states go unmanaged, and responding faster does not help, because the shortfall is in range rather than speed. A help desk with four scripted answers cannot resolve a caller whose problem is of the fifth kind.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Count the kinds of problem arriving rather than the number. Where kinds exceed available responses, the remedy is to add responses: rules others can apply, delegated authority, or a system that absorbs the routine cases.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="A small control panel with three settings facing a field of sixteen different incoming situations.">
+          <text class="dia-label" x="14" y="22">Your responses</text>
+          <rect class="coolbar" x="14" y="34" width="84" height="96"/>
+          <circle class="dot pop" style="--d:0" cx="56" cy="58" r="6"/>
+          <circle class="dot pop" style="--d:1" cx="56" cy="82" r="6"/>
+          <circle class="dot pop" style="--d:2" cx="56" cy="106" r="6"/>
+          <text class="dia-label hot" x="56" y="146" text-anchor="middle">three</text>
+          <path class="stroke warm draw" style="--d:2" pathLength="1" d="M160 82 H108 M108 82 l9 -5 M108 82 l9 5"/>
+          <text class="dia-label" x="230" y="22" text-anchor="middle">What arrives</text>
+          <g class="pop" style="--d:3">
+            <circle class="dot cool" cx="176" cy="40" r="4"/><circle class="dot cool" cx="206" cy="40" r="4"/><circle class="dot cool" cx="236" cy="40" r="4"/><circle class="dot cool" cx="266" cy="40" r="4"/><circle class="dot cool" cx="296" cy="40" r="4"/>
+            <circle class="dot cool" cx="176" cy="68" r="4"/><circle class="dot cool" cx="206" cy="68" r="4"/><circle class="dot cool" cx="236" cy="68" r="4"/><circle class="dot cool" cx="266" cy="68" r="4"/><circle class="dot cool" cx="296" cy="68" r="4"/>
+            <circle class="dot cool" cx="176" cy="96" r="4"/><circle class="dot cool" cx="206" cy="96" r="4"/><circle class="dot cool" cx="236" cy="96" r="4"/><circle class="dot cool" cx="266" cy="96" r="4"/><circle class="dot cool" cx="296" cy="96" r="4"/>
+            <circle class="dot cool" cx="176" cy="124" r="4"/><circle class="dot cool" cx="206" cy="124" r="4"/><circle class="dot cool" cx="236" cy="124" r="4"/><circle class="dot cool" cx="266" cy="124" r="4"/><circle class="dot cool" cx="296" cy="124" r="4"/>
+          </g>
+          <text class="dia-label" x="236" y="146" text-anchor="middle">twenty, all different</text>
+        </svg>
+        <figcaption>Fig. 2 Three available responses against twenty distinct situations.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-3">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <circle cx="20" cy="20" r="4.5"/>
+          <circle class="f a-pulse" cx="20" cy="6" r="2"/><circle class="f a-pulse" style="animation-delay:.35s" cx="32" cy="13" r="2"/>
+          <circle class="f a-pulse" style="animation-delay:.7s" cx="32" cy="27" r="2"/><circle class="f a-pulse" style="animation-delay:1.05s" cx="20" cy="34" r="2"/>
+          <circle class="f a-pulse" style="animation-delay:1.4s" cx="8" cy="27" r="2"/><circle class="f a-pulse" style="animation-delay:1.75s" cx="8" cy="13" r="2"/>
+        </svg></span>
+        <span class="law-num">No. 03</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Grove's Law of Managerial Output</h2>
+      <p class="law-origin reveal" style="--d:2">Andrew Grove, High Output Management, 1983, written while he was president of Intel.</p>
+      <p class="statement reveal" style="--d:3">A manager's output = the output of his organization + &hellip; the neighboring organizations under his influence.</p>
+      <p class="qnote reveal" style="--d:3">Grove's own formula, 1983, with one repeated phrase cut.</p>
+      <p class="body reveal" style="--d:4">Grove defines a manager's output as the combined output of the groups they affect rather than the work they complete personally. An hour spent removing an obstacle for twelve people can produce more than an hour of the manager's own work, however good. The formulation also explains a common difficulty: a strong individual contributor promoted into management loses the measure of progress they are used to.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Before beginning a task, consider how many people the result reaches. Work that many people reuse, such as a decision, a template, or an explanation, generally returns more than work that reaches one.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="A short bar for work done personally beside a much taller bar for the output of everyone influenced.">
+          <path class="axis" d="M28 24 V140 H300"/>
+          <circle class="dot cool pop" style="--d:0" cx="76" cy="112" r="7"/>
+          <rect class="coolbar rise" style="--d:0" x="48" y="122" width="56" height="18"/>
+          <text class="dia-label" x="76" y="156" text-anchor="middle">completed personally</text>
+          <g class="pop" style="--d:2">
+            <circle class="dot" cx="176" cy="44" r="6"/><circle class="dot" cx="206" cy="44" r="6"/><circle class="dot" cx="236" cy="44" r="6"/><circle class="dot" cx="266" cy="44" r="6"/>
+            <circle class="dot" cx="191" cy="64" r="6"/><circle class="dot" cx="221" cy="64" r="6"/><circle class="dot" cx="251" cy="64" r="6"/><circle class="dot" cx="281" cy="64" r="6"/>
+          </g>
+          <rect class="fillbar rise" style="--d:2" x="156" y="80" width="130" height="60"/>
+          <text class="dia-label hot" x="221" y="156" text-anchor="middle">completed by those influenced</text>
+          <text class="dia-label" x="28" y="18">Both columns count as the manager's output</text>
+        </svg>
+        <figcaption>Fig. 3 Personal output compared with the output of those influenced.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-4">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M5 20 H35"/><path class="d" d="M5 15 V25 M20 16 V24 M35 15 V25"/>
+          <circle class="f a-slide" cx="20" cy="20" r="3.6"/>
+        </svg></span>
+        <span class="law-num">No. 04</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Task-Relevant Maturity</h2>
+      <p class="law-origin reveal" style="--d:2">Grove, same book. The term describes how closely a manager should supervise a particular piece of work.</p>
+      <p class="statement reveal" style="--d:3">How closely you supervise depends on experience with this exact task, not on seniority.</p>
+      <p class="qnote reveal" style="--d:3">Modern phrasing. Grove named the idea but never reduced it to a line.</p>
+      <p class="body reveal" style="--d:4">Maturity here is measured per task rather than per person. The same experienced employee may need detailed direction on an unfamiliar assignment on Monday and none at all on a routine one on Tuesday. Supervision calibrated to seniority rather than to the specific task will be wrong in both directions, and the second error is the more expensive.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Set the level of involvement per task and say what it is: which work you expect to see in draft, and which you expect to hear about only when it is finished.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="One dial from close direction to full autonomy, with the same person marked at three different points for three different tasks.">
+          <text class="dia-label" x="160" y="26" text-anchor="middle">One person, one week</text>
+          <path class="stroke faint" d="M30 84 H290"/>
+          <path class="stroke faint" d="M30 76 V92 M160 78 V90 M290 76 V92"/>
+          <circle class="dot pop" style="--d:0" cx="58" cy="84" r="7"/>
+          <circle class="dot pop" style="--d:1" cx="172" cy="84" r="7"/>
+          <circle class="dot pop" style="--d:2" cx="266" cy="84" r="7"/>
+          <text class="dia-label hot" x="58" y="66" text-anchor="middle">unfamiliar</text>
+          <text class="dia-label hot" x="172" y="66" text-anchor="middle">done twice</text>
+          <text class="dia-label hot" x="266" y="66" text-anchor="middle">routine</text>
+          <text class="dia-label big" x="30" y="116">Show me the draft</text>
+          <text class="dia-label big" x="290" y="116" text-anchor="end">Tell me when it's done</text>
+        </svg>
+        <figcaption>Fig. 4 One person, three tasks, three levels of supervision.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+</section>
+<section id="ch-2">
+<header class="chapter">
+  <p class="numeral reveal">II</p>
+  <h2 class="reveal" style="--d:1">Triage</h2>
+  <p class="eyebrow reveal" style="--d:2">Entries 05 to 12</p>
+</header>
+
+<article class="law" id="law-5">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M3 10 H15 L20 17 H23 L28 10 H37"/><path d="M3 30 H15 L20 23 H23 L28 30 H37"/>
+          <circle class="f d" cx="7" cy="20" r="2"/><circle class="f d" cx="13" cy="20" r="2"/>
+          <circle class="f a-slide" cx="21" cy="20" r="2.2"/>
+        </svg></span>
+        <span class="law-num">No. 05</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">The Theory of Constraints</h2>
+      <p class="law-origin reveal" style="--d:2">Eliyahu Goldratt, The Goal, 1984, a management text written as a novel about a manufacturing plant.</p>
+      <p class="statement reveal" style="--d:3">An hour lost at a bottleneck is an hour lost for the entire system.</p>
+      <p class="qnote reveal" style="--d:3">Goldratt's own words, The Goal, 1984.</p>
+      <p class="body reveal" style="--d:4">In any system, one step limits total throughput. Improving a step upstream of that constraint adds work waiting in front of it. Improving a step downstream adds idle capacity. Neither changes the quantity finished. A clinic with one scanner does not see more patients by adding a second receptionist.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Find where work accumulates and waits, and improve that step first. Relieving a constraint moves it elsewhere, so the analysis has to be repeated once the change takes effect.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="A pipe with a narrow section. Work piles up before the narrow part and trickles out after it.">
+          <path class="stroke faint" d="M14 44 H130 L160 68 H200 L230 44 H306"/>
+          <path class="stroke faint" d="M14 126 H130 L160 102 H200 L230 126 H306"/>
+          <g class="pop" style="--d:0">
+            <circle class="dot" cx="34" cy="72" r="6"/><circle class="dot" cx="52" cy="72" r="6"/><circle class="dot" cx="70" cy="72" r="6"/><circle class="dot" cx="88" cy="72" r="6"/><circle class="dot" cx="106" cy="72" r="6"/>
+            <circle class="dot" cx="34" cy="98" r="6"/><circle class="dot" cx="52" cy="98" r="6"/><circle class="dot" cx="70" cy="98" r="6"/><circle class="dot" cx="88" cy="98" r="6"/><circle class="dot" cx="106" cy="98" r="6"/>
+          </g>
+          <circle class="dot pop" style="--d:2" cx="180" cy="85" r="6"/>
+          <circle class="dot pop" style="--d:3" cx="252" cy="85" r="6"/>
+          <circle class="dot pop" style="--d:4" cx="288" cy="85" r="6"/>
+          <text class="dia-label" x="70" y="150" text-anchor="middle">everything waits here</text>
+          <text class="dia-label hot" x="180" y="150" text-anchor="middle">the constraint</text>
+          <text class="dia-label" x="270" y="150" text-anchor="middle">idle capacity</text>
+          <text class="dia-label" x="14" y="26">Work moving through</text>
+        </svg>
+        <figcaption>Fig. 5 Work accumulates before the constraint and capacity idles after it.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-6">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <rect x="3" y="12" width="22" height="17"/>
+          <circle class="f" cx="9" cy="18" r="1.7"/><circle class="f" cx="15" cy="18" r="1.7"/><circle class="f" cx="21" cy="18" r="1.7"/>
+          <circle class="f" cx="9" cy="24" r="1.7"/><circle class="f" cx="15" cy="24" r="1.7"/><circle class="f" cx="21" cy="24" r="1.7"/>
+          <path class="a-flow" d="M25 20.5 H38"/>
+        </svg></span>
+        <span class="law-num">No. 06</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Little's Law</h2>
+      <p class="law-origin reveal" style="--d:2">John Little, 1954, who proved that the relationship holds for any stable queue.</p>
+      <p class="statement reveal" style="--d:3">How long something takes equals how much is in progress divided by how fast you finish things.</p>
+      <p class="qnote reveal" style="--d:3">Modern phrasing. Little's 1954 original is the formula L = &lambda;W.</p>
+      <p class="body reveal" style="--d:4">The time an item spends in a system equals the quantity of work in progress divided by the rate of completion. Doubling the number of items underway doubles the wait for each, while the quantity finished stays the same. A team running nine projects at once completes them no faster than a team running three; the other six are waiting.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Limit the number of items in progress. Only two variables appear in the relationship, and since completion rate is difficult to change quickly, the practical lever is starting fewer things.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="Three items in progress finish in two weeks. Nine items in progress finish in six, with the same output rate.">
+          <text class="dia-label" x="14" y="22">Three things started</text>
+          <rect class="coolbar" x="14" y="30" width="120" height="34"/>
+          <circle class="dot pop" style="--d:0" cx="44" cy="47" r="6"/><circle class="dot pop" style="--d:0" cx="74" cy="47" r="6"/><circle class="dot pop" style="--d:0" cx="104" cy="47" r="6"/>
+          <path class="stroke draw" style="--d:0" pathLength="1" d="M138 47 H196 M196 47 l-8 -5 M196 47 l-8 5"/>
+          <text class="dia-label hot" x="206" y="51">out in two weeks</text>
+          <text class="dia-label" x="14" y="100">Nine things started</text>
+          <rect class="coolbar" x="14" y="108" width="120" height="46"/>
+          <g class="pop" style="--d:2">
+            <circle class="dot" cx="34" cy="120" r="6"/><circle class="dot" cx="58" cy="120" r="6"/><circle class="dot" cx="82" cy="120" r="6"/>
+            <circle class="dot" cx="34" cy="140" r="6"/><circle class="dot" cx="58" cy="140" r="6"/><circle class="dot" cx="82" cy="140" r="6"/>
+            <circle class="dot" cx="106" cy="120" r="6"/><circle class="dot" cx="106" cy="140" r="6"/><circle class="dot" cx="118" cy="130" r="6"/>
+          </g>
+          <path class="stroke warm draw" style="--d:3" pathLength="1" d="M138 131 H196 M196 131 l-8 -5 M196 131 l-8 5"/>
+          <text class="dia-label warm" x="206" y="135">out in six weeks</text>
+        </svg>
+        <figcaption>Fig. 6 Equal completion rate, three times the work in progress, three times the wait.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-7">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <rect x="4" y="15" width="32" height="10"/>
+          <rect class="f a-shrink" x="4" y="15" width="6" height="10" style="transform-origin:left center"/>
+          <path class="d" d="M10 28 V33"/><path class="d" d="M4 33 H10"/>
+        </svg></span>
+        <span class="law-num">No. 07</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Amdahl's Law</h2>
+      <p class="law-origin reveal" style="--d:2">Gene Amdahl, 1967, arguing about the limits of parallel computing. The arithmetic applies to any process composed of parts.</p>
+      <p class="statement reveal" style="--d:3">How much faster the whole thing can get is capped by the share of it you are improving.</p>
+      <p class="qnote reveal" style="--d:3">Modern phrasing. Amdahl's 1967 sentence is about parallel computing and unreadable outside it.</p>
+      <p class="body reveal" style="--d:4">The maximum improvement to a whole process is bounded by the share of total time the improved part accounts for. If a step represents five percent of the time, eliminating it entirely saves five percent. This is why efficiency programmes often disappoint: effort goes to the step that is easiest to measure or most familiar, rather than the one consuming the most time.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Measure the distribution of time before choosing what to improve. The ceiling on any improvement is fixed in advance and can be calculated before the work begins.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="A long bar with a small highlighted section. Removing that section entirely barely shortens the bar.">
+          <text class="dia-label" x="16" y="26">Total time today</text>
+          <rect class="coolbar" x="16" y="36" width="288" height="30"/>
+          <rect class="fillbar" x="16" y="36" width="16" height="30"/>
+          <text class="dia-label hot" x="40" y="56">the part being improved</text>
+          <text class="dia-label" x="16" y="106">Total time after you make it instant</text>
+          <rect class="coolbar" x="16" y="116" width="272" height="30"/>
+          <path class="ghost" d="M288 112 V150 M304 112 V150"/>
+          <text class="dia-label warm" x="304" y="164" text-anchor="end">maximum saving</text>
+        </svg>
+        <figcaption>Fig. 7 Removing five percent of the total leaves ninety-five percent.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-8">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <rect x="3" y="7" width="14" height="26"/>
+          <path class="a-swing" style="transform-origin:3px 33px" d="M3 33 L14 28"/>
+          <rect x="23" y="7" width="14" height="26"/>
+          <path d="M26 20 H34"/><circle class="f a-blink" cx="30" cy="20" r="2"/>
+        </svg></span>
+        <span class="law-num">No. 08</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">One-Way and Two-Way Doors</h2>
+      <p class="law-origin reveal" style="--d:2">Jeff Bezos, in Amazon shareholder letters, describing how large organizations become slow.</p>
+      <p class="statement reveal" style="--d:3">Some decisions are consequential and irreversible or nearly irreversible&hellip;</p>
+      <p class="qnote reveal" style="--d:3">Bezos's own words, shareholder letter, 2015. He calls those doors one-way.</p>
+      <p class="body reveal" style="--d:4">Bezos separates decisions by reversibility. Most are reversible and can be made quickly by whoever is closest to them. A few are not, and warrant deliberation and consultation. Applying equal care to both categories is what produces a slow organization, since the great majority of decisions do not require it.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Ask what reversing this decision would cost in six months. Where reversal is inexpensive, decide now. Where it is expensive, gather more information and more perspectives.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="Two doorways. One has arrows in both directions, the other has an arrow one way and a bolt.">
+          <rect class="stroke faint" x="30" y="34" width="104" height="94" fill="none"/>
+          <path class="stroke draw" style="--d:0" pathLength="1" d="M46 74 H118 M118 74 l-9 -5 M118 74 l-9 5"/>
+          <path class="stroke draw" style="--d:1" pathLength="1" d="M118 98 H46 M46 98 l9 -5 M46 98 l9 5"/>
+          <text class="dia-label hot" x="82" y="150" text-anchor="middle">walk back through</text>
+          <text class="dia-label" x="82" y="24" text-anchor="middle">most decisions</text>
+          <rect class="stroke faint" x="186" y="34" width="104" height="94" fill="none"/>
+          <path class="stroke warm draw" style="--d:2" pathLength="1" d="M202 86 H274 M274 86 l-9 -5 M274 86 l-9 5"/>
+          <path class="stroke warm draw" style="--d:3" pathLength="1" d="M212 104 H262"/>
+          <circle class="dot pop" style="--d:4" cx="238" cy="104" r="5"/>
+          <text class="dia-label warm" x="238" y="150" text-anchor="middle">closes behind you</text>
+          <text class="dia-label" x="238" y="24" text-anchor="middle">a handful of them</text>
+        </svg>
+        <figcaption>Fig. 8 Reversible and irreversible decisions, drawn as doors.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+<article class="law" id="law-9">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <rect class="f a-rise" x="4" y="12" width="6" height="22"/>
+          <rect class="f a-rise" style="animation-delay:.2s" x="13" y="21" width="6" height="13"/>
+          <rect class="f a-rise" style="animation-delay:.4s" x="22" y="28" width="6" height="6"/>
+          <rect class="f a-rise" style="animation-delay:.6s" x="31" y="31" width="6" height="3"/>
+        </svg></span>
+        <span class="law-num">No. 09</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">The Pareto Principle</h2>
+      <p class="law-origin reveal" style="--d:2">Vilfredo Pareto observed in 1896 that a small share of the population held most of Italy's land. Joseph Juran generalized the pattern to quality management and named it after him.</p>
+      <p class="statement reveal" style="--d:3">Roughly 80 percent of the effects come from 20 percent of the causes.</p>
+      <p class="qnote reveal" style="--d:3">Modern phrasing. Pareto wrote about land; Juran named it the vital few and the trivial many.</p>
+      <p class="body reveal" style="--d:4">In many distributions, a small number of causes account for most of the effect. The specific ratio varies and the two figures need not sum to one hundred; what holds is the shape. A small number of customers, defects, or products usually carries most of the weight, and the remainder forms a long tail.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Identify the concentrated portion before optimizing anything. The inverse also applies: the final increment of refinement often costs the largest share of the effort, which is worth paying in some places and not in others.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="A Pareto chart. Two tall bars carry most of the total, followed by six small ones, with a cumulative line crossing eighty percent early.">
+          <text class="dia-label hot" x="36" y="18">The vital few</text>
+          <text class="dia-label" x="300" y="18" text-anchor="end">The trivial many</text>
+          <path class="axis" d="M28 20 V140 H304"/>
+          <path class="ghost" d="M28 52 H304"/>
+          <text class="dia-label" x="304" y="46" text-anchor="end">80%</text>
+          <rect class="fillbar rise" style="--d:0" x="36" y="78" width="22" height="62"/>
+          <rect class="fillbar rise" style="--d:1" x="70" y="106" width="22" height="34"/>
+          <rect class="fillbar rise" style="--d:2" x="104" y="122" width="22" height="18"/>
+          <rect class="fillbar rise" style="--d:3" x="138" y="128" width="22" height="12"/>
+          <rect class="fillbar rise" style="--d:4" x="172" y="132" width="22" height="8"/>
+          <rect class="fillbar rise" style="--d:5" x="206" y="135" width="22" height="5"/>
+          <rect class="fillbar rise" style="--d:6" x="240" y="137" width="22" height="3"/>
+          <rect class="fillbar rise" style="--d:7" x="274" y="138" width="22" height="2"/>
+          <path class="stroke cool draw" style="--d:2" pathLength="1" d="M47 93 L81 67 L115 53 L149 44 L183 38 L217 34 L251 32 L285 30"/>
+          <text class="dia-label" x="28" y="156">Causes, ranked by how much they matter</text>
+        </svg>
+        <figcaption>Fig. 9 Two causes account for most of the total; six share the remainder.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-10">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M12 11 L28 11 L20 29 Z"/>
+          <circle class="f" cx="12" cy="11" r="2.6"/><circle class="f" cx="28" cy="11" r="2.6"/><circle class="f" cx="20" cy="29" r="2.6"/>
+          <path class="d a-fade" d="M33 22 L12 11 M33 22 L28 11 M33 22 L20 29"/>
+          <circle class="f a-pulse" cx="33" cy="22" r="2.6"/>
+        </svg></span>
+        <span class="law-num">No. 10</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Brooks's Law</h2>
+      <p class="law-origin reveal" style="--d:2">Fred Brooks, The Mythical Man-Month, 1975, drawn from his experience managing the OS/360 project at IBM.</p>
+      <p class="statement reveal" style="--d:3">Adding manpower to a late software project makes it later.</p>
+      <p class="qnote reveal" style="--d:3">Brooks's own words, 1975, in full. It generalises past software.</p>
+      <p class="body reveal" style="--d:4">Adding people to a project already behind schedule tends to delay it further. New arrivals must be brought up to speed by the people currently holding the deadline, and each addition increases the number of communication paths: three people maintain three, eight maintain twenty-eight. The added capacity arrives later than the added coordination cost.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Where a project is late, reducing scope is usually more effective than adding people. If capacity must be added, assign a separable piece of work with a boundary of its own.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="Three people connected by three lines beside eight people connected by twenty eight lines.">
+          <text class="dia-label" x="78" y="20" text-anchor="middle">Before</text>
+          <text class="dia-label hot" x="238" y="20" text-anchor="middle">After you add five more</text>
+          <path class="stroke cool draw" style="--d:0" pathLength="1" d="M78 46 L107.4 97 M107.4 97 L48.6 97 M48.6 97 L78 46"/>
+          <circle class="dot pop" cx="78" cy="46" r="4.5"/>
+          <circle class="dot pop" cx="107.4" cy="97" r="4.5"/>
+          <circle class="dot pop" cx="48.6" cy="97" r="4.5"/>
+          <path class="stroke cool draw web" style="--d:1" pathLength="1" d="M238 36 L269.1 48.9 M238 36 L282 80 M238 36 L269.1 111.1 M238 36 L238 124 M238 36 L206.9 111.1 M238 36 L194 80 M238 36 L206.9 48.9 M269.1 48.9 L282 80 M269.1 48.9 L269.1 111.1 M269.1 48.9 L238 124 M269.1 48.9 L206.9 111.1 M269.1 48.9 L194 80 M269.1 48.9 L206.9 48.9 M282 80 L269.1 111.1 M282 80 L238 124 M282 80 L206.9 111.1 M282 80 L194 80 M282 80 L206.9 48.9 M269.1 111.1 L238 124 M269.1 111.1 L206.9 111.1 M269.1 111.1 L194 80 M269.1 111.1 L206.9 48.9 M238 124 L206.9 111.1 M238 124 L194 80 M238 124 L206.9 48.9 M206.9 111.1 L194 80 M206.9 111.1 L206.9 48.9 M194 80 L206.9 48.9"/>
+          <circle class="dot pop" cx="238" cy="36" r="4.5"/>
+          <circle class="dot pop" cx="269.1" cy="48.9" r="4.5"/>
+          <circle class="dot pop" cx="282" cy="80" r="4.5"/>
+          <circle class="dot pop" cx="269.1" cy="111.1" r="4.5"/>
+          <circle class="dot pop" cx="238" cy="124" r="4.5"/>
+          <circle class="dot pop" cx="206.9" cy="111.1" r="4.5"/>
+          <circle class="dot pop" cx="194" cy="80" r="4.5"/>
+          <circle class="dot pop" cx="206.9" cy="48.9" r="4.5"/>
+          <text class="dia-label" x="78" y="146" text-anchor="middle">3 people</text>
+          <text class="dia-label big" x="78" y="162" text-anchor="middle">3 conversations</text>
+          <text class="dia-label" x="238" y="146" text-anchor="middle">8 people</text>
+          <text class="dia-label big" x="238" y="162" text-anchor="middle">28 conversations</text>
+        </svg>
+        <figcaption>Fig. 10 Headcount adds; communication paths multiply.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-11">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <rect x="4" y="13" width="32" height="15"/>
+          <rect class="f a-stretch" x="4" y="13" width="32" height="15" opacity=".4" style="transform-origin:left center"/>
+        </svg></span>
+        <span class="law-num">No. 11</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Parkinson's Law</h2>
+      <p class="law-origin reveal" style="--d:2">Cyril Northcote Parkinson, The Economist, 1955. He had observed that Admiralty administrative staff grew while the fleet shrank.</p>
+      <p class="statement reveal" style="--d:3">Work expands so as to fill the time available for its completion.</p>
+      <p class="qnote reveal" style="--d:3">Parkinson's own words, 1955, in full.</p>
+      <p class="body reveal" style="--d:4">A task tends to occupy whatever time is allotted to it. Given three weeks, a status report acquires appendices. Given ten minutes, it becomes three sentences. The additional time is generally consumed by scope, revision, and formatting rather than by the quality of the underlying work.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Fix the deadline before deciding the contents. A shorter allocation forces an explicit decision about what the task actually requires.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="Two bars representing one hour and three weeks. The same task fills both completely.">
+          <text class="dia-label" x="10" y="26">Time available: one hour</text>
+          <rect class="ghost" x="10" y="34" width="300" height="30"/>
+          <rect class="fillbar grow" style="--d:0" x="10" y="34" width="300" height="30"/>
+          <text class="dia-label big" x="160" y="54" text-anchor="middle">The task</text>
+          <text class="dia-label" x="10" y="100">Time available: three weeks</text>
+          <rect class="ghost" x="10" y="108" width="300" height="30"/>
+          <rect class="fillbar grow" style="--d:1" x="10" y="108" width="300" height="30"/>
+          <text class="dia-label big" x="160" y="128" text-anchor="middle">The task</text>
+          <text class="dia-label hot" x="160" y="160" text-anchor="middle">Same task. Different container.</text>
+        </svg>
+        <figcaption>Fig. 11 The same task in a one-hour container and a three-week container.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-12">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <circle cx="20" cy="20" r="13"/>
+          <path class="d" d="M20 7 V10"/>
+          <path class="a-spin" style="transform-origin:20px 20px" d="M20 20 V10"/>
+          <circle class="f" cx="20" cy="20" r="2"/>
+        </svg></span>
+        <span class="law-num">No. 12</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Hofstadter's Law</h2>
+      <p class="law-origin reveal" style="--d:2">Douglas Hofstadter, Godel, Escher, Bach, 1979, on the difficulty of estimating complex work.</p>
+      <p class="statement reveal" style="--d:3">It always takes longer than you expect, even when you take into account Hofstadter's Law.</p>
+      <p class="qnote reveal" style="--d:3">Hofstadter's own words, 1979, in full.</p>
+      <p class="body reveal" style="--d:4">Estimates run long even after they have been padded, because the padded estimate comes from the same source as the original and omits the same unknowns. Complex work conceals its own complexity: the individual surprises are not visible until the work is underway, by which point a date has usually been given.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Use recorded durations of comparable past work rather than intuition. Historical figures already contain the surprises that fresh estimates leave out.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="Four measured spans, each longer than the last, the final one running off the edge of the diagram.">
+          <text class="dia-label" x="12" y="24">First estimate</text>
+          <path class="stroke cool draw" style="--d:0" pathLength="1" d="M12 30 V40 M12 35 H86 M86 30 V40"/>
+          <text class="dia-label" x="12" y="60">Plus a sensible buffer</text>
+          <path class="stroke cool draw" style="--d:1" pathLength="1" d="M12 66 V76 M12 71 H152 M152 66 V76"/>
+          <text class="dia-label" x="12" y="96">Plus a buffer for the buffer</text>
+          <path class="stroke cool draw" style="--d:2" pathLength="1" d="M12 102 V112 M12 107 H224 M224 102 V112"/>
+          <text class="dia-label hot" x="12" y="132">What it took</text>
+          <path class="stroke draw" style="--d:3" pathLength="1" d="M12 138 V148 M12 143 H286 M286 143 l-8 -5 M286 143 l-8 5"/>
+          <text class="dia-label hot" x="292" y="162" text-anchor="end">actual</text>
+        </svg>
+        <figcaption>Fig. 12 Successive estimates, each longer than the last.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+</section>
+<section id="ch-3">
+<header class="chapter">
+  <p class="numeral reveal">III</p>
+  <h2 class="reveal" style="--d:1">Preservation</h2>
+  <p class="eyebrow reveal" style="--d:2">Entries 13 to 19</p>
+</header>
+
+<article class="law" id="law-13">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M6 13 V32 M13 13 V32 M27 13 V32 M34 13 V32 M6 19 H13 M27 19 H34 M6 26 H13 M27 26 H34"/>
+          <path class="d" stroke-dasharray="2 3" d="M20 13 V32"/>
+          <circle class="f a-slide" cx="20" cy="23" r="3"/>
+        </svg></span>
+        <span class="law-num">No. 13</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Chesterton's Fence</h2>
+      <p class="law-origin reveal" style="--d:2">G. K. Chesterton, The Thing, 1929. He describes two reformers who find a fence across a road. The second declines to remove it until the first can explain its purpose.</p>
+      <p class="statement reveal" style="--d:3">If you don't see the use of it, I certainly won't let you clear it away.</p>
+      <p class="qnote reveal" style="--d:3">Chesterton's own words, 1929. The speaker is the wiser of two reformers.</p>
+      <p class="body reveal" style="--d:4">The principle concerns the order of operations rather than preservation for its own sake. Many long-standing constraints exist because of an incident nobody now remembers. A form field that appears redundant may have been added after a regulatory finding. From the outside, a constraint doing its work is indistinguishable from one doing none.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Establish the original reason before removing the constraint. Where it is genuinely obsolete, remove it. Where it is not, record the reason so that the next person does not have to repeat the inquiry.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="Tuesday: a fence separates a grazing animal from a flower bed. Wednesday: the fence is gone and the animal is in the flower bed.">
+          <text class="dia-label" x="14" y="22">Fence in place</text>
+          <path class="stroke faint" d="M14 76 H306"/>
+          <g class="stroke" transform="translate(30,76)">
+            <rect x="0" y="-26" width="38" height="18" rx="8" fill="none"/>
+            <path d="M6 -8 V0 M14 -8 V0 M26 -8 V0 M34 -8 V0"/>
+            <path d="M38 -22 h12 v11 h-12"/>
+            <path d="M0 -24 q-7 6 -4 14"/>
+          </g>
+          <path class="stroke draw" style="--d:0" pathLength="1" d="M150 34 V76 M162 34 V76 M174 34 V76 M186 34 V76 M147 46 H189 M147 62 H189"/>
+          <g class="stroke pop" style="--d:2">
+            <path d="M230 76 V60 M252 76 V58 M274 76 V61"/>
+            <circle class="dot" cx="230" cy="56" r="4"/><circle class="dot" cx="252" cy="54" r="4"/><circle class="dot" cx="274" cy="57" r="4"/>
+          </g>
+          <text class="dia-label" x="14" y="102">Fence removed</text>
+          <path class="stroke faint" d="M14 156 H306"/>
+          <path class="ghost" d="M150 114 V156 M162 114 V156 M174 114 V156 M186 114 V156"/>
+          <g class="stroke warm" transform="translate(214,156)">
+            <rect x="0" y="-26" width="38" height="18" rx="8" fill="none"/>
+            <path d="M6 -8 V0 M14 -8 V0 M26 -8 V0 M34 -8 V0"/>
+            <path d="M38 -22 h12 v11 h-12"/>
+            <path d="M0 -24 q-7 6 -4 14"/>
+          </g>
+          <g class="stroke warm pop" style="--d:4">
+            <path d="M276 156 L288 150 M296 156 L308 152"/>
+            <circle class="dot warm-dot" cx="290" cy="149" r="4"/><circle class="dot warm-dot" cx="306" cy="151" r="4"/>
+          </g>
+        </svg>
+        <figcaption>Fig. 13 The same field with the fence in place and removed.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-14">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <rect class="a-grow" x="4" y="24" width="9" height="9"/>
+          <rect class="a-grow" style="animation-delay:.4s" x="16" y="18" width="11" height="15"/>
+          <rect class="a-grow" style="animation-delay:.8s" x="29" y="10" width="9" height="23"/>
+        </svg></span>
+        <span class="law-num">No. 14</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Gall's Law</h2>
+      <p class="law-origin reveal" style="--d:2">John Gall, Systemantics, 1975. Gall was a pediatrician who wrote about the ways systems fail.</p>
+      <p class="statement reveal" style="--d:3">A complex system that works &hellip; evolved from a simple system that worked.</p>
+      <p class="qnote reveal" style="--d:3">Gall's own words, 1975, with four words cut from the middle.</p>
+      <p class="body reveal" style="--d:4">Complex systems that work are generally found to have grown from simple systems that worked. Complexity is discovered in operation rather than anticipated in design, so a large system specified in full before use tends to meet conditions its designers did not model. Most durable institutions and products began as something much smaller that functioned.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Deliver the smallest version that works for real users, then extend it. A plan with no functioning state until late in its schedule has no mechanism for learning from operation.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="Above, a small working shape growing into a larger one in stages. Below, a large complete design crossed out.">
+          <text class="dia-label hot" x="14" y="20">Grown from something that worked</text>
+          <rect class="fillbar rise" style="--d:0" x="20" y="46" width="30" height="26"/>
+          <path class="stroke cool draw" style="--d:0" pathLength="1" d="M58 59 H80 M80 59 l-7 -4 M80 59 l-7 4"/>
+          <rect class="fillbar rise" style="--d:1" x="88" y="34" width="52" height="38"/>
+          <path class="stroke faint" d="M114 34 V72"/>
+          <path class="stroke cool draw" style="--d:1" pathLength="1" d="M148 59 H170 M170 59 l-7 -4 M170 59 l-7 4"/>
+          <rect class="fillbar rise" style="--d:2" x="178" y="20" width="90" height="52"/>
+          <path class="stroke faint" d="M208 20 V72 M238 20 V72 M178 46 H268"/>
+          <text class="dia-label" x="14" y="110">Drawn complete on day one</text>
+          <rect class="coolbar" x="20" y="120" width="248" height="34"/>
+          <path class="stroke faint" d="M55 120 V154 M90 120 V154 M125 120 V154 M160 120 V154 M195 120 V154 M230 120 V154 M20 137 H268"/>
+          <path class="stroke warm draw" style="--d:3" pathLength="1" d="M28 118 L262 156 M262 118 L28 156"/>
+        </svg>
+        <figcaption>Fig. 14 A system grown in stages, and one specified complete at the outset.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-15">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M6 14 H24 V19 H34 V29 H6 Z"/>
+          <path class="a-wob" d="M27 19 V9"/><path class="a-wob" style="animation-delay:.4s" d="M31 19 V6"/>
+          <circle class="f a-wob" style="animation-delay:.4s" cx="31" cy="5" r="1.8"/>
+          <circle class="f a-wob" cx="27" cy="8" r="1.8"/>
+        </svg></span>
+        <span class="law-num">No. 15</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Hyrum's Law</h2>
+      <p class="law-origin reveal" style="--d:2">Hyrum Wright, a software engineer, describing what happens to any interface with a large number of users.</p>
+      <p class="statement reveal" style="--d:3">&hellip;all observable behaviors of your system will be depended on by somebody.</p>
+      <p class="qnote reveal" style="--d:3">Wright's own words. The full version opens: with a sufficient number of users.</p>
+      <p class="body reveal" style="--d:4">With enough users, every observable behavior of a system becomes a dependency, including behaviors that were never promised and some that were considered defects. Changing the order of rows in a report, the wording of a confirmation, or a form's tolerance for a blank field will break somebody's established routine.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Before changing anything with many users, assume that incidental behaviors are in use. Announce changes to those as well as to documented features.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="A block with a chipped corner. Two dependencies hang from the flat front, six hang from the chip.">
+          <path class="stroke" d="M40 60 H210 V90 H280 V132 H40 Z" fill="rgba(221,166,64,.1)"/>
+          <text class="dia-label big" x="120" y="102" text-anchor="middle">what you promised</text>
+          <text class="dia-label warm" x="245" y="122" text-anchor="middle">incidental</text>
+          <path class="stroke cool draw" style="--d:0" pathLength="1" d="M80 60 V34 M140 60 V34"/>
+          <circle class="dot cool pop" style="--d:0" cx="80" cy="30" r="4"/>
+          <circle class="dot cool pop" style="--d:1" cx="140" cy="30" r="4"/>
+          <path class="stroke warm draw" style="--d:2" pathLength="1" d="M220 90 V54 M238 90 V40 M256 90 V50 M274 90 V36 M292 90 V58"/>
+          <circle class="dot pop" style="--d:2" cx="220" cy="50" r="4"/><circle class="dot pop" style="--d:3" cx="238" cy="36" r="4"/>
+          <circle class="dot pop" style="--d:4" cx="256" cy="46" r="4"/><circle class="dot pop" style="--d:5" cx="274" cy="32" r="4"/>
+          <circle class="dot pop" style="--d:6" cx="292" cy="54" r="4"/>
+          <text class="dia-label" x="14" y="22">Dependencies</text>
+          <text class="dia-label" x="14" y="150">Two dependencies on the documented</text>
+          <text class="dia-label" x="14" y="162">behavior, five on the incidental one</text>
+        </svg>
+        <figcaption>Fig. 15 Two dependencies on the documented behavior, five on the incidental one.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+<article class="law" id="law-16">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <rect x="3" y="16" width="10" height="10"/>
+          <rect x="19" y="13" width="16" height="16"/>
+          <rect class="f a-pulse" x="15" y="7" width="5" height="5"/>
+          <rect class="f a-pulse" style="animation-delay:.3s" x="34" y="7" width="5" height="5"/>
+          <rect class="f a-pulse" style="animation-delay:.6s" x="34" y="30" width="5" height="5"/>
+          <rect class="f a-pulse" style="animation-delay:.9s" x="15" y="30" width="5" height="5"/>
+        </svg></span>
+        <span class="law-num">No. 16</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">The Second-System Effect</h2>
+      <p class="law-origin reveal" style="--d:2">Brooks again, 1975. He described the second system a designer builds as the most dangerous one.</p>
+      <p class="statement reveal" style="--d:3">The second is the most dangerous system a man ever designs.</p>
+      <p class="qnote reveal" style="--d:3">Brooks's own words, 1975, in full.</p>
+      <p class="body reveal" style="--d:4">Replacements tend to accumulate every feature the first version omitted, together with the stored complaints of everyone who used it. The result is larger, later, and sometimes worse at the original system's principal function. The energy behind such a project is real, but a list of grievances is not a specification.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Write down the small number of things the replacement must do better, and treat each addition to that list as a schedule decision rather than a scope decision.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="A small tidy first version beside a large second version with nine extra pieces attached.">
+          <text class="dia-label" x="16" y="24">Version one</text>
+          <rect class="coolbar rise" style="--d:0" x="16" y="66" width="72" height="52"/>
+          <text class="dia-label big" x="52" y="96" text-anchor="middle">does one job</text>
+          <path class="stroke cool draw" style="--d:1" pathLength="1" d="M98 92 H124 M124 92 l-8 -5 M124 92 l-8 5"/>
+          <text class="dia-label hot" x="228" y="24" text-anchor="middle">Version two</text>
+          <rect class="fillbar rise" style="--d:1" x="164" y="60" width="128" height="64"/>
+          <g class="pop" style="--d:3">
+            <rect class="fillbar" x="150" y="40" width="26" height="18"/><rect class="fillbar" x="184" y="34" width="26" height="18"/>
+            <rect class="fillbar" x="218" y="38" width="26" height="18"/><rect class="fillbar" x="252" y="32" width="26" height="18"/>
+            <rect class="fillbar" x="286" y="42" width="26" height="18"/>
+            <rect class="fillbar" x="156" y="128" width="26" height="18"/><rect class="fillbar" x="190" y="132" width="26" height="18"/>
+            <rect class="fillbar" x="224" y="128" width="26" height="18"/><rect class="fillbar" x="272" y="130" width="26" height="18"/>
+          </g>
+          <text class="dia-label warm" x="160" y="166" text-anchor="middle">features omitted from version one</text>
+        </svg>
+        <figcaption>Fig. 16 Version one and version two, with the omissions of the first added.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-17">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M5 14 H35"/><path class="d" d="M5 26 H21"/>
+          <circle class="f a-blink" cx="33" cy="26" r="2.6"/>
+          <path class="d" stroke-dasharray="2 3" d="M33 14 V26"/>
+        </svg></span>
+        <span class="law-num">No. 17</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Kernighan's Law</h2>
+      <p class="law-origin reveal" style="--d:2">Brian Kernighan and P. J. Plauger, The Elements of Programming Style, 1974.</p>
+      <p class="statement reveal" style="--d:3">if you're as clever as you can be &hellip; how will you ever debug it?</p>
+      <p class="qnote reveal" style="--d:3">Kernighan's own words, 1974, trimmed. He wrote it about programs; it travels.</p>
+      <p class="body reveal" style="--d:4">Diagnosing a fault in something is harder than building it, so anything built at the limit of a person's ability cannot reliably be repaired by that same person. Circumstance compounds the difficulty: repairs happen later, often under time pressure, and often by someone who does not hold the original reasoning.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Prefer the version an unfamiliar colleague could follow. Where explaining a mechanism takes longer than rebuilding it plainly, that difference is a reasonable estimate of its maintenance cost.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="A long bar for what you can build and a much shorter bar for what you can repair, with the design placed beyond the shorter bar.">
+          <text class="dia-label" x="16" y="26">Range you can build within</text>
+          <rect class="fillbar grow" style="--d:0" x="16" y="36" width="278" height="24"/>
+          <text class="dia-label" x="16" y="96">Range you can diagnose and repair</text>
+          <rect class="coolbar grow" style="--d:1" x="16" y="106" width="150" height="24"/>
+          <path class="ghost" d="M166 100 V150"/>
+          <circle class="dot pop" style="--d:3" cx="276" cy="118" r="7"/>
+          <text class="dia-label warm" x="248" y="146" text-anchor="middle">design sits here</text>
+          <text class="dia-label" x="166" y="166">repair limit</text>
+        </svg>
+        <figcaption>Fig. 17 Building range compared with repair range.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-18">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M6 9 H34 V22 H6 Z"/>
+          <path class="d" d="M18 22 L20 26 L22 22"/>
+          <circle class="f a-drip" cx="20" cy="26" r="2"/>
+          <path class="d" d="M6 35 q7 -4 14 0 t14 0"/>
+        </svg></span>
+        <span class="law-num">No. 18</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">The Law of Leaky Abstractions</h2>
+      <p class="law-origin reveal" style="--d:2">Joel Spolsky, 2002, on the limits of simplified interfaces.</p>
+      <p class="statement reveal" style="--d:3">All non-trivial abstractions, to some degree, are leaky.</p>
+      <p class="qnote reveal" style="--d:3">Spolsky's own words, 2002, in full.</p>
+      <p class="body reveal" style="--d:4">Every simplification of a complicated system eventually exposes the complexity beneath it. A steering wheel conceals an engine; a one-page summary conceals a department. Both work almost always, which is the reason they exist. When they fail, only someone who understands the underlying layer can respond. Abstractions reduce the effort required, not the knowledge required.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Use the simplified view for routine work, and maintain access to someone who understands what it conceals.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="A smooth simple surface with a crack in it, above a tangled layer that shows through.">
+          <text class="dia-label" x="16" y="22">The interface in daily use</text>
+          <rect class="fillbar" x="16" y="30" width="288" height="42"/>
+          <text class="dia-label big" x="160" y="56" text-anchor="middle">simplified layer</text>
+          <path class="stroke warm draw" style="--d:1" pathLength="1" d="M188 72 L196 84 L188 92 L198 104"/>
+          <text class="dia-label" x="16" y="126">The system beneath it</text>
+          <path class="stroke cool draw" style="--d:2" pathLength="1" d="M16 140 q14 -18 28 0 t28 0 t28 0 t28 0 t28 0 t28 0 t28 0 t28 0 t28 0 t28 0"/>
+          <path class="stroke faint draw" style="--d:3" pathLength="1" d="M16 152 q20 14 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0"/>
+        </svg>
+        <figcaption>Fig. 18 The simplified layer and the complexity beneath it.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-19">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M4 20 H20"/><path class="d" d="M4 15 V25"/>
+          <path class="a-stretch" style="transform-origin:left center" d="M20 20 H36"/>
+          <circle class="f" cx="20" cy="20" r="2.6"/>
+        </svg></span>
+        <span class="law-num">No. 19</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">The Lindy Effect</h2>
+      <p class="law-origin reveal" style="--d:2">Named after Lindy's, a delicatessen in New York where the idea was first discussed in relation to comedians' careers. Described by Albert Goldman in 1964 and later formalized by Benoit Mandelbrot and Nassim Taleb.</p>
+      <p class="statement reveal" style="--d:3">For a thing that does not age, every year survived predicts another year of survival.</p>
+      <p class="qnote reveal" style="--d:3">Modern phrasing. Goldman's 1964 original is about comedians and television slots.</p>
+      <p class="body reveal" style="--d:4">For things that do not age, such as ideas, technologies, and texts, expected remaining life increases with age. A book in print for four hundred years is likelier to remain in print than one published last year. Living things behave in the opposite way. A process that has run for twelve years has absorbed twelve years of unusual conditions, which is evidence not otherwise obtainable.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>When comparing an established option with a new one, treat the years the established one has already survived as evidence of robustness, and replace it for a specific reason rather than for its age.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="A twelve year old system with twelve more years projected, beside a six month old system with six months projected.">
+          <text class="dia-label" x="16" y="24">Established process</text>
+          <rect class="fillbar grow" style="--d:0" x="16" y="34" width="132" height="26"/>
+          <rect class="ghost" x="148" y="34" width="132" height="26"/>
+          <text class="dia-label hot" x="82" y="76" text-anchor="middle">12 years survived</text>
+          <text class="dia-label" x="214" y="76" text-anchor="middle">12 more, probably</text>
+          <text class="dia-label" x="16" y="112">New alternative</text>
+          <rect class="fillbar grow" style="--d:2" x="16" y="122" width="16" height="26"/>
+          <rect class="ghost" x="32" y="122" width="16" height="26"/>
+          <text class="dia-label" x="60" y="140">six months, then six more</text>
+          <path class="ghost" d="M290 34 V148"/>
+        </svg>
+        <figcaption>Fig. 19 Years already survived, and years projected on that basis.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+</section>
+<section id="ch-4">
+<header class="chapter">
+  <p class="numeral reveal">IV</p>
+  <h2 class="reveal" style="--d:1">Reading the Organization</h2>
+  <p class="eyebrow reveal" style="--d:2">Entries 20 to 27</p>
+</header>
+
+<article class="law" id="law-20">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <circle cx="20" cy="16" r="9"/>
+          <path class="a-fade" d="M15 16 H25 M20 11 V21 M16 12 L24 20"/>
+          <path d="M10 34 q10 -7 20 0"/>
+        </svg></span>
+        <span class="law-num">No. 20</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Naur's Theory Building</h2>
+      <p class="law-origin reveal" style="--d:2">Peter Naur, 1985, in an essay arguing that what a team produces is a shared understanding rather than a document.</p>
+      <p class="statement reveal" style="--d:3">&hellip;the programmers form or achieve &hellip; a theory, of the matters at hand.</p>
+      <p class="qnote reveal" style="--d:3">Naur's own words, 1985, trimmed. Read programmers as anyone who builds a thing.</p>
+      <p class="body reveal" style="--d:4">The people who build something hold a model of why it works as it does: what was attempted, what failed, which parts are fragile, and what a particular exception protects. Much of this is never written down, because it is not consciously held until someone asks. When those people leave, the artifact remains and the model does not.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Treat the understanding as the asset being preserved. Recording reasons is more useful than recording procedures, since procedures can be inferred from the artifact and reasons cannot.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="A person holding an internal model of a system. After they leave, the system remains but the model is missing.">
+          <text class="dia-label" x="14" y="22">With the original team</text>
+          <circle class="stroke" cx="66" cy="60" r="26" fill="none"/>
+          <path class="stroke draw" style="--d:0" pathLength="1" d="M52 60 H80 M66 46 V74 M55 50 L77 70 M77 50 L55 70"/>
+          <path class="stroke faint" d="M40 106 q26 -18 52 0"/>
+          <rect class="fillbar" x="34" y="118" width="64" height="30"/>
+          <text class="dia-label" x="66" y="164" text-anchor="middle">the artifact</text>
+          <path class="stroke cool draw" style="--d:2" pathLength="1" d="M124 82 H176 M176 82 l-8 -5 M176 82 l-8 5"/>
+          <text class="dia-label" x="150" y="70" text-anchor="middle">leaves</text>
+          <text class="dia-label warm" x="306" y="22" text-anchor="end">After</text>
+          <circle class="ghost" cx="252" cy="60" r="26" fill="none"/>
+          <path class="ghost" d="M238 60 H266 M252 46 V74"/>
+          <path class="ghost" d="M226 106 q26 -18 52 0"/>
+          <rect class="fillbar" x="220" y="118" width="64" height="30"/>
+          <text class="dia-label warm" x="252" y="164" text-anchor="middle">artifact remains</text>
+        </svg>
+        <figcaption>Fig. 20 The artifact remains; the model of it does not.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-21">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <circle cx="6" cy="20" r="3"/><circle cx="16" cy="20" r="3"/><circle cx="34" cy="20" r="3"/>
+          <circle class="f a-blink" cx="25" cy="20" r="3"/>
+          <path class="d a-blink" d="M19 20 H22 M28 20 H31"/>
+          <path d="M9 20 H13"/>
+        </svg></span>
+        <span class="law-num">No. 21</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">The Bus Factor</h2>
+      <p class="law-origin reveal" style="--d:2">An informal measure of concentration risk, of unknown authorship, in common use in project management.</p>
+      <p class="statement reveal" style="--d:3">How many people would have to be hit by a bus before the work becomes unmaintainable?</p>
+      <p class="qnote reveal" style="--d:3">Modern phrasing. No known author, and the bus is the whole reason it is memorable.</p>
+      <p class="body reveal" style="--d:4">The bus factor is the number of people who would have to become unavailable before work could not continue. For many important processes the answer is one: a single person knows the exception, holds the supplier relationship, or remembers why a figure is calculated a particular way. The exposure is invisible until it materializes.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Establish the bus factor for each critical process and record it. Where the answer is one, the correction is shared work over time; documentation alone rarely transfers enough.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="Four people all connected through one central person. Remove the centre and the group splits into disconnected pairs.">
+          <text class="dia-label" x="14" y="20">All routes pass through one person</text>
+          <path class="stroke cool draw" style="--d:0" pathLength="1" d="M78 48 L160 84 M78 120 L160 84 M242 48 L160 84 M242 120 L160 84"/>
+          <circle class="dot pop" style="--d:0" cx="78" cy="48" r="9"/>
+          <circle class="dot pop" style="--d:1" cx="78" cy="120" r="9"/>
+          <circle class="dot pop" style="--d:2" cx="242" cy="48" r="9"/>
+          <circle class="dot pop" style="--d:3" cx="242" cy="120" r="9"/>
+          <circle class="ghost" cx="160" cy="84" r="13" fill="none"/>
+          <path class="stroke warm draw" style="--d:4" pathLength="1" d="M151 75 L169 93 M169 75 L151 93"/>
+          <text class="dia-label warm" x="160" y="118" text-anchor="middle">unavailable</text>
+          <text class="dia-label" x="14" y="158">The remaining four have no route to one another</text>
+        </svg>
+        <figcaption>Fig. 21 Four people connected through one, and the same group without them.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-22">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <circle class="f" cx="20" cy="20" r="5"/>
+          <path class="a-grow" d="M9 9 a15 15 0 0 0 0 22"/>
+          <path class="a-grow" style="animation-delay:.15s" d="M31 9 a15 15 0 0 1 0 22"/>
+        </svg></span>
+        <span class="law-num">No. 22</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">The Shirky Principle</h2>
+      <p class="law-origin reveal" style="--d:2">Attributed to Clay Shirky, describing the incentives that act on established institutions.</p>
+      <p class="statement reveal" style="--d:3">Institutions will try to preserve the problem to which they are the solution.</p>
+      <p class="qnote reveal" style="--d:3">Shirky's own words, in full.</p>
+      <p class="body reveal" style="--d:4">An organization built to address a problem acquires an interest in that problem continuing, since budget, headcount, and purpose depend on it. This rarely takes the form of deliberate obstruction. It appears as a durable sense that the problem is more complicated than it looks and that proposed simplifications carry drawbacks.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Where a simplification meets unusually detailed resistance, examine what depends on the current arrangement, and consider what the group's role would be afterwards.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="A department drawn as two arms wrapped around a problem, with the problem's exit blocked.">
+          <text class="dia-label" x="14" y="22">The unit funded to address it</text>
+          <path class="stroke draw" style="--d:0" pathLength="1" d="M96 40 a54 54 0 0 0 0 88"/>
+          <path class="stroke draw" style="--d:1" pathLength="1" d="M224 40 a54 54 0 0 1 0 88"/>
+          <circle class="dot pop" style="--d:2" cx="160" cy="84" r="24"/>
+          <text class="dia-label" x="160" y="140" text-anchor="middle">the problem</text>
+          <path class="ghost" d="M190 84 H272"/>
+          <path class="stroke warm draw" style="--d:4" pathLength="1" d="M272 62 V106"/>
+          <text class="dia-label warm" x="278" y="52">no exit</text>
+        </svg>
+        <figcaption>Fig. 22 The organization and the problem it is funded to address.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-23">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <path class="d" d="M5 30 H35"/>
+          <path class="a-draw" pathLength="100" d="M6 25 L34 9"/>
+          <path class="d a-draw" pathLength="100" style="animation-delay:.4s" d="M6 25 L34 33"/>
+          <circle class="f" cx="6" cy="25" r="2"/>
+        </svg></span>
+        <span class="law-num">No. 23</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Goodhart's Law</h2>
+      <p class="law-origin reveal" style="--d:2">Charles Goodhart, 1975, on monetary targets. The phrasing in general circulation is Marilyn Strathern's, from 1997.</p>
+      <p class="statement reveal" style="--d:3">When a measure becomes a target, it ceases to be a good measure.</p>
+      <p class="qnote reveal" style="--d:3">Strathern's own words, 1997, sharpening Goodhart's longer 1975 original.</p>
+      <p class="body reveal" style="--d:4">A measure is a proxy for something that matters, and the relationship between them holds only while nothing depends on it. Once the measure carries consequences, effort moves toward the measure and the proxy relationship weakens. Calls answered rises; problems solved does not. This generally occurs without anyone acting in bad faith.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Pair each target with a second measure that would detect the obvious ways of satisfying the first, and state plainly what the target is a proxy for.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="Two lines tracking together until a target is set, after which the measured number climbs while the outcome it stood for declines.">
+          <path class="axis" d="M30 18 V140 H304"/>
+          <path class="ghost" d="M140 24 V140"/>
+          <text class="dia-label hot" x="136" y="20" text-anchor="end">target set</text>
+          <path class="stroke cool draw" style="--d:0" pathLength="1" d="M32 112 L140 96"/>
+          <path class="stroke draw" style="--d:1" pathLength="1" d="M140 96 L206 66 L300 34"/>
+          <path class="stroke warm draw" style="--d:1" pathLength="1" d="M140 96 L210 102 L300 122"/>
+          <text class="dia-label hot" x="300" y="26" text-anchor="end">the number</text>
+          <text class="dia-label warm" x="300" y="136" text-anchor="end">what you wanted</text>
+          <text class="dia-label" x="30" y="158">Time</text>
+        </svg>
+        <figcaption>Fig. 23 Measured value and intended outcome after a target is set.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+<article class="law" id="law-24">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M4 31 a11 11 0 0 1 22 0 Z"/>
+          <path d="M28 31 V25 l4 -3 l4 3 V31 Z"/>
+          <circle class="f a-rise" cx="29" cy="14" r="1.7"/>
+          <circle class="f a-rise" style="animation-delay:.35s" cx="34" cy="11" r="1.7"/>
+          <circle class="f a-rise" style="animation-delay:.7s" cx="38" cy="15" r="1.7"/>
+        </svg></span>
+        <span class="law-num">No. 24</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Parkinson's Law of Triviality</h2>
+      <p class="law-origin reveal" style="--d:2">Parkinson, 1957. A committee in his example has three items on its agenda: a reactor, a bicycle shed, and the coffee budget.</p>
+      <p class="statement reveal" style="--d:3">The time spent on any item &hellip; in inverse proportion to the sum involved.</p>
+      <p class="qnote reveal" style="--d:3">Parkinson's own words, 1957, trimmed. The sum means money, not importance.</p>
+      <p class="body reveal" style="--d:4">Discussion time runs inversely to the sum at stake. The ten million pound reactor was approved in two and a half minutes. The three hundred and fifty pound bicycle shed took forty-five. The coffee budget, at twenty-one pounds a year, took an hour and a quarter and was deferred. Everyone can assess a bicycle shed; few will admit to not following a reactor.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Compare time spent per item against the sums involved. An item that passes without discussion may have been well understood, or may not have been examined at all.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="Three agenda items. The ten million pound reactor takes two and a half minutes, the three hundred and fifty pound bicycle shed takes forty five, and the twenty one pound coffee budget takes seventy five with no decision.">
+          <text class="dia-label" x="16" y="20">One committee, one agenda, minutes spent</text>
+          <text class="dia-label big" x="16" y="44">Reactor, 10 million pounds</text>
+          <rect class="coolbar grow" style="--d:0" x="16" y="50" width="10" height="18"/>
+          <text class="dia-label" x="34" y="64">2.5 minutes, approved</text>
+          <text class="dia-label big" x="16" y="90">Bicycle shed, 350 pounds</text>
+          <rect class="fillbar grow" style="--d:1" x="16" y="96" width="165" height="18"/>
+          <text class="dia-label hot" x="188" y="110">45 minutes</text>
+          <text class="dia-label big" x="16" y="136">Coffee, 21 pounds a year</text>
+          <rect class="fillbar grow" style="--d:2" x="16" y="142" width="275" height="18"/>
+          <text class="dia-label hot" x="291" y="168" text-anchor="end">75 minutes, and no decision</text>
+        </svg>
+        <figcaption>Fig. 24 Time spent per agenda item against the sum at stake.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-25">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <circle cx="11" cy="20" r="8"/><path d="M11 20 V14"/>
+          <circle cx="29" cy="20" r="8"/>
+          <path class="a-sweep" style="transform-origin:29px 20px" d="M29 20 V14"/>
+        </svg></span>
+        <span class="law-num">No. 25</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Segal's Law</h2>
+      <p class="law-origin reveal" style="--d:2">An adage of uncertain origin, in circulation since the 1930s.</p>
+      <p class="statement reveal" style="--d:3">A man with a watch knows what time it is. A man with two watches is never sure.</p>
+      <p class="qnote reveal" style="--d:3">The canonical form of an anonymous 1930s joke. No original text survives.</p>
+      <p class="body reveal" style="--d:4">Two sources of the same information that nearly agree produce less certainty than one source, because every decision now begins with reconciling them. The reconciliation is recurring rather than one-time: the discrepancy reappears with each new figure, and the argument is repeated by whoever is in the room.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Designate one source as authoritative and derive the others from it. The cost of occasional error from a single source is usually lower than the standing cost of reconciliation.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="Two clocks showing slightly different times with a person between them unable to decide.">
+          <circle class="stroke" cx="76" cy="76" r="42" fill="none"/>
+          <path class="stroke draw" style="--d:0" pathLength="1" d="M76 76 V44 M76 76 L98 88"/>
+          <circle class="dot" cx="76" cy="76" r="4"/>
+          <text class="dia-label big" x="76" y="140" text-anchor="middle">10:42</text>
+          <circle class="stroke" cx="244" cy="76" r="42" fill="none"/>
+          <path class="stroke draw" style="--d:1" pathLength="1" d="M244 76 V40 M244 76 L268 82"/>
+          <circle class="dot" cx="244" cy="76" r="4"/>
+          <text class="dia-label big" x="244" y="140" text-anchor="middle">10:47</text>
+          <text class="dia-label warm" x="160" y="70" text-anchor="middle" style="font-size:24px;letter-spacing:0">?</text>
+          <text class="dia-label" x="160" y="140" text-anchor="middle">both plausible</text>
+        </svg>
+        <figcaption>Fig. 25 Two sources, two readings, no resolution.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-26">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <rect class="d" x="4" y="12" width="6" height="6"/><rect class="d" x="13" y="12" width="6" height="6"/><rect class="d" x="22" y="12" width="6" height="6"/><rect class="d" x="31" y="12" width="6" height="6"/>
+          <rect class="d" x="4" y="22" width="6" height="6"/><rect class="d" x="22" y="22" width="6" height="6"/><rect class="d" x="31" y="22" width="6" height="6"/>
+          <rect class="f a-pulse" x="13" y="22" width="6" height="6"/>
+        </svg></span>
+        <span class="law-num">No. 26</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Sturgeon's Law</h2>
+      <p class="law-origin reveal" style="--d:2">Theodore Sturgeon, science fiction writer, responding to critics who judged the genre by its weakest examples.</p>
+      <p class="statement reveal" style="--d:3">Ninety percent of everything is crap.</p>
+      <p class="qnote reveal" style="--d:3">Sturgeon's own words, in full. He called it a revelation, not a law.</p>
+      <p class="body reveal" style="--d:4">Sturgeon's argument was comparative: a large majority of output in any field is unremarkable, so judging a field by its average says little about the field. Read as calibration, it sets an expectation. Weak proposals, unconvincing demonstrations, and poor first drafts are the normal distribution rather than evidence that something has gone wrong.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Evaluate a category by its best examples, and treat the filtering as a planned cost with hours attached rather than an unexpected one.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="Ten squares representing anything you sample: nine dim, one bright.">
+          <text class="dia-label" x="16" y="24">Any ten of anything</text>
+          <g class="pop" style="--d:0">
+            <rect class="coolbar" x="16" y="36" width="48" height="42"/><rect class="coolbar" x="72" y="36" width="48" height="42"/>
+            <rect class="coolbar" x="128" y="36" width="48" height="42"/><rect class="coolbar" x="184" y="36" width="48" height="42"/>
+            <rect class="coolbar" x="240" y="36" width="48" height="42"/>
+            <rect class="coolbar" x="16" y="86" width="48" height="42"/><rect class="coolbar" x="128" y="86" width="48" height="42"/>
+            <rect class="coolbar" x="184" y="86" width="48" height="42"/><rect class="coolbar" x="240" y="86" width="48" height="42"/>
+          </g>
+          <rect class="fillbar pop" style="--d:3" x="72" y="86" width="48" height="42"/>
+          <text class="dia-label hot" x="96" y="150" text-anchor="middle">notable</text>
+          <text class="dia-label" x="288" y="150" text-anchor="end">the remainder</text>
+        </svg>
+        <figcaption>Fig. 26 Ten samples from any category, one of them notable.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-27">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <circle cx="9" cy="20" r="5"/>
+          <path class="a-stretch" style="transform-origin:left center" d="M16 20 H37"/>
+          <path class="d" d="M37 17 V23"/>
+        </svg></span>
+        <span class="law-num">No. 27</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">The Dunning-Kruger Effect</h2>
+      <p class="law-origin reveal" style="--d:2">David Dunning and Justin Kruger, Cornell, 1999, published under the title Unskilled and Unaware of It.</p>
+      <p class="statement reveal" style="--d:3">The less you know about something, the harder it is to see how much you do not know.</p>
+      <p class="qnote reveal" style="--d:3">Modern phrasing. The 1999 paper is titled Unskilled and Unaware of It.</p>
+      <p class="body reveal" style="--d:4">The finding is that assessing one's competence at a task draws on the same knowledge as performing it, so those with the least skill are also the least able to recognize the gap. Experts show the opposite pattern: familiarity with a field reveals its extent, which produces qualified statements and the appearance of uncertainty.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Ask a confident person what would change their mind, and ask a hedging expert for a single best estimate.</p></div>
+      <div class="note reveal" style="--d:6"><span class="tag">On the evidence</span><p>The widely circulated curve with a peak and a valley does not appear in the paper. Statisticians have since argued that part of the measured effect follows from the method of analysis. The weaker claim is the one that holds: confidence is a poor indicator of accuracy.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="The popular confidence curve, spiking early to a peak, dropping into a valley, then climbing slowly with real expertise.">
+          <path class="axis" d="M30 18 V142 H304"/>
+          <text class="dia-label" transform="rotate(-90 15 84)" x="15" y="84" text-anchor="middle">Confidence</text>
+          <path class="stroke draw" pathLength="1" d="M32 120 C 44 46, 58 28, 76 32 C 94 38, 102 96, 128 112 C 152 126, 192 106, 232 80 C 262 60, 282 48, 300 42"/>
+          <circle class="dot pop" style="--d:0" cx="74" cy="32" r="4"/>
+          <circle class="dot pop" style="--d:1" cx="129" cy="113" r="4"/>
+          <text class="dia-label hot" x="74" y="22" text-anchor="middle">peak</text>
+          <text class="dia-label" x="140" y="128">valley</text>
+          <text class="dia-label" x="32" y="158">Knows nothing</text>
+          <text class="dia-label" x="304" y="158" text-anchor="end">Knows a great deal</text>
+          <text class="dia-label warm" x="304" y="30" text-anchor="end">popular version</text>
+        </svg>
+        <figcaption>Fig. 27 The popular curve, which does not appear in the paper.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+</section>
+<section id="ch-5">
+<header class="chapter">
+  <p class="numeral reveal">V</p>
+  <h2 class="reveal" style="--d:1">Judgment</h2>
+  <p class="eyebrow reveal" style="--d:2">Entries 28 to 38</p>
+</header>
+
+<article class="law" id="law-28">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <path class="d" d="M5 20 C 12 6, 20 32, 27 14 S 34 24, 35 20"/>
+          <path class="d" d="M5 20 C 14 34, 24 8, 35 20"/>
+          <path class="a-draw" pathLength="100" d="M5 20 H35"/>
+          <circle class="f" cx="5" cy="20" r="2.4"/><circle class="f" cx="35" cy="20" r="2.4"/>
+        </svg></span>
+        <span class="law-num">No. 28</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Occam's Razor</h2>
+      <p class="law-origin reveal" style="--d:2">Attributed to William of Ockham, a fourteenth-century friar, who used the principle in theological argument. The familiar Latin phrasing is later than he is.</p>
+      <p class="statement reveal" style="--d:3">Plurality must never be posited without necessity.</p>
+      <p class="qnote reveal" style="--d:3">Ockham's own words, in translation. The famous entities version is not his.</p>
+      <p class="body reveal" style="--d:4">Where two explanations account for the same evidence, prefer the one requiring fewer independent assumptions. Plurality here means the number of separate things that must be true. An explanation with six moving parts requires all six to hold. An unanswered message is more often explained by a full inbox than by a decision about the sender.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>List what each candidate explanation requires, then count. Begin with the shortest list. The principle indicates where to start rather than what is true.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="Two routes from symptom to cause: one direct with a single node, one elaborate loop with six nodes.">
+          <text class="dia-label" x="160" y="16" text-anchor="middle">Six assumptions, every one load bearing</text>
+          <path class="stroke cool draw" style="--d:0" pathLength="1" d="M24 118 C 40 40, 76 32, 104 62 C 128 88, 132 34, 168 36 C 206 38, 194 94, 226 84 C 258 74, 272 100, 296 118"/>
+          <circle class="dot cool" cx="58" cy="52" r="3.4"/>
+          <circle class="dot cool" cx="104" cy="62" r="3.4"/>
+          <circle class="dot cool" cx="151" cy="38" r="3.4"/>
+          <circle class="dot cool" cx="196" cy="60" r="3.4"/>
+          <circle class="dot cool" cx="226" cy="84" r="3.4"/>
+          <circle class="dot cool" cx="262" cy="90" r="3.4"/>
+          <path class="stroke draw" style="--d:1" pathLength="1" d="M24 118 H296"/>
+          <circle class="dot pop" cx="160" cy="118" r="5"/>
+          <text class="dia-label hot" x="160" y="136" text-anchor="middle">One assumption</text>
+          <circle class="dot" cx="24" cy="118" r="5"/>
+          <circle class="dot" cx="296" cy="118" r="5"/>
+          <text class="dia-label big" x="24" y="158">Symptom</text>
+          <text class="dia-label big" x="296" y="158" text-anchor="end">Cause</text>
+        </svg>
+        <figcaption>Fig. 28 Two explanations of the same evidence, requiring six assumptions and one.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-29">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <g class="a-tip" style="transform-origin:20px 14px">
+            <path d="M7 14 H33"/><path d="M7 14 V18 M33 14 V18"/>
+            <circle class="f" cx="7" cy="20" r="2"/><circle class="f" cx="31" cy="20" r="2"/><circle class="f" cx="35" cy="20" r="2"/>
+          </g>
+          <path d="M20 14 L14 32 H26 Z"/>
+        </svg></span>
+        <span class="law-num">No. 29</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Hanlon's Razor</h2>
+      <p class="law-origin reveal" style="--d:2">Attributed to Robert J. Hanlon, from a 1980 collection of aphorisms. Comparable formulations appear earlier in Goethe and others.</p>
+      <p class="statement reveal" style="--d:3">Never attribute to malice that which is adequately explained by stupidity.</p>
+      <p class="qnote reveal" style="--d:3">The canonical form, 1980. Stupidity is the original word; it is harsher than the truth usually is.</p>
+      <p class="body reveal" style="--d:4">Behavior that reads as hostile is more often produced by time pressure, fatigue, or missing context. Malice requires planning and sustained attention, both of which are scarcer than the alternatives. A curt reply usually indicates a short interval between reading and responding rather than a judgment about the reader.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Ask what a rushed and reasonably well-intentioned person would have produced in the same circumstances, and compare that with what arrived.</p></div>
+      <div class="note reveal" style="--d:6"><span class="tag">Caveat</span><p>The razor is an opening assumption rather than a settled one. Repeated errors in a single direction that consistently favour one party call for a different explanation. A further refinement is also worth holding: behavior read as incompetence is often a reasonable response to constraints and incentives not visible from outside.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="A balance beam. One small weight labelled malice on the left, five weights labelled hurry and fatigue on the right, tipping the beam.">
+          <g class="tilt">
+            <path class="stroke" d="M58 92 H262"/>
+            <path class="stroke cool" d="M58 92 V108 M262 92 V108"/>
+            <path class="stroke cool" d="M40 108 q18 20 36 0 M244 108 q18 20 36 0"/>
+            <circle class="dot cool" cx="58" cy="102" r="4"/>
+            <circle class="dot" cx="250" cy="102" r="4"/>
+            <circle class="dot" cx="262" cy="102" r="4"/>
+            <circle class="dot" cx="274" cy="102" r="4"/>
+            <circle class="dot" cx="256" cy="112" r="4"/>
+            <circle class="dot" cx="268" cy="112" r="4"/>
+          </g>
+          <path class="stroke faint" d="M160 88 L178 128 L142 128 Z M120 130 H200"/>
+          <text class="dia-label" x="58" y="152" text-anchor="middle">Malice</text>
+          <text class="dia-label hot" x="262" y="152" text-anchor="middle">Hurry, fatigue,</text>
+          <text class="dia-label hot" x="262" y="164" text-anchor="middle">no context, bad day</text>
+          <text class="dia-label" x="12" y="22">Weight of available evidence</text>
+        </svg>
+        <figcaption>Fig. 29 Relative weight of the two explanations.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-30">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <g class="a-flip" style="transform-origin:20px 20px">
+            <path d="M6 20 H34"/><path d="M27 13 L34 20 L27 27"/>
+          </g>
+        </svg></span>
+        <span class="law-num">No. 30</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Inversion</h2>
+      <p class="law-origin reveal" style="--d:2">Carl Jacobi, the nineteenth-century mathematician, on approaching difficult problems. Charlie Munger adopted it as a method for decisions.</p>
+      <p class="statement reveal" style="--d:3">Invert, always invert.</p>
+      <p class="qnote reveal" style="--d:3">Jacobi's own words, in translation. Munger borrowed it and made it a habit.</p>
+      <p class="body reveal" style="--d:4">Where the conditions for success are numerous and hard to specify, the conditions for failure are usually few and easy to state. Asking what would cause a project to fail produces a short concrete list within minutes: the sponsor's attention moves elsewhere, the underlying data proves wrong, ownership is undefined after launch.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>At the start of a project, write the account of its failure a year from now, then treat the resulting list as the plan.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="How to succeed drawn as many faint branching paths, beside how to fail drawn as a short bold list of three.">
+          <text class="dia-label" x="16" y="22">How to succeed</text>
+          <circle class="dot cool" cx="26" cy="86" r="5"/>
+          <path class="stroke cool draw web" style="--d:0" pathLength="1" d="M30 86 L128 34 M30 86 L128 50 M30 86 L128 66 M30 86 L128 82 M30 86 L128 98 M30 86 L128 114 M30 86 L128 130 M30 86 L128 146"/>
+          <text class="dia-label" x="128" y="160">many, unspecifiable</text>
+          <text class="dia-label hot" x="182" y="22">How to fail</text>
+          <circle class="dot" cx="192" cy="86" r="5"/>
+          <path class="stroke draw" style="--d:1" pathLength="1" d="M196 86 L228 54 H298 M196 86 H228 H298 M196 86 L228 118 H298"/>
+          <text class="dia-label hot" x="234" y="48">sponsor drifts</text>
+          <text class="dia-label hot" x="234" y="80">numbers wrong</text>
+          <text class="dia-label hot" x="234" y="112">nobody owns it</text>
+          <text class="dia-label" x="192" y="160">few, and specifiable</text>
+        </svg>
+        <figcaption>Fig. 30 Routes to success and routes to failure, drawn to scale.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-31">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M4 10 H16 M11 5 L16 10 L11 15"/>
+          <circle class="d" cx="26" cy="26" r="9"/>
+          <g class="a-spin" style="transform-origin:26px 26px"><circle class="f" cx="26" cy="17" r="2.6"/></g>
+        </svg></span>
+        <span class="law-num">No. 31</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Cynefin</h2>
+      <p class="law-origin reveal" style="--d:2">Dave Snowden, 1999. The Welsh word refers to the several places a person belongs to at once.</p>
+      <p class="statement reveal" style="--d:3">Complicated problems have expert answers. Complex ones only yield to small experiments.</p>
+      <p class="qnote reveal" style="--d:3">Modern phrasing. Snowden calls the two the domain of experts and the domain of emergence.</p>
+      <p class="body reveal" style="--d:4">The framework separates problems whose answers are knowable from those whose answers are not. Complicated problems have been solved before and yield to expertise. Complex problems involve interacting parts whose behavior cannot be predicted in advance, and yield only to small trials observed closely. Applying either method to the other kind of problem is expensive.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Establish first whether this specific problem has been solved before. If it has, acquire the answer. If it has not, design a small trial and decide in advance what result would end it.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="A straight arrow from problem to answer for complicated problems, and a repeating loop for complex ones.">
+          <text class="dia-label" x="16" y="24">Complicated: somebody knows</text>
+          <circle class="dot pop" style="--d:0" cx="30" cy="56" r="6"/>
+          <path class="stroke draw" style="--d:0" pathLength="1" d="M40 56 H128 M128 56 l-9 -5 M128 56 l-9 5"/>
+          <text class="dia-label hot" x="136" y="60">buy the answer</text>
+          <text class="dia-label" x="16" y="100">Complex: nobody knows yet</text>
+          <path class="stroke draw" style="--d:2" pathLength="1" d="M74 108 a24 24 0 1 1 -16 42"/>
+          <path class="stroke" d="M58 150 l1 -11 M58 150 l11 1"/>
+          <circle class="dot pop" style="--d:3" cx="74" cy="108" r="5"/>
+          <circle class="dot pop" style="--d:4" cx="98" cy="132" r="5"/>
+          <text class="dia-label hot" x="128" y="118">try something small</text>
+          <text class="dia-label" x="128" y="136">watch what happens</text>
+          <text class="dia-label" x="128" y="154">then decide</text>
+        </svg>
+        <figcaption>Fig. 31 Two problem types and the method each requires.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+<article class="law" id="law-32">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M5 11 H35 M5 11 V19 M15 11 V19 M25 11 V19 M35 11 V19 M5 19 H35"/>
+          <path class="a-wob" d="M5 30 q6 -7 11 0 t11 0 t8 -2"/>
+        </svg></span>
+        <span class="law-num">No. 32</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">The Map Is Not the Territory</h2>
+      <p class="law-origin reveal" style="--d:2">Alfred Korzybski, 1931, in a paper on the relationship between language and the things it describes.</p>
+      <p class="statement reveal" style="--d:3">A map is not the territory it represents&hellip;</p>
+      <p class="qnote reveal" style="--d:3">Korzybski's own words, 1931, trimmed. The rest adds that a good map shares the territory's structure.</p>
+      <p class="body reveal" style="--d:4">A representation is necessarily simpler than what it represents, and is made at a particular moment for a particular purpose. An organization chart describes reporting lines rather than how decisions are actually made. A process diagram describes the intended path rather than the one used when it is blocked. Disagreement between the two is information about the representation.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Where representation and observation conflict, observe directly and then revise the representation. The discrepancy usually indicates something the representation had no place to record.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="A neat grid of the plan above, and a bumpy uneven line of what actually happens below, with the difference marked.">
+          <text class="dia-label" x="16" y="22">The plan</text>
+          <path class="stroke faint" d="M16 34 H304 M16 34 V70 M88 34 V70 M160 34 V70 M232 34 V70 M304 34 V70 M16 70 H304"/>
+          <text class="dia-label big" x="52" y="58" text-anchor="middle">step</text>
+          <text class="dia-label big" x="124" y="58" text-anchor="middle">step</text>
+          <text class="dia-label big" x="196" y="58" text-anchor="middle">step</text>
+          <text class="dia-label big" x="268" y="58" text-anchor="middle">step</text>
+          <text class="dia-label" x="16" y="104">What people actually do</text>
+          <path class="stroke draw" style="--d:1" pathLength="1" d="M16 132 q22 -22 42 2 t34 14 q20 -30 44 -8 t40 -18 q26 26 52 4 t56 -6"/>
+          <path class="ghost" d="M160 70 V126"/>
+          <text class="dia-label warm" x="166" y="94">nobody does step three</text>
+        </svg>
+        <figcaption>Fig. 32 The planned sequence and the observed one.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-33">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <g class="a-tap" style="transform-origin:12px 30px">
+            <path d="M12 30 L22 12"/><path d="M17 8 L28 15"/>
+          </g>
+          <path d="M6 34 H34"/>
+          <circle class="f" cx="14" cy="34" r="1.6"/><circle class="f" cx="23" cy="34" r="1.6"/><circle class="f" cx="31" cy="34" r="1.6"/>
+        </svg></span>
+        <span class="law-num">No. 33</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">The Law of the Instrument</h2>
+      <p class="law-origin reveal" style="--d:2">Abraham Kaplan, 1964, and Abraham Maslow, 1966, who gave the idea its familiar form.</p>
+      <p class="statement reveal" style="--d:3">If all you have is a hammer, everything looks like a nail.</p>
+      <p class="qnote reveal" style="--d:3">Modern phrasing. Maslow's 1966 sentence was longer, and Kaplan got there first with a small boy.</p>
+      <p class="body reveal" style="--d:4">The tools available shape which problems are recognized and which solutions are considered. A group fluent in one method will find that most requests suit that method, often correctly, since familiarity genuinely lowers cost and risk. The effect is that alternatives go unevaluated, because nobody present can represent them well enough to make the case.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Have the problem described by someone who works with different tools before selecting an approach. An unusually confident estimate for the familiar option is worth examining.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="A hammer above three different shapes, each of which has been given a nail.">
+          <text class="dia-label" x="16" y="22">The familiar tool</text>
+          <path class="stroke" d="M160 30 V64 M142 26 L178 26 L178 38 L142 38 Z"/>
+          <path class="stroke faint" d="M20 140 H300"/>
+          <circle class="stroke" cx="70" cy="118" r="20" fill="none"/>
+          <path class="stroke" d="M160 98 L182 138 H138 Z"/>
+          <rect class="stroke" x="230" y="98" width="42" height="42" fill="none"/>
+          <path class="stroke warm draw" style="--d:2" pathLength="1" d="M70 82 V98 M160 82 V98 M251 82 V98"/>
+          <circle class="dot pop" style="--d:2" cx="70" cy="80" r="4"/>
+          <circle class="dot pop" style="--d:3" cx="160" cy="80" r="4"/>
+          <circle class="dot pop" style="--d:4" cx="251" cy="80" r="4"/>
+          <text class="dia-label hot" x="160" y="162" text-anchor="middle">three different problems, one solution</text>
+        </svg>
+        <figcaption>Fig. 33 One tool applied to three different problems.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-34">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M12 6 V22 M4 13 H20 M8 22 H16"/>
+          <circle class="f" cx="7" cy="13" r="1.4"/><circle class="f" cx="17" cy="13" r="1.4"/>
+          <g class="a-sink"><path class="d" d="M30 22 V34 M23 28 H37 M26 34 H34"/></g>
+        </svg></span>
+        <span class="law-num">No. 34</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Survivorship Bias</h2>
+      <p class="law-origin reveal" style="--d:2">From Abraham Wald's 1943 analysis of damage to returning aircraft, conducted for the Statistical Research Group.</p>
+      <p class="statement reveal" style="--d:3">You only see the ones that made it back, and they are not a fair sample.</p>
+      <p class="qnote reveal" style="--d:3">Modern phrasing. Wald's 1943 work is a statistical memo with no aphorism in it.</p>
+      <p class="body reveal" style="--d:4">Wald was asked where to add armour, based on damage recorded on aircraft that returned. He observed that the sample excluded aircraft that did not return, so the undamaged areas on survivors were the likely fatal locations. The pattern recurs wherever a sample is drawn from outcomes: supplier references, published case studies, and systems still in operation.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Before drawing a conclusion from successful cases, look for cases that followed the same approach and failed. If none can be found, the sample is incomplete rather than uniform.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="A returning aircraft with damage marked on the wings, and ghosted aircraft below that never came back, damaged at the centre.">
+          <text class="dia-label" x="16" y="20">Came back, damage recorded</text>
+          <path class="stroke" d="M160 30 V86 M96 52 H224 M132 82 H188"/>
+          <circle class="dot" cx="118" cy="52" r="3.6"/><circle class="dot" cx="140" cy="52" r="3.6"/>
+          <circle class="dot" cx="186" cy="52" r="3.6"/><circle class="dot" cx="208" cy="52" r="3.6"/>
+          <circle class="dot" cx="146" cy="82" r="3.6"/>
+          <path class="ghost" d="M16 106 H304"/>
+          <text class="dia-label warm" x="16" y="124">Did not come back, damage unknown</text>
+          <g class="ghost">
+            <path d="M78 132 V166 M46 144 H110 M62 162 H94"/>
+            <path d="M160 132 V166 M128 144 H192 M144 162 H176"/>
+            <path d="M242 132 V166 M210 144 H274 M226 162 H258"/>
+          </g>
+          <circle class="dot warm-dot pop" style="--d:3" cx="78" cy="146" r="3.6"/>
+          <circle class="dot warm-dot pop" style="--d:4" cx="160" cy="146" r="3.6"/>
+          <circle class="dot warm-dot pop" style="--d:5" cx="242" cy="146" r="3.6"/>
+        </svg>
+        <figcaption>Fig. 34 Damage recorded on returning aircraft, and the aircraft absent from the sample.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-35">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <path class="d" stroke-dasharray="3 3" d="M4 24 H36"/>
+          <circle class="f" cx="13" cy="9" r="2.6"/>
+          <circle class="f a-settle" cx="27" cy="22" r="2.6"/>
+          <path class="d" d="M17 12 L23 19"/>
+        </svg></span>
+        <span class="law-num">No. 35</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Regression to the Mean</h2>
+      <p class="law-origin reveal" style="--d:2">Francis Galton, 1886, from measurements of height across successive generations.</p>
+      <p class="statement reveal" style="--d:3">Extreme results are usually followed by less extreme ones, with or without your help.</p>
+      <p class="qnote reveal" style="--d:3">Modern phrasing. Galton called it regression towards mediocrity.</p>
+      <p class="body reveal" style="--d:4">Extreme measurements contain an element of chance, and chance does not persist, so a subsequent measurement tends to fall closer to the average. This produces a durable illusion in evaluation: praise appears to be followed by decline and criticism by improvement, because both are applied to outliers, and outliers move toward the middle regardless.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Establish a baseline before intervening, and compare results against the expected movement rather than against the extreme value that prompted the intervention.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="Scattered results around an average line, with one extreme low point followed by a point much closer to average.">
+          <path class="axis" d="M28 20 V140 H300"/>
+          <path class="ghost" d="M28 80 H300"/>
+          <text class="dia-label" x="300" y="74" text-anchor="end">average</text>
+          <circle class="dot cool pop" style="--d:0" cx="58" cy="66" r="4"/>
+          <circle class="dot cool pop" style="--d:0" cx="88" cy="92" r="4"/>
+          <circle class="dot cool pop" style="--d:1" cx="118" cy="72" r="4"/>
+          <circle class="dot pop" style="--d:2" cx="148" cy="128" r="6"/>
+          <circle class="dot pop" style="--d:4" cx="192" cy="86" r="6"/>
+          <circle class="dot cool pop" style="--d:5" cx="228" cy="74" r="4"/>
+          <circle class="dot cool pop" style="--d:5" cx="264" cy="90" r="4"/>
+          <path class="stroke draw" style="--d:4" pathLength="1" d="M158 124 L182 92 M182 92 l-1 -9 M182 92 l9 3"/>
+          <text class="dia-label hot" x="148" y="150" text-anchor="middle">the crisis</text>
+          <text class="dia-label hot" x="212" y="112">the recovery</text>
+        </svg>
+        <figcaption>Fig. 35 An extreme result followed by one closer to the average.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+<article class="law" id="law-36">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M3 34 V29 H12 V23 H21 V17 H30 V11 H37"/>
+          <circle class="f a-bob" cx="33" cy="7" r="2.8"/>
+        </svg></span>
+        <span class="law-num">No. 36</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">The Peter Principle</h2>
+      <p class="law-origin reveal" style="--d:2">Laurence J. Peter, 1969. The book was written as satire and received as management theory.</p>
+      <p class="statement reveal" style="--d:3">In a hierarchy every employee tends to rise to his level of incompetence.</p>
+      <p class="qnote reveal" style="--d:3">Peter's own words, 1969, in full.</p>
+      <p class="body reveal" style="--d:4">Promotion rewards performance in one role and assigns a different one. Where the two require different skills, a sequence of promotions ends at the first role the person does not perform well, and stops there, since further promotion is not offered. The mechanism requires no error of judgment at any single step.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Evaluate candidates against the requirements of the role being filled rather than performance in the previous one, and make lateral and downward moves ordinary rather than exceptional.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="A staircase of four steps. A figure sits on the top step, where the stairs stop and a dashed plateau runs off to the right.">
+          <path class="stroke draw" pathLength="1" d="M16 152 V126 H78 V100 H140 V74 H202 V48 H262"/>
+          <path class="ghost" d="M262 48 H308"/>
+          <circle class="dot pop" cx="232" cy="42" r="6"/>
+          <text class="dia-label" x="47" y="142" text-anchor="middle">Suited</text>
+          <text class="dia-label" x="109" y="116" text-anchor="middle">Suited</text>
+          <text class="dia-label" x="171" y="90" text-anchor="middle">Adequate</text>
+          <text class="dia-label hot" x="233" y="64" text-anchor="middle">Not suited</text>
+          <text class="dia-label hot" x="308" y="88" text-anchor="end">no further promotion</text>
+          <text class="dia-label" x="16" y="24">Each promotion rewards the step below it</text>
+        </svg>
+        <figcaption>Fig. 36 Promotions ending at the first unsuited role.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-37">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <path class="d" d="M20 34 L7 14 M20 34 L13 10 M20 34 L20 7 M20 34 L27 10 M20 34 L33 14"/>
+          <path class="a-sweep" style="transform-origin:20px 34px" d="M20 34 V12"/>
+          <circle class="f" cx="20" cy="34" r="2.2"/>
+        </svg></span>
+        <span class="law-num">No. 37</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Hick's Law</h2>
+      <p class="law-origin reveal" style="--d:2">William Hick and Ray Hyman, working independently in the early 1950s, measuring reaction time against the number of possible signals.</p>
+      <p class="statement reveal" style="--d:3">The time it takes to choose grows with the number of options, but only gently.</p>
+      <p class="qnote reveal" style="--d:3">Modern phrasing. The original is a formula: RT = a + b log&#8322;(n + 1).</p>
+      <p class="body reveal" style="--d:4">Decision time increases with the logarithm of the number of options, so doubling the options adds a fixed increment rather than doubling the time. The result holds for organized sets. Where options are unsorted and unranked, the observed behavior is different: people defer the decision rather than take proportionally longer over it.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Group and rank options rather than reducing their number arbitrarily, and supply a default so that choosing is optional rather than required.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="A curve of decision time against number of options, rising quickly at first then flattening out.">
+          <path class="axis" d="M34 18 V138 H304"/>
+          <text class="dia-label" transform="rotate(-90 16 84)" x="16" y="84" text-anchor="middle">Time to decide</text>
+          <path class="stroke draw" pathLength="1" d="M34 130 L42.5 113 L50.9 103 L59.4 96 L76.3 86 L93.2 79 L127 69 L160.8 62 L228.4 52 L296 45"/>
+          <circle class="dot pop" style="--d:0" cx="42.5" cy="113" r="4"/>
+          <circle class="dot pop" style="--d:1" cx="93.2" cy="79" r="4"/>
+          <circle class="dot pop" style="--d:2" cx="296" cy="45" r="4"/>
+          <text class="dia-label" x="42" y="152" text-anchor="middle">2</text>
+          <text class="dia-label" x="93" y="152" text-anchor="middle">8</text>
+          <text class="dia-label" x="296" y="152" text-anchor="middle">32</text>
+          <text class="dia-label" x="170" y="166" text-anchor="middle">Number of options on offer</text>
+          <text class="dia-label hot" x="304" y="30" text-anchor="end">each doubling costs the same again</text>
+        </svg>
+        <figcaption>Fig. 37 Decision time against the number of options.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+<article class="law" id="law-38">
+  <div class="law-grid">
+    <div class="law-copy">
+      <div class="law-mark reveal" style="--d:0">
+        <span class="ico-box"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <path class="d" d="M4 25 H36"/>
+          <path class="a-draw" pathLength="100" d="M4 30 C 11 10, 17 6, 23 15 C 27 22, 31 32, 36 36"/>
+        </svg></span>
+        <span class="law-num">No. 38</span>
+      </div>
+      <h2 class="law-name reveal" style="--d:1">Illich's Law</h2>
+      <p class="law-origin reveal" style="--d:2">Associated with Ivan Illich, whose published work applies the argument to institutions rather than to hours worked.</p>
+      <p class="statement reveal" style="--d:3">Beyond a certain threshold, human efficiency decreases, even becoming negative.</p>
+      <p class="qnote reveal" style="--d:3">Widely attributed to Illich. His own books make the same argument about institutions.</p>
+      <p class="body reveal" style="--d:4">Beyond a threshold, additional input reduces output. Illich's own version concerns institutions: past a certain scale, a system begins to obstruct the purpose it was built for, so that a transport network can consume more time than it saves. Applied to individual work, the eleventh hour introduces errors that consume the ninth and tenth.</p>
+      <div class="use reveal" style="--d:5"><span class="tag">In practice</span><p>Establish where the threshold falls for a given kind of work and treat it as a limit. Output past that point is negative rather than merely diminished.</p></div>
+    </div>
+    <div class="law-panel">
+      <figure class="instrument reveal" style="--d:3">
+        <svg viewBox="0 0 320 170" role="img" aria-label="Output rising with hours worked, peaking, then falling below zero as errors accumulate.">
+          <path class="axis" d="M28 20 V150 H304"/>
+          <path class="ghost" d="M28 104 H304"/>
+          <text class="dia-label" x="26" y="100" text-anchor="end">0</text>
+          <path class="stroke draw" pathLength="1" d="M30 104 C 66 44, 108 30, 150 42 C 186 52, 214 88, 244 112 C 266 128, 286 138, 300 142"/>
+          <circle class="dot pop" style="--d:1" cx="150" cy="42" r="5"/>
+          <text class="dia-label hot" x="150" y="32" text-anchor="middle">hour eight</text>
+          <circle class="dot pop" style="--d:3" cx="244" cy="112" r="5"/>
+          <text class="dia-label warm" x="302" y="164" text-anchor="end">hour eleven, now subtracting</text>
+          <text class="dia-label" x="28" y="166">Hours worked</text>
+        </svg>
+        <figcaption>Fig. 38 Output against hours worked.</figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+</section>
+</main>
+
+<section class="closing wrap">
+  <div class="twelfth reveal">
+    <p class="eyebrow">A closing note</p>
+    <q>The value of a named pattern is that it can be recognised early, before the evidence is in.</q>
+    <p class="attrib">Which is also the reason to hold each of them loosely.</p>
+  </div>
+
+  <div class="outro">
+    <div class="reveal" style="--d:1">
+      <h2>Using them</h2>
+    </div>
+    <div class="reveal" style="--d:2">
+      <p>Several of these contradict one another, and that is expected. Gall's Law argues for growing a system from a small working version; the Second-System Effect warns about what the small version left out. The Lindy Effect argues for leaving a long-running arrangement alone; Chesterton's Fence argues for establishing why it exists first. Determining which applies to a particular situation is the substance of the work, and no collection can do it for you.</p>
+      <p>Each entry is a compressed observation made in a particular setting, usually a factory, a laboratory, a committee, or a government office. The compression is what makes them portable, and it is also what makes them approximate at the edges. They are most useful as a first hypothesis, and least useful as a conclusion.</p>
+    </div>
+  </div>
+
+  <p class="colophon reveal" style="--d:3">Thirty-eight entries, thirty-eight figures.<br>Ockham circa 1320, Galton 1886, Pareto 1896, Chesterton 1929, Korzybski 1931, Wald 1943, Sturgeon 1950s, Hick and Hyman 1952, Little 1954, Parkinson 1955 and 1957, Ashby 1956, Kaplan 1964 and Maslow 1966, Goldman 1964, Amdahl 1967, Conway 1968, Peter 1969, Illich 1973, Kernighan and Plauger 1974, Brooks 1975, Goodhart 1975, Gall 1975, Hofstadter 1979, Hanlon 1980, Grove 1983, Goldratt 1984, Naur 1985, Strathern 1997, Snowden 1999, Dunning and Kruger 1999, Spolsky 2002, and the undated: Jacobi, Munger, Shirky, Segal, Bezos, Wright.</p>
+</section>
+
+</div>
+
+<script>
+(function(){
+  var targets = document.querySelectorAll(".reveal");
+  var laws = document.querySelectorAll(".law");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  for (var j = 0; j < laws.length; j++) laws[j].classList.add("visible");
+
+  if (!("IntersectionObserver" in window) || reduce) {
+    for (var i = 0; i < targets.length; i++) targets[i].classList.add("in");
+    return;
+  }
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        entry.target.classList.add("in");
+        io.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.1 });
+  targets.forEach(function(el){ io.observe(el); });
+
+  // only animate the icons of laws near the viewport
+  var vis = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      entry.target.classList.toggle("visible", entry.isIntersecting);
+    });
+  }, { rootMargin: "300px 0px 300px 0px" });
+  laws.forEach(function(el){ vis.observe(el); });
+
+  document.querySelectorAll(".hero .reveal").forEach(function(el){ el.classList.add("in"); });
+})();
+</script>
+</body>
+</html>
