@@ -1,0 +1,53 @@
+// ============================================================
+// Shared dark palette — "Night Transit"
+// Source of truth for the color scheme used by git-finally.html
+// and old-wisdom.html, and mirrored into index.html's dark theme
+// (style.css, [data-theme="dark"]).
+//
+// This file isn't wired into a build step — the project has no
+// Sass compiler configured (assets/sass/ is a separate, unrelated
+// legacy template used only by index-demo.html / generic.html /
+// elements.html). Treat this as the canonical reference: when the
+// palette changes, update it here first, then hand-port the values
+// into whichever plain CSS/inline <style> block needs them.
+// ============================================================
+
+// ---- Base surfaces (darkest to lightest) ----
+$ink-900: #0A101F; // page background
+$ink-850: #0C1425; // deep background / secondary panel
+$ink-800: #101A30; // card / panel background
+$ink-700: #1A2540; // border
+$ink-600: #263256; // hover border / raised surface
+
+// ---- Text ----
+$chalk:   #EDF1F9; // primary text
+$chalk-2: #C7D0E6; // secondary text
+$chalk-3: #9AA7C1; // muted / soft text
+
+// ---- Warm accents ----
+$tan:      #F3EBD8; // cream — headings, emphasis
+$tan-dim:  #C9BFA8; // dimmed cream
+$brass:    #FFB020; // amber — primary accent (CTAs, highlights)
+$brass-2:  #E0982A; // darker amber
+$brass-glow: rgba(255, 176, 32, 0.16);
+
+// ---- Cool / semantic accents ----
+$teal:   #2AD4B0; // secondary accent — links, feature highlights
+$pink:   #FF5D8F;
+$violet: #9D8CFF;
+$red:    #FF6A55; // == coral below; alerts / destructive
+$green:  #6FE39B;
+$coral:  #FF6A55; // warm accent — notes, tags
+
+// ---- Semantic aliases (match index.html's style.css tokens) ----
+$bg:               $ink-900;
+$bg-deep:          $ink-850;
+$surface:          $ink-800;
+$border:           $ink-700;
+$text:             $chalk;
+$text-soft:        $chalk-3;
+$accent-orange:    $brass;
+$accent-orange-soft: rgba(255, 176, 32, 0.2);
+$accent-blue:      $teal;
+$accent-blue-deep: #1FA98A;
+$shadow:           0 18px 50px -20px rgba(4, 8, 18, 0.65);
