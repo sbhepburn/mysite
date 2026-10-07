@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decoding Costco — The Insider's Field Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#D2202E;
+    --red-deep:#A8131F;
+    --navy:#00477E;
+    --navy-bright:#005DAA;
+    --ink:#211B16;
+    --cream:#F6EEDD;
+    --cream-2:#EFE4CC;
+    --paper:#FFFDF7;
+    --gold:#E0A323;
+    --green:#2E7D4F;
+    --shadow:#211B16;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background-color:var(--cream);
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(0,71,126,.05), transparent 40%),
+      radial-gradient(circle at 88% 8%, rgba(210,32,46,.06), transparent 35%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    color:var(--ink);
+    font-family:'Fraunces', Georgia, serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    padding:0 16px 80px;
+  }
+
+  .wrap{max-width:1040px;margin:0 auto;}
+
+  /* ===== ENTRANCE ANIMATION ===== */
+  .rise{opacity:0;transform:translateY(22px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards;}
+  @keyframes rise{to{opacity:1;transform:translateY(0);}}
+  .d1{animation-delay:.05s}.d2{animation-delay:.15s}.d3{animation-delay:.25s}
+  .d4{animation-delay:.35s}.d5{animation-delay:.45s}.d6{animation-delay:.55s}
+  @media (prefers-reduced-motion:reduce){.rise{animation:none;opacity:1;transform:none;}}
+
+  /* ===== MASTHEAD ===== */
+  header{
+    margin:48px auto 30px;
+    text-align:center;
+    position:relative;
+  }
+  .kicker{
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    font-size:.7rem;
+    color:var(--red);
+    display:inline-block;
+    border:1.5px solid var(--red);
+    padding:6px 14px 5px;
+    border-radius:2px;
+    background:var(--paper);
+  }
+  h1{
+    font-family:'Anton', Impact, sans-serif;
+    font-weight:400;
+    text-transform:uppercase;
+    line-height:.86;
+    font-size:clamp(3.4rem, 13vw, 8.2rem);
+    color:var(--navy);
+    letter-spacing:-.01em;
+    margin:18px 0 8px;
+    text-shadow:4px 4px 0 rgba(210,32,46,.16);
+  }
+  h1 .dot{color:var(--red);}
+  .tagline{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:clamp(1.05rem, 3.2vw, 1.5rem);
+    color:var(--ink);
+    max-width:34ch;
+    margin:0 auto;
+  }
+  .meta-strip{
+    margin:22px auto 0;
+    display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+    font-family:'Space Mono', monospace;
+    font-size:.72rem;
+    letter-spacing:.04em;
+  }
+  .meta-strip span{
+    background:var(--ink);color:var(--cream);
+    padding:5px 11px;border-radius:2px;
+  }
+  .meta-strip span.alt{background:var(--navy);}
+  .meta-strip span.alt2{background:var(--red);}
+
+  .stamp{
+    position:absolute;top:-18px;right:0;
+    width:108px;height:108px;border-radius:50%;
+    border:2.5px dashed var(--red);
+    color:var(--red);
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    font-family:'Anton',sans-serif;font-size:.82rem;text-transform:uppercase;
+    line-height:1.05;letter-spacing:.06em;
+    transform:rotate(-11deg);
+    background:rgba(255,253,247,.6);
+  }
+  @media (max-width:680px){.stamp{display:none;}}
+
+  /* ===== SECTION HEADINGS ===== */
+  .sec-head{
+    display:flex;align-items:baseline;gap:14px;
+    margin:64px 0 22px;
+    border-bottom:3px solid var(--ink);
+    padding-bottom:8px;
+  }
+  .sec-num{
+    font-family:'Anton',sans-serif;
+    font-size:clamp(1.6rem,5vw,2.3rem);
+    color:var(--red);
+    line-height:1;
+  }
+  .sec-head h2{
+    font-family:'Anton',sans-serif;
+    font-weight:400;text-transform:uppercase;
+    font-size:clamp(1.5rem,5vw,2.3rem);
+    color:var(--navy);letter-spacing:.005em;line-height:1;
+  }
+  .sec-intro{
+    font-size:1.06rem;max-width:62ch;margin:-6px 0 28px;color:#3a312a;
+  }
+  .sec-intro b{color:var(--red-deep);}
+
+  /* ===== ANATOMY HERO ===== */
+  .anatomy{
+    background:var(--navy);
+    border-radius:6px;
+    padding:34px clamp(20px,5vw,48px);
+    display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center;
+    color:var(--cream);
+    box-shadow:8px 8px 0 rgba(33,27,22,.9);
+  }
+  @media (max-width:760px){.anatomy{grid-template-columns:1fr;gap:26px;}}
+  .anatomy h3{
+    font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;
+    font-size:1.5rem;letter-spacing:.02em;margin-bottom:6px;color:#fff;
+  }
+  .anatomy p{font-size:.98rem;color:rgba(246,238,221,.85);margin-bottom:16px;}
+  .anatomy ul{list-style:none;display:grid;gap:11px;}
+  .anatomy li{display:flex;gap:11px;font-size:.92rem;align-items:flex-start;}
+  .anatomy li .pin{
+    flex:0 0 auto;width:22px;height:22px;border-radius:50%;
+    background:var(--gold);color:var(--ink);
+    font-family:'Space Mono',monospace;font-weight:700;font-size:.74rem;
+    display:flex;align-items:center;justify-content:center;margin-top:1px;
+  }
+
+  /* the big sample tag */
+  .bigtag{
+    background:var(--paper);color:var(--ink);
+    border:2px solid var(--ink);border-radius:3px;
+    padding:20px 22px 16px;position:relative;
+    box-shadow:6px 6px 0 var(--red);
+    max-width:330px;margin:0 auto;width:100%;
+  }
+  .bigtag .ast{
+    position:absolute;top:8px;right:14px;
+    font-family:'Anton',sans-serif;font-size:2rem;color:var(--red);line-height:.6;
+  }
+  .bigtag .item{
+    font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.06em;
+    text-transform:uppercase;color:#6b5e50;margin-bottom:2px;
+  }
+  .bigtag .desc{font-family:'Fraunces',serif;font-size:1.04rem;font-weight:600;margin-bottom:14px;line-height:1.2;}
+  .bigtag .price{
+    font-family:'Anton',sans-serif;font-size:3.6rem;line-height:.8;color:var(--navy);
+    display:flex;align-items:flex-start;
+  }
+  .bigtag .price .cur{font-size:1.5rem;margin-top:6px;margin-right:2px;}
+  .bigtag .price .end{color:var(--red);}
+  .bigtag .foot{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    margin-top:14px;border-top:1.5px dashed #c9bca6;padding-top:8px;
+    font-family:'Space Mono',monospace;font-size:.66rem;color:#8a7c6a;
+  }
+  .hl{background:var(--gold);color:var(--ink);padding:0 4px;border-radius:2px;font-weight:700;}
+
+  /* ===== PRICE-TAG GRID ===== */
+  .tag-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:22px;
+  }
+  .tag{
+    background:var(--paper);
+    border:2px solid var(--ink);border-radius:3px;
+    padding:18px 18px 14px;position:relative;
+    box-shadow:5px 5px 0 var(--shadow);
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .tag:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--navy);}
+  .tag .pill{
+    display:inline-block;font-family:'Space Mono',monospace;font-weight:700;
+    font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+    padding:4px 9px;border-radius:2px;color:#fff;margin-bottom:12px;
+  }
+  .p-full{background:#6b5e50;}
+  .p-clear{background:var(--red);}
+  .p-final{background:var(--navy);}
+  .p-mfr{background:var(--gold);color:var(--ink);}
+  .tag .end-big{
+    font-family:'Anton',sans-serif;font-size:3.1rem;line-height:.85;color:var(--ink);
+  }
+  .tag .end-big em{font-style:normal;color:var(--red);}
+  .tag .end-big.blue em{color:var(--navy-bright);}
+  .tag .end-sub{
+    font-family:'Space Mono',monospace;font-size:.66rem;color:#8a7c6a;
+    margin:4px 0 12px;letter-spacing:.03em;
+  }
+  .tag h4{
+    font-family:'Fraunces',serif;font-weight:900;font-size:1.04rem;
+    color:var(--navy);margin-bottom:6px;line-height:1.15;
+  }
+  .tag p{font-size:.9rem;color:#3a312a;line-height:1.45;}
+  .tag .verdict{
+    margin-top:11px;font-family:'Space Mono',monospace;font-size:.66rem;
+    text-transform:uppercase;letter-spacing:.05em;color:var(--red-deep);font-weight:700;
+  }
+  .tag .verdict.wait{color:var(--navy);}
+
+  /* ===== DEATH STAR CALLOUT ===== */
+  .deathstar{
+    margin-top:24px;background:var(--ink);color:var(--cream);
+    border-radius:6px;padding:30px clamp(22px,5vw,40px);
+    display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;
+    box-shadow:8px 8px 0 var(--red);position:relative;overflow:hidden;
+  }
+  .deathstar::after{
+    content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;
+    border-radius:50%;border:3px dashed rgba(224,163,35,.25);
+  }
+  @media (max-width:640px){.deathstar{grid-template-columns:1fr;text-align:center;gap:16px;}}
+  .ds-mark{
+    font-family:'Anton',sans-serif;font-size:clamp(5rem,16vw,8rem);color:var(--gold);
+    line-height:.7;text-shadow:4px 4px 0 var(--red-deep);
+  }
+  .deathstar h3{
+    font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;
+    font-size:clamp(1.5rem,5vw,2.1rem);color:#fff;margin-bottom:6px;letter-spacing:.02em;
+  }
+  .deathstar h3 .sub{display:block;font-size:.8rem;color:var(--gold);letter-spacing:.18em;margin-top:4px;}
+  .deathstar p{font-size:1rem;color:rgba(246,238,221,.9);max-width:60ch;}
+  .deathstar p b{color:var(--gold);}
+
+  /* ===== MINI NOTE CARDS ===== */
+  .notes{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px;}
+  @media (max-width:560px){.notes{grid-template-columns:1fr;}}
+  .note{
+    background:var(--cream-2);border-left:6px solid var(--navy);
+    border-radius:3px;padding:16px 18px;
+  }
+  .note.green{border-left-color:var(--green);}
+  .note h4{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;
+    font-size:1.1rem;color:var(--navy);margin-bottom:5px;letter-spacing:.02em;}
+  .note.green h4{color:var(--green);}
+  .note p{font-size:.92rem;color:#3a312a;}
+
+  /* ===== LEGEND / DEAL CARDS ===== */
+  .deals{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
+  .deal{
+    background:var(--paper);border:2px solid var(--ink);border-radius:4px;
+    overflow:hidden;box-shadow:5px 5px 0 var(--shadow);
+    transition:transform .18s ease, box-shadow .18s ease;display:flex;flex-direction:column;
+  }
+  .deal:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--red);}
+  .deal .price-band{
+    background:var(--red);color:#fff;padding:14px 16px;
+    display:flex;align-items:baseline;gap:8px;
+  }
+  .deal.navy .price-band{background:var(--navy);}
+  .deal .price-band .num{font-family:'Anton',sans-serif;font-size:2.1rem;line-height:.9;}
+  .deal .price-band .lbl{font-family:'Space Mono',monospace;font-size:.66rem;
+    text-transform:uppercase;letter-spacing:.08em;opacity:.85;}
+  .deal .body{padding:15px 16px 17px;}
+  .deal .body h4{font-family:'Fraunces',serif;font-weight:900;font-size:1.12rem;
+    color:var(--ink);margin-bottom:6px;line-height:1.15;}
+  .deal .body p{font-size:.9rem;color:#3a312a;line-height:1.46;}
+
+  /* ===== EVERGREEN LIST ===== */
+  .ever{display:grid;gap:14px;}
+  .ever-row{
+    display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;
+    background:var(--paper);border:1.5px solid var(--ink);border-radius:4px;
+    padding:16px 18px;box-shadow:3px 3px 0 var(--navy);
+  }
+  .ever-row .tagico{
+    font-family:'Anton',sans-serif;font-size:1.4rem;color:#fff;background:var(--navy);
+    width:42px;height:42px;border-radius:3px;display:flex;align-items:center;justify-content:center;
+    transform:rotate(-4deg);
+  }
+  .ever-row:nth-child(even) .tagico{background:var(--red);}
+  .ever-row h4{font-family:'Fraunces',serif;font-weight:900;font-size:1.06rem;color:var(--navy);margin-bottom:3px;}
+  .ever-row:nth-child(even) h4{color:var(--red-deep);}
+  .ever-row p{font-size:.92rem;color:#3a312a;line-height:1.45;}
+
+  /* ===== PRO TIPS ===== */
+  .tips{
+    background:var(--navy);color:var(--cream);border-radius:6px;
+    padding:30px clamp(22px,5vw,42px);margin-top:30px;box-shadow:8px 8px 0 var(--shadow);
+  }
+  .tips h3{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;
+    font-size:1.5rem;color:#fff;margin-bottom:18px;letter-spacing:.02em;}
+  .tips ul{list-style:none;display:grid;gap:14px;}
+  .tips li{display:flex;gap:13px;font-size:1rem;align-items:flex-start;}
+  .tips li .star{color:var(--gold);font-family:'Anton',sans-serif;font-size:1.2rem;line-height:1.1;flex:0 0 auto;}
+  .tips li b{color:#fff;}
+
+  /* ===== FOOTER ===== */
+  footer{
+    margin-top:44px;text-align:center;
+    font-family:'Space Mono',monospace;font-size:.72rem;color:#7a6e5e;line-height:1.7;
+    border-top:2px dashed #c9bca6;padding-top:24px;
+  }
+  footer .big{
+    font-family:'Anton',sans-serif;font-size:1.3rem;color:var(--red);
+    letter-spacing:.04em;margin-bottom:8px;
+  }
+  footer a{color:var(--navy);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- MASTHEAD -->
+  <header class="rise d1">
+    <div class="stamp">Insider<br>Intel</div>
+    <div class="kicker">Member Edition · Field Guide</div>
+    <h1>Decoding<br>Cost<span class="dot">c</span>o</h1>
+    <p class="tagline">The classic deals that never die — and the secret language hiding on every price tag.</p>
+    <div class="meta-strip">
+      <span>VERIFIED · JUNE 2026</span>
+      <span class="alt">NEAREST WAREHOUSE: WILSONVILLE, OR</span>
+      <span class="alt2">EST. 1983</span>
+    </div>
+  </header>
+
+  <!-- SECTION 1: PRICE CODE -->
+  <section>
+    <div class="sec-head rise d2">
+      <span class="sec-num">01</span>
+      <h2>The Secret Price-Tag Code</h2>
+    </div>
+    <p class="sec-intro rise d2">Costco almost never shouts about a sale. No big banners, no colored signs — instead, the <b>last two digits of the price</b> do the talking, and a tiny corner symbol tells you when to pounce. Learn to read the bottom-right of every tag and you'll shop like an employee.</p>
+
+    <!-- ANATOMY HERO -->
+    <div class="anatomy rise d3">
+      <div class="bigtag">
+        <span class="ast">✱</span>
+        <div class="item">Kirkland Sig. · Item 1284057</div>
+        <div class="desc">Anatomy of a Costco price tag</div>
+        <div class="price"><span class="cur">$</span>8<span class="end">.97</span></div>
+        <div class="foot">
+          <span>★ MEMBER PRICE</span>
+          <span>EFF. 06/15/26</span>
+        </div>
+      </div>
+      <div>
+        <h3>Four things to read, fast</h3>
+        <p>Every tag is a tiny cheat sheet. Here's where to look:</p>
+        <ul>
+          <li><span class="pin">1</span><span><b>The ending</b> — the last two digits reveal whether it's full price or a markdown.</span></li>
+          <li><span class="pin">2</span><span><b>The asterisk (✱)</b> — top-right corner means it's leaving the building for good.</span></li>
+          <li><span class="pin">3</span><span><b>The date</b> — bottom-right shows when the price last changed. Old + overstocked = another cut may be coming.</span></li>
+          <li><span class="pin">4</span><span><b>The color</b> — white is standard; a <span class="hl">green</span> tag means organic.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- THE CODE GRID -->
+    <div class="tag-grid rise d4" style="margin-top:24px;">
+
+      <div class="tag">
+        <span class="pill p-full">Full Price</span>
+        <div class="end-big">.<em style="color:var(--ink)">99</em></div>
+        <div class="end-sub">e.g. $12.99 — standard</div>
+        <h4>The Everyday Price</h4>
+        <p>Costco's regular, full member price. Already a strong deal thanks to their famously thin markup, but it's not a markdown — this is where your weekly staples live. No urgency.</p>
+        <div class="verdict wait">Buy if you need it</div>
+      </div>
+
+      <div class="tag">
+        <span class="pill p-clear">Clearance</span>
+        <div class="end-big">.<em>97</em></div>
+        <div class="end-sub">e.g. $8.97 — manager markdown</div>
+        <h4>The One You're Hunting</h4>
+        <p>A store-level clearance cut to move inventory. Warehouse-specific, limited stock, and it moves <em>fast</em>. Bonus: it qualifies for a price adjustment within 30 days — even if it drops again later.</p>
+        <div class="verdict">Grab it now</div>
+      </div>
+
+      <div class="tag">
+        <span class="pill p-final">Final Markdown</span>
+        <div class="end-big blue">.<em>00</em> <span style="font-size:1.6rem;color:#c9bca6">/</span> .<em>88</em></div>
+        <div class="end-sub">the lowest of the low</div>
+        <h4>Manager's Last Call</h4>
+        <p>Rock-bottom liquidation — often returns, floor models, or damaged packaging, so inspect before you buy. Hunt these on flatbed carts, end-caps, and the perimeter walls.</p>
+        <div class="verdict">Snag &amp; inspect</div>
+      </div>
+
+      <div class="tag">
+        <span class="pill p-mfr">Mfr. Deal</span>
+        <div class="end-big">.<em style="color:var(--gold)">49</em>/<em style="color:var(--gold)">79</em>/<em style="color:var(--gold)">89</em></div>
+        <div class="end-sub">brand-supported promo</div>
+        <h4>The Manufacturer Special</h4>
+        <p>A temporary deal funded by the brand or negotiated by Costco's buyers. Sometimes a genuine steal, sometimes a shrug — judge each one on its own merits.</p>
+        <div class="verdict wait">Worth a look</div>
+      </div>
+
+    </div>
+
+    <!-- DEATH STAR -->
+    <div class="deathstar rise d5">
+      <div class="ds-mark">✱</div>
+      <div>
+        <h3>The Asterisk<span class="sub">A.K.A. "The Death Star"</span></h3>
+        <p>A small <b>✱ in the top-right corner</b> means Costco isn't reordering it — the item is being discontinued (or it's seasonal and headed out). Once the warehouse sells through, it's very likely gone for good. See it on something you love? <b>Buy your backups today.</b> Often you'll spot it alongside a .97, meaning it's discounted on its way out the door.</p>
+      </div>
+    </div>
+
+    <!-- DATE + GREEN NOTES -->
+    <div class="notes rise d5">
+      <div class="note">
+        <h4>📅 The Date Stamp</h4>
+        <p>Bottom-right of the tag = when the price last changed. If a .97 has been sitting for a couple of weeks and shelves are still full, another markdown may be on the way. Feeling lucky? Wait it out — but it might sell first.</p>
+      </div>
+      <div class="note green">
+        <h4>🟢 The Green Tag</h4>
+        <p>White is the default tag color. The one exception you'll see is a green tag, which flags an organic item — handy, though a few warehouses haven't fully adopted the practice yet.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: FOOD COURT -->
+  <section>
+    <div class="sec-head rise d2">
+      <span class="sec-num">02</span>
+      <h2>Food Court Legends</h2>
+    </div>
+    <p class="sec-intro">Prices frozen in time. While fast food has jumped 30%+ since 2020, the court has barely flinched.</p>
+
+    <div class="deals rise d3">
+      <div class="deal">
+        <div class="price-band"><span class="num">$1.50</span><span class="lbl">Since 1985</span></div>
+        <div class="body">
+          <h4>The Hot Dog Combo</h4>
+          <p>A quarter-pound all-beef Kirkland dog + a 20-oz drink with free refills — unchanged for 40 years and called "sacrosanct" by execs. New for 2026: swap the soda for a Kirkland water at the same price. Costco's single best-seller, with ~245 million sold last fiscal year.</p>
+        </div>
+      </div>
+
+      <div class="deal navy">
+        <div class="price-band"><span class="num">$4.99</span><span class="lbl">3-lb bird</span></div>
+        <div class="body">
+          <h4>The Rotisserie Chicken</h4>
+          <p>A whole roasted chicken for less than a <em>raw</em> one costs almost anywhere else. A deliberate loss-leader Costco calls "foundational." Find it in the deli — perfect for tacos, salads, and feeding a crowd.</p>
+        </div>
+      </div>
+
+      <div class="deal">
+        <div class="price-band"><span class="num">$9.95</span><span class="lbl">Whole · $1.99 slice</span></div>
+        <div class="body">
+          <h4>The Pizza</h4>
+          <p>An 18-inch slice is basically a full meal, and a whole cheese pie feeds four for under ten bucks. Order the whole pizza ahead near closing time to skip the wait.</p>
+        </div>
+      </div>
+
+      <div class="deal navy">
+        <div class="price-band"><span class="num">$3.99</span><span class="lbl">+ $1.99 soft serve</span></div>
+        <div class="body">
+          <h4>The Chicken Bake &amp; Sweets</h4>
+          <p>The cult-favorite chicken bake packs ~46g of protein in one hand-held log. Cap the run with a generous swirl of soft serve for $1.99 — the simple, creamy classic.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: EVERGREEN -->
+  <section>
+    <div class="sec-head rise d2">
+      <span class="sec-num">03</span>
+      <h2>Evergreen Member Wins</h2>
+    </div>
+    <p class="sec-intro">The deals that don't need a coupon book — they're baked into how Costco operates.</p>
+
+    <div class="ever rise d3">
+      <div class="ever-row">
+        <div class="tagico">KS</div>
+        <div>
+          <h4>Kirkland Signature</h4>
+          <p>The house brand built to match or beat national names — and frequently made in the very same factories. Reliable value across coffee, batteries, olive oil, paper goods, and more.</p>
+        </div>
+      </div>
+      <div class="ever-row">
+        <div class="tagico">↩</div>
+        <div>
+          <h4>The Legendary Return Policy</h4>
+          <p>The "risk-free 100% satisfaction guarantee." Most items have no time limit; electronics get 90 days. It even covers clearance and discontinued buys — so trying that ✱ item is low-risk.</p>
+        </div>
+      </div>
+      <div class="ever-row">
+        <div class="tagico">⛽</div>
+        <div>
+          <h4>The Gas Pump</h4>
+          <p>Member fuel typically runs ~10–15¢ a gallon under nearby stations. For regular fill-ups, the savings alone can chip away at your membership fee over a year.</p>
+        </div>
+      </div>
+      <div class="ever-row">
+        <div class="tagico">2%</div>
+        <div>
+          <h4>Executive 2% Reward</h4>
+          <p>The upgraded membership earns 2% back as a year-end certificate. Spend enough (roughly $230+/month) and that reward basically refunds the cost of the membership itself.</p>
+        </div>
+      </div>
+      <div class="ever-row">
+        <div class="tagico">30</div>
+        <div>
+          <h4>The 30-Day Price Adjustment</h4>
+          <p>Bought something that went on sale within 30 days? Take your receipt to the returns desk and they'll refund the difference — no need to re-buy it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRO TIPS -->
+  <div class="tips rise d3">
+    <h3>★ Three Insider Habits</h3>
+    <ul>
+      <li><span class="star">✱</span><span><b>Shop in person.</b> Costco.com prices usually run higher than the warehouse, and there's no price-matching between online and in-store.</span></li>
+      <li><span class="star">✱</span><span><b>Scan the corners, not the products.</b> Train your eye to register the price ending and the asterisk as you walk — that's how the deals find <em>you</em>.</span></li>
+      <li><span class="star">✱</span><span><b>Move fast on clearance.</b> The .97 you walk past on Thursday morning may genuinely be gone by Thursday afternoon.</span></li>
+    </ul>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="big">KEEP CALM &amp; SCAN THE CORNERS ✱</div>
+    Price-tag codes are crowd-decoded member lore — remarkably consistent nationwide, but not officially published by Costco, and exact markdowns vary by warehouse. Food-court &amp; classic prices verified June 2026. Sample item numbers are illustrative.<br>
+    Happy hunting at the Wilsonville warehouse. 🛒
+  </footer>
+
+</div>
+</body>
+</html>
